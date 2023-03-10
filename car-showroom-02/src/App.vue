@@ -9,7 +9,7 @@
 
 <script>
 import gallery_card from "./components/gallery-card.vue";
-import Navbar from "./Nav-bar";
+import Navbar from "./components/Nav-bar";
 export default {
     name: "App",
     components: {
