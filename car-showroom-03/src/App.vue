@@ -2,25 +2,21 @@
 <Navbar />
 
 <div class="add-car-button">
-    <button class="button" @click="showModel = false">Add Car</button>
-    <transition name="fade" appear>
-        <div class="modal-overlay" v-if="!showModel" @click="showModel = false">
-        </div>
-    </transition>
-    <transition name="slide" appear>
-        <div class="modal" v-if="!showModel">
-            <carform :showModel="showModel" @show-model="showModelx"></carform>
-        </div>
-    </transition>
-</div>
-<div class="gallery">
-    <div class="car-card">
-        <div v-for="item in cars_info" :key="item.id">
-            <gallery_card :name="item.name" :image="item.image" :description="item.desc" :price="item.price" @get-Price-Info="getPrice" />
+    <button class="button" @click="showModal = true">Add Car</button>
+    <div class="modal-overlay" v-if="showModal">
+    </div>
+
+    <div name="slide">
+        <div class="modal" v-if="showModal">
+            <carform :showModal="showModal" @show-model="showModalx"></carform>
         </div>
     </div>
 </div>
-
+<div class="car-card">
+    <div v-for="item in cars_info" :key="item.id">
+        <gallery_card :name="item.name" :image="item.image" :description="item.desc" :price="item.price" @get-Price-Info="getPrice" />
+    </div>
+</div>
 </template>
 
 <script>
@@ -38,19 +34,19 @@ export default {
         getPrice(price) {
             alert("Price is : " + price);
         },
-        showModelx() {
-            this.showModel = true
-        
+        showModalx() {
+            this.showModal = false
+
         }
     },
     data() {
         return {
-            showModel: true,
+            showModal: false,
             cars_info: [{
                     id: 1,
                     name: "Maruti Suzuki Wagon R",
                     image: require("./assets/images/1Maruti.jpg"),
-                    desc: "This is the first f ffffffffff ffffff f aaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaamajor update for the Wagon R since this generation was launched in 2019 and sees it get cosmetic updates as well as new engine options. Like we've said earlier",
+                    desc: "This is the first major update for the Wagon R since this generation was launched in 2019 and sees it get cosmetic updates as well as new engine options. Like we've said earlier",
                     price: "Rs. 3.54 Lakhs",
                 },
                 {
@@ -177,16 +173,6 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
-
 .modal {
     position: fixed;
     top: 50%;
@@ -197,7 +183,7 @@ button:hover {
     max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
-    height:550px;
+    height: 520px;
 }
 
 @media (max-width: 800px) {
