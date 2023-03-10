@@ -10,11 +10,11 @@
         <p>{{ description }}</p>
     </div>
     <div class="btn">
-        <button class="edit"><i class="fa-solid fa-pen"></i></button>
+        <button class="edit"  @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
         <button class="button" @click="getPrice" title="Get Price" :disabled="hasPrice">
-            {{ price ? "Info" : "Available Soon" }}
+            {{ price!=0 ? "Info" : "Available Soon" }}
         </button>
-        <button class="delete"><i class="fa-sharp fa-solid fa-trash"></i></button>
+        <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
     </div>
 </div>
 </template>
@@ -22,20 +22,40 @@
 <script>
 export default {
     name: "gallery_card",
-    props: ["name", "image", "description", "price"],
-    emit: ["get-Price-Info"],
+    props: ["id","name", "image", "description", "price","showModalEdit"],
+    emit: ["get-Price-Info","show-edit",'get-car','delete-car'],
     methods: {
         getPrice() {
             this.$emit("get-Price-Info", this.price);
         },
+        getCarData(){
+            return {
+                id: this.id,
+                name:this.name,
+                image:this.image,
+                description:this.description,
+                price:this.price
+            }
+        }, 
+        showeditform(){
+            this.$emit('show-edit');
+            const cardata= this.getCarData()
+            this.$emit('get-car',cardata)
+        },
+        deleteData(){
+            const cardata=this.getCarData()
+            this.$emit('delete-car',cardata)
+            alert("Car : "+this.name+" deleted successuflly!")
+        }
+
     },
 
     computed: {
         hasPrice() {
-            if (this.price != "") {
-                return false;
-            } else {
+            if (this.price == 0) {
                 return true;
+            } else {
+                return false;
             }
         },
     },

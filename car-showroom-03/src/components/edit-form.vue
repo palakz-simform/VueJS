@@ -1,6 +1,6 @@
 <template>
 <div class="heading">
-    <h1>Add Car</h1>
+    <h1>Edit Car</h1>
     <button class="button" @click="showModalx">x</button>
 </div>
 <div class="form">
@@ -10,46 +10,45 @@
     </div>
     <div class="row">
         <label>Image:</label>
-        <input type="url" v-model="form.image"> 
+        <input type="url" v-model="form.image">
     </div>
     <div class="row">
         <label>Description:</label>
         <textarea v-model="form.description"></textarea>
     </div>
+
     <div class="row">
         <label>Price:</label>
         <input type="number" v-model="form.price">
     </div>
 
-    <button @click="submit"  class="submit">Submit</button>
+    <button @click="edit" class="submit">Edit</button>
 
 </div>
 </template>
 
 <script>
 export default {
-    name: "car-form",
-    props: {
-        showModal: Boolean
-    },
-    emits: ['show-model'],
+    name: 'editForm',
+    props: ["carData"],
+    emits: ['show-model','edit-data'],
     methods: {
         showModalx() {
             this.$emit("show-model")
         },
-        submit() {
+        edit() {
             this.error = []
             if (this.form.name === "" || typeof this.form.name != 'string') {
                 this.error.push("Enter valid name")
             }
-            if (this.form.image === "") {
+            if (this.form.image === "" || this.form.image.length===0) {
                 this.error.push("Enter valid image URL")
-            } 
-            if(this.form.description === ""){
+            }
+            if(this.form.description==="" || this.form.description.length===0 ){
                 this.error.push("Enter description")
             }
             else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
-                this.error.push("Description must be 30-120 characters long")
+                this.error.push("Enter valid description")
             }
             if (typeof this.form.price != 'number') {
                 this.error.push("Enter valid Price")
@@ -57,12 +56,12 @@ export default {
             if (this.error.length > 0) {
                 var error_list = ''
                 for (let err in this.error) {
-
                     error_list += this.error[err] + '\n'
                 }
                 alert(error_list)
-            } else {               
-                this.$emit("display-data",this.form)
+            } else {
+               
+                this.$emit("edit-data", this.form)
                 alert('Created data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price);
                 this.showModalx()
             }
@@ -72,15 +71,17 @@ export default {
     data() {
         return {
             form: {
-                name: '',
-                image: '',
-                description: '',                
-                price: ''
+                id: this.carData.id,
+                name: this.carData.name,
+                image: this.carData.image,
+                description: this.carData.description,
+                price: this.carData.price,
+
             },
             errors: []
         }
     }
-};
+}
 </script>
 
 <style scoped>
