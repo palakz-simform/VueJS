@@ -2,17 +2,13 @@
 <Navbar />
 
 <div class="add-car-button">
-    <button class="button" @click="showModal = true">Add Car</button>
+    <button class="button" @click="addCar()">Add Car</button>
 </div>
-<div class="modal-overlay" v-if="showModal || showModalEdit">
+<div class="modal-overlay" v-if="showModal ">
 </div>
 
 <div class="modal" v-if="showModal">
-    <carform :showModal="showModal" @show-model="showModalx" @display-data="setdata"></carform>
-</div>
-
-<div class="modal" v-if="showModalEdit">
-    <editForm @show-model="showModalx" :carData="carData" @edit-data="editCarData"></editForm>
+    <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
 </div>
 
 <div class="car-card">
@@ -22,10 +18,11 @@
 </div>
 </template>
 
+    
+    
 <script>
 import gallery_card from "./components/gallery-card.vue";
 import carform from "./components/car-form.vue";
-import editForm from "./components/edit-form.vue";
 import Navbar from "./components/Nav-bar";
 export default {
     name: "App",
@@ -33,33 +30,42 @@ export default {
         gallery_card,
         Navbar,
         carform,
-        editForm
     },
     methods: {
+        addCar() {
+            this.showModal = true,
+            this.title = 'Add Car',
+            this.addForm = true
+        },
         getPrice(price) {
             alert("Price is : Rs. " + price);
         },
         showModalx() {
             this.showModal = false;
-            this.showModalEdit = false;
-
         },
         setdata(formdata) {
             this.showModal = false;
             this.cars_info.push(formdata)
+            this.addForm = false
+
         },
 
         getCar(cardata) {
-            this.showModalEdit = true
+            this.showModal = true
+            this.editForm = true
             this.carData = cardata;
+            this.title = cardata.title;
+
         },
         editCarData(data) {
-            this.showModalEdit = false;
+            this.showModal = false;
             const toCarUpdate = this.cars_info.filter(car => car.id === data.id)[0];
+
             toCarUpdate.name = data.name,
                 toCarUpdate.description = data.description,
                 toCarUpdate.image = data.image,
                 toCarUpdate.price = data.price
+            this.editForm = false
         },
         deleteCar(data) {
             if (this.cars_info) {
@@ -72,7 +78,9 @@ export default {
     data() {
         return {
             showModal: false,
-            showModalEdit: false,
+            title: "",
+            addForm: false,
+            editForm: false,
             carData: {},
             cars_info: [{
                     id: 1,
@@ -164,7 +172,8 @@ export default {
     },
 };
 </script>
-
+    
+    
 <style scoped>
 .car-card {
     display: flex;
