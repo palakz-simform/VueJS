@@ -45,6 +45,7 @@ export default {
 
         },
         setdata(formdata) {
+            this.showModal = false;
             this.cars_info.push(formdata)
         },
 
@@ -53,6 +54,7 @@ export default {
             this.carData = cardata;
         },
         editCarData(data) {
+            this.showModalEdit = false;
             const toCarUpdate = this.cars_info.filter(car => car.id === data.id)[0];
             toCarUpdate.name = data.name,
                 toCarUpdate.description = data.description,
@@ -75,77 +77,77 @@ export default {
             cars_info: [{
                     id: 1,
                     name: "Maruti Suzuki Wagon R",
-                    image: "https://imgd.aeplcdn.com/1200x900/n/cw/ec/112947/wagon-r-2022-exterior-right-front-three-quarter.jpeg?isig=0&q=75",
+                    image: "https://imgd.aeplcdn.com/1200x900/n/cw/ec/112947/wagon-r-2022-exterior-right-front-three-quarter.jpeg",
                     description: "This is the first major update for the Wagon R since this generation was launched in 2019 and sees it get cosmetic...",
                     price: 354000
                 },
                 {
                     id: 2,
                     name: "BMW 5 Series",
-                    image: require("./assets/images/2BMW.jpg"),
+                    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/96443/5-series-exterior-right-front-three-quarter-4.jpeg",
                     description: "Under the hood, the updated BMW 5 Series is offered with a 2.0-litre, four-cylinder petrol engine in the 520d M...",
                     price: 0
                 },
                 {
                     id: 3,
                     name: "Audi Q8",
-                    image: require("./assets/images/3Audi.jpg"),
+                    image: "https://imgd-ct.aeplcdn.com/664x415/n/cw/ec/34470/q8-exterior-left-front-three-quarter.jpeg",
                     description: "If you want an SUV that stands out, drives well, and will never be common place (given its steep pricing)...",
                     price: 10600000
                 },
                 {
                     id: 4,
                     name: "Nissan GT-R",
-                    image: require("./assets/images/4Ngtr.jpg"),
+                    image: "https://imgd.aeplcdn.com/0x0/cw/ec/20361/Nissan-GTR-Right-Front-Three-Quarter-84904.jpg?",
                     description: "The Godzilla has finally arrived on the Indian shores. The beast in question is the Nissan GT-R...",
                     price: 20000000,
                 },
                 {
                     id: 5,
                     name: "Toyota Fortuner",
-                    image: require("./assets/images/5Toyota.jpg"),
+                    image: "https://imgd.aeplcdn.com/0x0/n/cw/ec/44709/fortuner-exterior-right-front-three-quarter-19.jpeg",
                     description: "This Toyota Fortuner Legender model isn't a world apart from the standard version, and yet gets a ...",
                     price: 0,
                 },
                 {
                     id: 6,
                     name: "Toyota Innova Crystal",
-                    image: require("./assets/images/6innova.jpg"),
+                    image: "https://imgd.aeplcdn.com/664x374/n/cw/ec/140809/innova-crysta-2023-exterior-left-front-three-quarter.jpeg",
                     description: "The Toyota Innova Crysta needs no introduction in the country. It has done everything right that it set out...",
                     price: 0,
                 },
                 {
                     id: 7,
                     name: "Maruti Swift",
-                    image: require("./assets/images/7swift.jpg"),
+                    image: "https://imgd.aeplcdn.com/1200x900/n/cw/ec/54399/exterior-right-front-three-quarter-10.jpeg",
                     description: "What makes the Maruti Suzuki Swift such a fascinating proposition is that it's not only sporty to drive... ",
                     price: 607000,
                 },
                 {
                     id: 8,
                     name: "Maruti Ertiga",
-                    image: require("./assets/images/8ertiga.jpg"),
+                    image: "https://imgd.aeplcdn.com/0x0/n/cw/ec/115777/2022-ertiga-exterior-right-front-three-quarter-3.jpeg",
                     description: "The recently updated Ertiga gets a tweaked engine, new gearbox and newer features that put it in line with...",
                     price: 835000,
                 },
                 {
                     id: 9,
                     name: "Audi A3 Cabriolet",
-                    image: require("./assets/images/9audi a3.jpg"),
+                    image: "https://imgd.aeplcdn.com/664x374/cw/ec/28430/Audi-A3-Right-Front-Three-Quarter-165478.jpg",
                     description: "If the sight of a convertible ever tugged at your heart, then the Audi A3 Cabriolet is one that can easily... ",
                     price: 0
                 },
                 {
                     id: 10,
                     name: "Nissan Sunny",
-                    image: require("./assets/images/10Sunny.jpg"),
+                    image: "https://imgd.aeplcdn.com/664x374/ec/94/C0/9725/img/m/Nissan-Sunny-Right-Front-Three-Quarter-48975_ol.jpg",
                     description: "The Nissan Sunny is a no-nonsense C-segment sedan that offers a spacious rear seat and a large boot to...",
                     price: 709000,
                 },
                 {
                     id: 11,
                     name: "Honda City",
-                    image: require("./assets/images/11Hondacity.jpg"),
+                    image: "https://images.news18.com/ibnlive/uploads/2020/06/1592401324_2020-honda-city.jpg",
                     description: "The current model of the Honda City, which was introduced in 2020, features a sporty and modern exterior design... ",
                     price: 564000,
                 },
@@ -153,7 +155,7 @@ export default {
                 {
                     id: 12,
                     name: "Hyundai Verna",
-                    image: require("./assets/images/12Verna.jpg"),
+                    image: "https://imgd-ct.aeplcdn.com/664x415/n/cw/ec/41197/verna-exterior-left-front-three-quarter.jpeg",
                     description: "The current model of the Hyundai Verna, which was introduced in 2020, features a modern and sporty exterior... ",
                     price: 787000,
                 },
@@ -205,13 +207,15 @@ button:hover {
 
 .modal {
     position: fixed;
-    left: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
     width: 100%;
     max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
-    height: 520px;
+    height: 600px;
 }
 
 @media (max-width: 800px) {
