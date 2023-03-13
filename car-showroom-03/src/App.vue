@@ -3,21 +3,21 @@
 
 <div class="add-car-button">
     <button class="button" @click="showModal = true">Add Car</button>
-    <div class="modal-overlay" v-if="showModal || showModalEdit">
-    </div>
-
-    <div class="modal" v-if="showModal">
-        <carform :showModal="showModal" @show-model="showModalx" @display-data="setdata"></carform>
-    </div>
-
-    <div class="modal" v-if="showModalEdit">
-        <editForm @show-model="showModalx" :carData="carData" @edit-data="editCarData"></editForm>
-    </div>
-
 </div>
+<div class="modal-overlay" v-if="showModal || showModalEdit">
+</div>
+
+<div class="modal" v-if="showModal">
+    <carform :showModal="showModal" @show-model="showModalx" @display-data="setdata"></carform>
+</div>
+
+<div class="modal" v-if="showModalEdit">
+    <editForm @show-model="showModalx" :carData="carData" @edit-data="editCarData"></editForm>
+</div>
+
 <div class="car-card">
     <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.description" :price="item.price" @get-Price-Info="getPrice" @show-edit="showEditForm" @get-car="getCar" @delete-car="deleteCar" />
+        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.description" :price="item.price" @get-Price-Info="getPrice" @get-car="getCar" @delete-car="deleteCar" />
     </div>
 </div>
 </template>
@@ -45,13 +45,11 @@ export default {
 
         },
         setdata(formdata) {
-
             this.cars_info.push(formdata)
         },
-        showEditForm() {
-            this.showModalEdit = true
-        },
+
         getCar(cardata) {
+            this.showModalEdit = true
             this.carData = cardata;
         },
         editCarData(data) {
@@ -62,14 +60,11 @@ export default {
                 toCarUpdate.price = data.price
         },
         deleteCar(data) {
-         
-            if(this.cars_info){              
+            if (this.cars_info) {
                 var newCarData = this.cars_info.filter(car => car.id != data.id);
-                this.cars_info=newCarData
+                this.cars_info = newCarData
             }
-               
-              
-        
+
         }
     },
     data() {
@@ -203,17 +198,15 @@ button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 98;
+    z-index: 1;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 99;
+    left: 40%;
+    z-index: 2;
     width: 100%;
     max-width: 400px;
     background-color: #fff;

@@ -23,7 +23,7 @@
 export default {
     name: "gallery_card",
     props: ["id","name", "image", "description", "price","showModalEdit"],
-    emit: ["get-Price-Info","show-edit",'get-car','delete-car'],
+    emit: ["get-Price-Info",'get-car','delete-car'],
     methods: {
         getPrice() {
             this.$emit("get-Price-Info", this.price);
@@ -37,8 +37,7 @@ export default {
                 price:this.price
             }
         }, 
-        showeditform(){
-            this.$emit('show-edit');
+        showeditform(){           
             const cardata= this.getCarData()
             this.$emit('get-car',cardata)
         },

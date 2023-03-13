@@ -19,9 +19,8 @@
 
     <div class="row">
         <label>Price:</label>
-        <input type="number" v-model="form.price">
+        <input type="number" v-model="form.price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109);">
     </div>
-
     <button @click="edit" class="submit">Edit</button>
 
 </div>
@@ -38,34 +37,39 @@ export default {
         },
         edit() {
             this.error = []
-            if (this.form.name === "" || typeof this.form.name != 'string') {
-                this.error.push("Enter valid name")
-            }
-            if (this.form.image === "" || this.form.image.length===0) {
-                this.error.push("Enter valid image URL")
-            }
-            if(this.form.description==="" || this.form.description.length===0 ){
-                this.error.push("Enter description")
-            }
-            else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
-                this.error.push("Enter valid description")
-            }
-            if (typeof this.form.price != 'number') {
-                this.error.push("Enter valid Price")
-            }
-            if (this.error.length > 0) {
-                var error_list = ''
-                for (let err in this.error) {
-                    error_list += this.error[err] + '\n'
+                if (this.form.name === "" || typeof this.form.name != 'string') {
+                    this.error.push("Enter valid name")
                 }
-                alert(error_list)
-            } else {
-               
-                this.$emit("edit-data", this.form)
-                alert('Created data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price);
-                this.showModalx()
-            }
-
+                if (this.form.image === "") {
+                    this.error.push("Enter image URL")
+                }
+                if (this.form.image != "") {
+                    const url = this.form.image
+                    const imgExtension = ['jpg', 'jpeg', 'gif', 'png'];
+                    const extension = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                    if (!(imgExtension.includes(extension))) {
+                        this.error.push("Enter valid image URL")
+                    }
+                }
+                if (this.form.description === "") {
+                    this.error.push("Enter description")
+                } else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
+                    this.error.push("Description must be 30-120 characters long")
+                }
+                if (this.form.price === "") {
+                    this.error.push("Enter price")
+                }
+    
+                if (this.error.length > 0) {
+                    var error_list = ''
+                    for (let err in this.error) {    
+                        error_list += this.error[err] + '\n'
+                    }
+                    alert(error_list)
+                } else {
+                    alert('Created data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price);
+                    this.showModalx()
+                }
         }
     },
     data() {
