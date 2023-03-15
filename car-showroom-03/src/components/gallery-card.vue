@@ -83,7 +83,7 @@ export default {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 30px;
+  
 }
 
 .heading {
@@ -91,7 +91,7 @@ export default {
     text-align: center;
     background-color: rgb(44, 44, 44);
     color: wheat;
-    overflow-x: hidden;
+    overflow: hidden;
 
 }
 
@@ -178,6 +178,7 @@ button[disabled] {
     .heading {
         height: 40px;
         font-size: 10px;
+        
     }
 
     .image {
