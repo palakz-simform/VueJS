@@ -18,8 +18,6 @@
 </div>
 </template>
 
-    
-    
 <script>
 import gallery_card from "./components/gallery-card.vue";
 import carform from "./components/car-form.vue";
@@ -34,8 +32,8 @@ export default {
     methods: {
         addCar() {
             this.showModal = true,
-            this.title = 'Add Car',
-            this.addForm = true
+                this.title = 'Add Car',
+                this.addForm = true
         },
         getPrice(price) {
             alert("Price is : Rs. " + price);
@@ -49,7 +47,6 @@ export default {
             this.addForm = false
 
         },
-
         getCar(cardata) {
             this.showModal = true
             this.editForm = true
@@ -68,11 +65,11 @@ export default {
             this.editForm = false
         },
         deleteCar(data) {
-            if (this.cars_info) {
+            if (confirm("Do you want to delete " + data.name + " ?") == true) {
                 var newCarData = this.cars_info.filter(car => car.id != data.id);
                 this.cars_info = newCarData
+                alert("Car : " + data.name + " deleted successuflly!")
             }
-
         }
     },
     data() {
@@ -172,15 +169,13 @@ export default {
     },
 };
 </script>
-    
-    
+
 <style scoped>
 .car-card {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
 .add-car-button {
     display: flex;
     justify-content: end;
@@ -203,7 +198,6 @@ button:hover {
     color: brown;
     border: 3px solid brown;
 }
-
 .modal-overlay {
     top: 0;
     left: 0;
@@ -213,7 +207,6 @@ button:hover {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
 }
-
 .modal {
     position: fixed;
     top: 50%;

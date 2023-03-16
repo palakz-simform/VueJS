@@ -18,8 +18,6 @@
     </div>
 </div>
 </template>
-
-    
     
 <script>
 export default {
@@ -47,12 +45,10 @@ export default {
         },
         deleteData() {
             const cardata = this.getCarData()
-            this.$emit('delete-car', cardata)
-            alert("Car : " + this.name + " deleted successuflly!")
+            this.$emit('delete-car', cardata)         
         }
 
     },
-
     computed: {
         hasPrice() {
             if (this.price == 0) {
@@ -64,8 +60,7 @@ export default {
     },
 };
 </script>
-    
-    
+        
 <style scoped>
 .card {
     width: 350px;
@@ -73,19 +68,16 @@ export default {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgb(216, 215, 214);
 }
-
 .card:hover {
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: 0.25s;
 }
-
 .heading h1 {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
   
 }
-
 .heading {
     height: 50px;
     text-align: center;
@@ -94,7 +86,6 @@ export default {
     overflow: hidden;
 
 }
-
 .image {
     width: 350px;
     height: 200px;
@@ -107,13 +98,11 @@ img {
     width: 350px;
     height: 200px;
 }
-
 .description p {
     font-weight: bold;
     line-height: 20px;
     padding: 4px;
 }
-
 .description {
     height: 80px;
     width: 350px;
@@ -126,7 +115,6 @@ button:disabled,
 button[disabled] {
     cursor: not-allowed;
 }
-
 .btn {
     width: 350px;
     height: 50px;
@@ -134,9 +122,7 @@ button[disabled] {
     align-items: center;
     justify-content: space-between;
 }
-
-.edit,
-.delete {
+.edit,.delete {
     width: 55px;
     height: 34px;
     margin-left: 10px;
@@ -147,7 +133,6 @@ button[disabled] {
     border-radius: 10px;
     cursor: pointer;
 }
-
 .button {
     width: 150px;
     height: 34px;
@@ -157,7 +142,6 @@ button[disabled] {
     border-radius: 10px;
     cursor: pointer;
 }
-
 .button:hover,
 .edit:hover,
 .delete:hover {
@@ -166,21 +150,17 @@ button[disabled] {
     font-weight: bolder;
     border: 3px solid rgb(44, 44, 44);
 }
-
 @media (max-width: 1155px) {
-    .card {
+   .card {
         width: 300px;
         margin: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         background-color: rgb(216, 215, 214);
     }
-
     .heading {
         height: 40px;
-        font-size: 10px;
-        
+        font-size: 10px;        
     }
-
     .image {
         width: 300px;
         height: 175px;
@@ -190,7 +170,6 @@ button[disabled] {
         width: 300px;
         height: 175px;
     }
-
     .description p {
         padding: 6px;
     }
@@ -200,12 +179,10 @@ button[disabled] {
         width: 300px;
         text-align: center;
     }
-
     .btn {
         width: 300px;
         height: 50px;
     }
-
     .button {
         width: 100px;
         height: 34px;
@@ -223,16 +200,13 @@ button[disabled] {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         background-color: rgb(216, 215, 214);
     }
-
     .heading {
         height: 25px;
         font-size: 8px;
     }
-
     .heading h1 {
         padding-top: 4px;
     }
-
     .image {
         width: 175px;
         height: 100px;
@@ -247,18 +221,15 @@ button[disabled] {
         padding: 6px;
         font-size: 12px;
     }
-
     .description {
         height: 120px;
         width: 175px;
         text-align: center;
     }
-
     .btn {
         width: 175px;
         height: 50px;
     }
-
     .button {
         width: 70px;
         height: 35px;
