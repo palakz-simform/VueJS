@@ -92,7 +92,6 @@ export default {
                 this.$refs.price.focus()
                 return false
             }
-
             if (this.title == "Add Car") {
                 this.$emit("display-data", this.form)
                 alert('Created data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
@@ -102,7 +101,6 @@ export default {
             }
 
         },
-
     },
     data() {
         if (this.addForm == true) {
@@ -147,19 +145,14 @@ h1 {
 }
 
 div.row {
-
     height: 80px;
-
     margin-top: 0px;
-    ;
 }
-
 .heading {
     display: flex;
     justify-content: space-between;
     padding: 1px 10px 5px 150px;
 }
-
 .button {
     height: 20px;
     margin-top: 10px;
@@ -173,7 +166,6 @@ label {
     padding-left: 40px;
     font-size: 18px;
 }
-
 .error {
     color: red;
     padding-left: 40px;
@@ -181,7 +173,6 @@ label {
     margin-bottom: 0px;
 
 }
-
 .row {
     display: flex;
     flex-direction: column;
@@ -205,7 +196,6 @@ input:focus {
     border-color: brown;
     box-shadow: 0 0 10px rgb(196, 105, 105);
 }
-
 .submit {
     width: 100px;
     height: 35px;
@@ -219,7 +209,6 @@ input:focus {
     margin-left: 140px;
 
 }
-
 .submit:hover {
     background-color: transparent;
     color: brown;

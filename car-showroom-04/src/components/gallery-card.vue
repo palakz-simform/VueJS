@@ -19,8 +19,6 @@
 </div>
 </template>
 
-    
-    
 <script>
 export default {
     name: "gallery_card",
@@ -48,7 +46,6 @@ export default {
         deleteData() {
             const cardata = this.getCarData()
             this.$emit('delete-car', cardata)
-            alert("Car : " + this.name + " deleted successuflly!")
         }
 
     },
@@ -64,8 +61,7 @@ export default {
     },
 };
 </script>
-    
-    
+
 <style scoped>
 .card {
     width: 350px;
@@ -83,7 +79,7 @@ export default {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
-  
+
 }
 
 .heading {
@@ -178,7 +174,7 @@ button[disabled] {
     .heading {
         height: 40px;
         font-size: 10px;
-        
+
     }
 
     .image {
