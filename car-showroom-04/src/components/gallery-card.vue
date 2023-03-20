@@ -43,10 +43,12 @@ export default {
                 title: "Edit Car"
             }
         },
+        // On clicking edit button emit event 'edit-car'
         showeditform() {
             const cardata = this.getCarData()
             this.$emit('edit-car', cardata)
         },
+        // On clicking delete button emit event 'delete-car'
         deleteData() {
             const cardata = this.getCarData()
             this.$emit('delete-car', cardata)
@@ -55,6 +57,7 @@ export default {
     },
 
     computed: {
+         // check if the car has price, if not return false and dissable the button
         hasPrice() {
             if (this.price == 0) {
                 return true;
