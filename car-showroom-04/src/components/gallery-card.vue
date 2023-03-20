@@ -1,4 +1,5 @@
 <template>
+<!-- Card of each car -->
 <div class="card">
     <div class="heading">
         <h1>{{ name }}</h1>
@@ -23,11 +24,15 @@
 export default {
     name: "gallery_card",
     props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
-    emit: ["get-Price-Info", 'get-car', 'delete-car'],
+    emit: ["get-Price-Info", 'edit-car', 'delete-car'],
     methods: {
+
+        // Emitting event to pass the price to the parent component
         getPrice() {
             this.$emit("get-Price-Info", this.price);
         },
+
+        // Function to get a particular car data 
         getCarData() {
             return {
                 id: this.id,
@@ -40,8 +45,7 @@ export default {
         },
         showeditform() {
             const cardata = this.getCarData()
-
-            this.$emit('get-car', cardata)
+            this.$emit('edit-car', cardata)
         },
         deleteData() {
             const cardata = this.getCarData()
@@ -71,7 +75,7 @@ export default {
 }
 
 .card:hover {
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: 0.25s;
 }
 
@@ -115,7 +119,6 @@ img {
     width: 350px;
     text-align: center;
     overflow: hidden;
-    /* hide any text that exceeds the specified height */
 }
 
 button:disabled,

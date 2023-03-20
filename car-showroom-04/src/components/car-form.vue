@@ -1,8 +1,11 @@
 <template>
+<!-- Car Form for Edit and Add Car -->
 <div class="heading">
     <h1>{{ title }}</h1>
+    <!-- Button to click when the user wants to close the form -->
     <button class="button" @click="showModalx">x</button>
 </div>
+<!-- Car Add/Edit Form -->
 <div class="form">
     <div class="row">
         <label>Name:</label>
@@ -28,6 +31,7 @@
     <div class="row">
         <label>Price:</label>
         <input type="number" v-model="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+        <!-- Prevent the user from pressing key : +,-,e -->
         <div v-if="error_price">
             <p class="error">{{ error_msg }}</p>
         </div>
@@ -46,18 +50,21 @@ export default {
             this.$emit("show-model")
         },
         submit() {
+            // Form validation
             this.error = []
             this.error_name = false,
                 this.error_image = false,
                 this.error_description = false,
                 this.error_price = false
 
+            // Checking that name is not empty and is a string
             if (this.form.name === "" || typeof this.form.name != 'string') {
                 this.error_name = true
                 this.error_msg = "**Please enter name**";
                 this.$refs.name.focus()
                 return false
             }
+            // Checking that image is not empty 
             if (this.form.image === "") {
                 this.error_image = true;
                 this.error_msg = "**Please enter image URL**";
@@ -65,6 +72,8 @@ export default {
                 return false
 
             }
+
+            // If image is not empty, checking that the input is an URL
             if (this.form.image != "") {
                 const url = this.form.image;
                 const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
@@ -75,34 +84,47 @@ export default {
                     return false
                 }
             }
+
+            // Checking that the description is not empty
             if (this.form.description === "") {
                 this.error_description = true;
                 this.error_msg = "**Please enter description**";
                 this.$refs.description.focus()
                 return false
-            } else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
+            }
+            // If the description is not empty, checking that the no. of characters is between 30-120
+            else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
                 this.error_description = true;
                 this.error_msg = "**Description must be 30-120 characters long**"
                 this.$refs.description.focus()
                 return false
             }
+            // checking that the price is not empty
             if (this.form.price === "") {
                 this.error_price = true;
                 this.error_msg = "**Please enter price**"
                 this.$refs.price.focus()
                 return false
             }
-            if (this.title == "Add Car") {
-                this.$emit("display-data", this.form)
-                alert('Created data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
-            } else if (this.title == "Edit Car") {
-                this.$emit("edit-data", this.form)
-                alert('Edited data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price);
-            }
 
+            // Emit event 'display-data' when the form is Add Car
+            if (this.addForm == true) {
+                this.alertData()
+                this.$emit("display-data", this.form)
+            } 
+            // Emit event 'edit-data' when the form is Add Car
+            else if (this.editForm == true) {
+                this.alertData()
+                this.$emit("edit-data", this.form)
+            }
         },
+        // function to alert data after submitting the form
+        alertData() {
+            alert((this.addForm == true ? 'Created' : 'Edited') + ' data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
+        }
     },
     data() {
+        // set this data when form is Add Car Data
         if (this.addForm == true) {
             return {
                 error_name: false,
@@ -117,7 +139,9 @@ export default {
                     price: ''
                 },
             }
-        } else if (this.editForm == true) {
+        }
+        // Set this data when the form is Edit Car Data
+        else if (this.editForm == true) {
             return {
                 error_name: false,
                 error_image: false,
@@ -148,11 +172,13 @@ div.row {
     height: 80px;
     margin-top: 0px;
 }
+
 .heading {
     display: flex;
     justify-content: space-between;
     padding: 1px 10px 5px 150px;
 }
+
 .button {
     height: 20px;
     margin-top: 10px;
@@ -166,6 +192,7 @@ label {
     padding-left: 40px;
     font-size: 18px;
 }
+
 .error {
     color: red;
     padding-left: 40px;
@@ -173,6 +200,7 @@ label {
     margin-bottom: 0px;
 
 }
+
 .row {
     display: flex;
     flex-direction: column;
@@ -196,6 +224,7 @@ input:focus {
     border-color: brown;
     box-shadow: 0 0 10px rgb(196, 105, 105);
 }
+
 .submit {
     width: 100px;
     height: 35px;
@@ -209,6 +238,7 @@ input:focus {
     margin-left: 140px;
 
 }
+
 .submit:hover {
     background-color: transparent;
     color: brown;
