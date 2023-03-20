@@ -1,19 +1,25 @@
 <template>
+<!-- Navigation Global Component -->
 <Navbar />
 
+<!-- Add Car Button -->
 <div class="add-car-button">
     <button class="button" @click="addCar()">Add Car</button>
 </div>
+
+<!-- Style applied when Add/Edit form is displayed -->
 <div class="modal-overlay" v-if="showModal ">
 </div>
 
+<!-- Add/Edit Car Component -->
 <div class="modal" v-if="showModal">
     <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
 </div>
 
+<!-- gallery-card.vue component -->
 <div class="car-card">
     <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.description" :price="item.price" @get-Price-Info="getPrice" @get-car="getCar" @delete-car="deleteCar" />
+        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.description" :price="item.price" @get-Price-Info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
     </div>
 </div>
 </template>
@@ -30,23 +36,28 @@ export default {
         carform,
     },
     methods: {
+        // Display Add Car form
         addCar() {
             this.showModal = true,
                 this.title = 'Add Car',
                 this.addForm = true
         },
+        // get price of the car
         getPrice(price) {
             alert("Price is : Rs. " + price);
         },
+          // Close form when 'x' button is clicked on the form
         showModalx() {
             this.showModal = false;
         },
+         // Add Car data
         setdata(formdata) {
             this.showModal = false;
             this.cars_info.push(formdata)
             this.addForm = false
 
         },
+               // Show car data
         getCar(cardata) {
             this.showModal = true
             this.editForm = true
@@ -54,6 +65,7 @@ export default {
             this.title = cardata.title;
 
         },
+             // Edit Car Data
         editCarData(data) {
             this.showModal = false;
             const toCarUpdate = this.cars_info.filter(car => car.id === data.id)[0];
@@ -64,6 +76,7 @@ export default {
                 toCarUpdate.price = data.price
             this.editForm = false
         },
+         // Delete Car Data
         deleteCar(data) {
             if (confirm("Do you want to delete " + data.name + " ?") == true) {
                 var newCarData = this.cars_info.filter(car => car.id != data.id);
@@ -176,6 +189,7 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
 .add-car-button {
     display: flex;
     justify-content: end;
@@ -198,6 +212,7 @@ button:hover {
     color: brown;
     border: 3px solid brown;
 }
+
 .modal-overlay {
     top: 0;
     left: 0;
@@ -207,6 +222,7 @@ button:hover {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
 .modal {
     position: fixed;
     top: 50%;
