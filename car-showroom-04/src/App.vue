@@ -26,7 +26,6 @@
 <script>
 import gallery_card from "./components/gallery-card.vue";
 import carform from "./components/car-form.vue";
-import Navbar from "./components/Nav-bar";
 import axios from 'axios'
 export default {
     name: "App",
@@ -36,7 +35,6 @@ export default {
     },
     components: {
         gallery_card,
-        Navbar,
         carform,
     },
     data() {
