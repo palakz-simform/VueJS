@@ -81,9 +81,14 @@ export default {
                     image: formdata.image,
                     details: formdata.description,
                     price: formdata.price
-                }).then(() => {
-                    this.getData(),
-                        this.addForm = false
+                }).then((res) => {
+                    if(res.status===201){
+                        this.getData()                        
+                    }
+                    else{
+                        alert("Error!!")
+                    }
+                    this.addForm = false
                 })
                 .catch(error => {
                     alert("Error : " + error)
@@ -102,16 +107,21 @@ export default {
         // Edit Car Data
         editCarData(data) {
             this.showModal = false;
-            console.log(data.id)
             axios.put('https://testapi.io/api/dartya/resource/cardata/' + data.id, {
                 id: data.id,
                 name: data.name,
                 image: data.image,
                 details: data.description,
                 price: data.price
-            }).then(() => {
+            }).then((res) => {
+                if(res.status===200){                    
+                     this.getData()
+                }
+                else{
+                    alert("Error!!")
+                }
                 this.editForm = false
-                this.getData()
+               
             }).catch(error => {
                 alert("Error : " + error)
             });
@@ -121,9 +131,14 @@ export default {
         // Delete Car Data
         deleteCar(data) {
             if (confirm("Do you want to delete this car data ?") == true) {
-                axios.delete('https://testapi.io/api/dartya/resource/cardata/' + data.id).then(() => {
-                    this.getData()
+                axios.delete('https://testapi.io/api/dartya/resource/cardata/' + data.id).then((res) => {
+                    if(res.status===204){
+                        this.getData()
                     alert("Car : " + data.name + " deleted successuflly!")
+                    }
+                    else{
+                        alert("Error!!")
+                    }                  
                 }).catch(error => {
                     alert("Error : " + error)
                 })
