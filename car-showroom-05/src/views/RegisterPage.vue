@@ -444,13 +444,13 @@ input:focus {
 
     .heading {
 
-        padding: 1px 10px 5px 70px;
+        align-items: center;
+    display: contents;
     }
 
     .submit {
 
-        margin-left: 140px;
-        margin-bottom: 20px;
+        margin-left:40px;  
 
     }
 }

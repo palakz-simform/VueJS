@@ -18,11 +18,10 @@
         <label>Password:</label>
         <input type="password" v-model="form.password" ref="password">
         <div v-if="error_password">
-            <p class="error">{{ error_password }}</p>
+            <p class="error">{{ error_msg }}</p>
         </div>
     </div>
-
-    <button @click="login" class="submit">Login</button>
+        <button @click.prevent="login" class="submit">Login</button>  
 </div>
 </div>
 
@@ -30,11 +29,14 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../router'
+
     export default {
         name:'LoginPage',
         data(){
         return{
-            error_email: false,
+                error_email: false,
                 error_password: false,
                 error_msg: "",
                 form: {
@@ -45,8 +47,60 @@
         },
         methods:{
             login(){
-                alert("LoggedIn successfully")
+                this.error_email = false,
+                this.error_password = false
+                if (this.checkEmail() && this.checkPassword() ) {
+                    axios.get('https://testapi.io/api/dartya/resource/users').then((res)=>{
+                        const data = res.data.data
+                        if(res.status==200){
+                            const userData = data.find(udata => udata.email==this.form.email)
+                            if(userData.password==this.form.password){
+                                alert("Logged In Successfully!!")
+                                router.push({name:'home'})
+                            }
+                            else{
+                                alert("Error Logging In!!\n\nPlease try again")
+                            }
+                          
+                        }
+                    })}
+            },
+            checkEmail() {
+            if (this.form.email === "") {
+                this.error_email = true
+                this.error_msg = "**Please enter email**"
+                this.$refs.email.focus()
+                return false;
+            } else if (this.form.email !== "") {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(this.form.email)) {
+                    this.error_email = true
+                    this.error_msg = "**Please enter valid email**"
+                    this.$refs.email.focus()
+                    return false;
+                }
+                return true
             }
+            return true;
+        },
+        checkPassword() {
+            if (this.form.password === "") {
+                console.log("aa")
+                this.error_password = true;
+                this.error_msg = "**Please enter password**"
+                this.$refs.password.focus()
+                return false;
+            } else if (this.form.password !== "") {
+                if (this.form.password.length < 8) {
+                    this.error_password = true;
+                    this.error_msg = "**Password must be greater than 8 characters**"
+                    this.$refs.password.focus()
+                    return false;
+                }
+                return true
+            }
+            return true
+        },
         }
     }
 
@@ -144,14 +198,14 @@ input:focus {
     border: 3px solid brown;
 }
 
-@media (max-width:500px){
+@media (max-width:500px){  
     .heading {
-    padding: 1px 10px 5px 100px;
+     
+    align-items: center;
+    display: contents;
 }
-.submit {
-    
-    margin-left: 120px;
-
+.submit {    
+   margin-left:40px;  
 
 }
 }

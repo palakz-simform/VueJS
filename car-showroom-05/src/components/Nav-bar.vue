@@ -61,7 +61,7 @@ a{
 
 @media (max-width: 500px) {
     .link{
-    margin-right:40px;   
+    margin-right:20px;   
 }
 }
 

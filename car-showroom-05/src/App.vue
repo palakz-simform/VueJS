@@ -1,8 +1,8 @@
 <template>
   <!-- Navigation Global Component -->
   <NavBar />
-  <!-- <RouterView/> -->
-  <CarDetail/>
+  <RouterView/>
+  <!-- <CarDetail/> -->
   </template>
   
   <script>
