@@ -127,7 +127,6 @@ export default {
         }
     },
     methods: {
-
         submit() {
             // clear error
             this.error_name=false

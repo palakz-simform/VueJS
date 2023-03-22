@@ -1,38 +1,78 @@
 <template>
+<div class="back">
+   <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
+</div>
 <div class="car-detail">
     <div class="image">
-        <img src="https://imgd.aeplcdn.com/1200x900/n/cw/ec/112947/wagon-r-2022-exterior-right-front-three-quarter.jpeg">
+        <img :src="car.image">
     </div>
     <div class="info">
         <div class="title">
-            <h1>Maruti suzuki</h1>
+            <h1>{{ car.name }}</h1>
         </div>
         <div class="description">
             <h3>Description of Car : </h3>
-            <p>mply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an</p>
+            <p>{{ car.details }}</p>
         </div>
         <div class="price">
             <h3>Price of Car : </h3>
-            <emp><p>Rs. 500</p></emp>
+            <emp><p>Rs. {{ car.price }}</p></emp>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-    name: 'CarDetail'
+
+    name: 'CarDetail', 
+    data(){
+        return{
+            car:{}
+        }
+    }   ,
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        getData() {
+            axios.get(`https://testapi.io/api/dartya/resource/cardata/${this.$route.params.id}`).then((response) => {
+               this.car=response.data
+        })
+        },
+        home(){
+            this.$router.push({name:'home'})
+        }
+       
+    }
+
+
 }
 </script>
 
 <style scoped>
+
+button{
+    margin-top:30px;
+    margin-left:30px;
+    color:wheat;
+    background-color: rgb(44, 44, 44);
+    border:none;
+    height:40px;
+    width:100px;
+}
+i{
+    margin-right: 15px;
+}
 .car-detail {
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    height: 700px;
+    height: 500px;
     box-shadow: 0px 1px 10px;
-    max-width: 1500px;
+    max-width: 1200px;
     display: flex;
     box-shadow: 5px 10px 18px #888888;
 
@@ -41,12 +81,12 @@ export default {
         margin-top:20px;        
     }
 .image {
-    max-width: 700px;
+    max-width: 500px;
     align-self: center;
 }
 
 img {
-    width: 100%;
+    width:500px;
     margin-left:20px;
 }
 
@@ -54,13 +94,10 @@ img {
     width: 800px;
     height: 100px;
 }
-.title h1{
-    color:maroon;
-}
 .description {   
     padding-left:80px;
 
-    height: 200px;    
+    height: 150px;    
 }
 .description h3{
     color:maroon;
@@ -128,7 +165,7 @@ img {
             margin-left: 10px;
             margin-right: 10px;
             flex-direction: column;
-            height: 800px;         
+            height: 700px;         
             display: flex;
            
         }
@@ -136,10 +173,11 @@ img {
         .image {
             max-width: 400px;
             align-self: center;
+            padding-top: 20px;;
 
         }
         img {
-            width: 100%;
+            width: 400px;;
         }
         .title {
             
@@ -154,7 +192,7 @@ img {
 
         .price {
             padding-left:40px;
-            height: 100px;
+            height: 50px;
         }
     }
 

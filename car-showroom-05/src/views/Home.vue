@@ -16,7 +16,7 @@
 <!-- gallery-card.vue component -->
 <div class="car-card">
     <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @get-Price-Info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
+        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
     </div>
 </div>
 </template>
@@ -59,11 +59,6 @@ export default {
             this.showModal = true,
                 this.title = 'Add Car',
                 this.addForm = true
-        },
-
-        // get price of the car
-        getPrice(price) {
-            alert("Price is : Rs. " + price);
         },
 
         // Close form when 'x' button is clicked on the form

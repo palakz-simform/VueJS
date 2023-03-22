@@ -12,25 +12,21 @@
     </div>
     <div class="btn">
         <button class="edit" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
-        <button class="button" @click="getPrice" title="Get Price" :disabled="hasPrice">
+        <RouterLink :to="{name:'carDetail',params:{id:id}}"><button class="button" title="Get Price" :disabled="hasPrice" :id="this.id">
             {{ price!=0 ? "Info" : "Available Soon" }}
-        </button>
+        </button></RouterLink>
         <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
     </div>
 </div>
 </template>
 
 <script>
+import {RouterLink} from "vue-router"
 export default {
     name: "gallery_card",
     props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
-    emit: ["get-Price-Info", 'edit-car', 'delete-car'],
+    emit: ['edit-car', 'delete-car'],
     methods: {
-
-        // Emitting event to pass the price to the parent component
-        getPrice() {
-            this.$emit("get-Price-Info", this.price);
-        },
 
         // Function to get a particular car data 
         getCarData() {
