@@ -343,10 +343,7 @@ label {
     margin-top: 10px;
 }
 
-.row-gender {
-    display: flex;
-    flex-direction: column;
-}
+
 
 input,
 textarea,
@@ -381,37 +378,35 @@ input[type="radio"]:focus {
     box-shadow: 0 0 0px rgb(0, 0, 0);
 }
 
-.gender {
 
-    display: flex;
-    flex-direction: column;
-}
 
 .gender-class {
-    height: 90px;
+   
+    height: 70px;
 }
+
 
 div.row-gender.row {
     display: flex;
     flex-direction: row;
-    height: 40px;
+    height: 20px;    
 }
 
 .female label,
 .male label {
     padding-left: 10px;
+    padding-top:5px;
 }
 
 .female,
 .male {
     display: flex;
-    width: 30px;
+    width: 80px;
 
 }
 
 select {
     height: 33px;
-
 }
 
 textarea:focus,

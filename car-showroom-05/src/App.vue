@@ -1,20 +1,20 @@
 <template>
   <!-- Navigation Global Component -->
   <NavBar />
-  <RouterView/>
+  <!-- <RouterView/> -->
+  <CarDetail/>
   </template>
   
   <script>
   import { RouterView } from "vue-router";
-  import NavBar from "./components/Nav-bar.vue";
-  // import HomePage from './views/Home.vue'
+  import CarDetail from "./views/CarDetail.vue"
   
   export default{
       name:"App",
       components:{
-          NavBar,
-          // HomePage
+        CarDetail,
       }
+   
   }
   </script>
   

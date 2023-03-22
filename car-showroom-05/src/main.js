@@ -8,5 +8,4 @@ import router from './router'
 const app = createApp(App)
 
 app.use(router)
-app.component('NavBar',NavBar)
-app.mount('#app')
+app.component('NavBar',NavBar).mount('#app')
