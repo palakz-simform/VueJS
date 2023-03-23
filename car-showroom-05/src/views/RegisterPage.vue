@@ -11,33 +11,25 @@
             <div class="row">
                 <label>Name:</label>
                 <input type="text" v-model="form.name" ref="name">
-                <div v-show="error_name">
-                    <p class="error">{{error_msg }}</p>
-                </div>
+                <div v-show="error_name" class="error">{{ error_msg }} </div>
             </div>
             <!-- Email -->
             <div class="row">
                 <label>Email:</label>
                 <input type="email" v-model="form.email" ref="email">
-                <div v-show="error_email">
-                    <p class="error">{{error_msg }}</p>
-                </div>
+                <div v-show="error_email" class="error">{{ error_msg }} </div>
             </div>
             <!-- Password -->
             <div class="row">
                 <label>Password:</label>
                 <input type="password" v-model="form.password" ref="password">
-                <div v-if="error_password">
-                    <p class="error">{{error_msg}}</p>
-                </div>
+                <div v-if="error_password" class="error">{{ error_msg }} </div>
             </div>
             <!-- Confirm Password -->
             <div class="row">
                 <label>Confirm Password:</label>
                 <input type="password" v-model="form.confirmPassword" ref="confirmPassword">
-                <div v-if="error_confirmPassword">
-                    <p class="error">{{error_msg}}</p>
-                </div>
+                <div v-if="error_confirmPassword" class="error">{{ error_msg }}  </div>
             </div>
             <!-- Role -->
             <div class="row">
@@ -47,9 +39,7 @@
                     <option value="Employee">Employee</option>
                     <option value="Customer">Customer</option>
                 </select>
-                <div v-if="error_role">
-                    <p class="error">{{error_msg}}</p>
-                </div>
+                <div v-if="error_role" class="error">{{ error_msg }} </div>
             </div>
             <!-- Gender -->
             <div class="gender-class">
@@ -66,26 +56,20 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="error_gender">
-                    <p class="error">{{error_msg}}</p>
-                </div>
+                <div v-if="error_gender" class="error">{{ error_msg }} </div>
             </div>
             <!-- Age -->
             <div class="row">
                 <label>Age:</label>
                 <input type="number" v-model="form.age" ref="age" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
                 <!-- Prevent the user from pressing key : +,-,e -->
-                <div v-if="error_age">
-                    <p class="error">{{ error_msg }}</p>
-                </div>
+                <div v-if="error_age" class="error">{{ error_msg }}</div>
             </div>
             <!-- DOB -->
             <div class="row">
                 <label>Date of Birth:</label>
                 <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31">
-                <div v-if="error_dob">
-                    <p class="error">{{ error_msg }}</p>
-                </div>
+                <div v-if="error_dob" class="error">{{ error_msg }}</div>
             </div>
 
             <button class="submit" @click.prevent="submit">Register</button>
@@ -97,7 +81,6 @@
 
 <script>
 import axios from 'axios'
-import router from '../router'
 
 export default {
     name: 'RegisterPage',
@@ -150,7 +133,7 @@ export default {
                 }).then((res)=>{                   
                     if(res.status===201){
                         alert(' User added Successfully: \n\nName: ' + this.form.name +'\nEmail: ' + this.form.email + '\nRole :' + this.form.role + '\nGender:' + this.form.gender+ '\nAge:' + this.form.age+ '\nDate of Birth:' + this.form.dob)
-                        router.push({name: 'login'})                        
+                        this.$router.push({name: 'login'})                        
                     }
                     else{
                         alert("Error!!")
@@ -196,12 +179,14 @@ export default {
                 this.$refs.password.focus()
                 return false;
             } else if (this.form.password !== "") {
-                if (this.form.password.length < 8) {
-                    this.error_password = true
-                    this.error_msg = "**Password must be greater than 8 characters**"
+                const passRegex =/^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+                if(!passRegex.test(this.form.password)){
+                    this.error_password = true;
+                    this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
                     this.$refs.password.focus()
                     return false;
                 }
+              
                 return true
             }
             return true
@@ -303,7 +288,7 @@ h1 {
 }
 
 div.row {
-    height: 80px;
+    height: 120px;
     margin-top: 0px;
 }
 
@@ -332,13 +317,13 @@ label {
     padding-left: 40px;
     margin-top: 2px;
     margin-bottom: 0px;
+    margin-right:30px;
 
 }
 
 .row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     margin-top: 10px;
 }
 
@@ -376,9 +361,6 @@ input[type="radio"]:focus {
     border-color: rgb(0, 0, 0);
     box-shadow: 0 0 0px rgb(0, 0, 0);
 }
-
-
-
 .gender-class {
    
     height: 70px;
@@ -436,9 +418,12 @@ input:focus {
     border: 3px solid brown;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     form {
         max-width: 400px;
+        margin-left:20px;
+        margin-right: 20px;;
+       
     }
 
     .heading {

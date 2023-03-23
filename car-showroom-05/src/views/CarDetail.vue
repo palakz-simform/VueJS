@@ -16,7 +16,7 @@
         </div>
         <div class="price">
             <h3>Price of Car : </h3>
-            <emp><p>Rs. {{ car.price }}</p></emp>
+            <p>Rs. {{ car.price }}</p>
         </div>
     </div>
 </div>
@@ -62,7 +62,15 @@ button{
     border:none;
     height:40px;
     width:100px;
+    cursor: pointer;
 }
+button:hover {
+    background-color: transparent;
+    color: rgb(44, 44, 44);
+    font-weight: bolder;
+    border: 3px solid rgb(44, 44, 44);
+}
+
 i{
     margin-right: 15px;
 }
@@ -91,8 +99,12 @@ img {
 }
 
 .title {    
-    width: 800px;
+    width: 700px;
     height: 100px;
+}
+.title h1{
+    color:black;
+    margin-right: 30px;;
 }
 .description {   
     padding-left:80px;
@@ -107,8 +119,7 @@ img {
     
     font-size:18px;
 }
-.price {
-    
+.price {    
     padding-left:80px;
 }
 .price h3{
@@ -177,7 +188,9 @@ img {
 
         }
         img {
-            width: 400px;;
+            margin-left: 13px;
+            margin-right:10px;
+           width:90%
         }
         .title {
             

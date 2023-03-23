@@ -156,6 +156,7 @@ export default {
     display: flex;
     justify-content: end;
     padding: 20px;
+    margin-right: 30px;;
 }
 
 button {
@@ -204,5 +205,11 @@ button:hover {
         flex-wrap: wrap;
         justify-content: center;
     }
+    .add-car-button {
+    display: flex;
+    justify-content: end;
+    padding: 20px;
+    margin-right: 0px;;
+}
 }
 </style>

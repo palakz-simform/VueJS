@@ -10,16 +10,12 @@
     <div class="row">
         <label>Email:</label>
         <input type="email" v-model="form.email" ref="email">
-        <div v-show="error_email">
-            <p class="error">{{error_msg }}</p>
-        </div>
+        <div v-show="error_email" class="error">{{error_msg }}</div>
     </div>
-    <div class="row">
+    <div class="row row-password">
         <label>Password:</label>
         <input type="password" v-model="form.password" ref="password">
-        <div v-if="error_password">
-            <p class="error">{{ error_msg }}</p>
-        </div>
+        <div v-show="error_password" class="error">{{error_msg }}</div>
     </div>
         <button @click.prevent="login" class="submit">Login</button>  
 </div>
@@ -30,7 +26,6 @@
 
 <script>
 import axios from 'axios'
-import router from '../router'
 
     export default {
         name:'LoginPage',
@@ -56,7 +51,7 @@ import router from '../router'
                             const userData = data.find(udata => udata.email==this.form.email)
                             if(userData.password==this.form.password){
                                 alert("Logged In Successfully!!")
-                                router.push({name:'home'})
+                                this.$router.push({name:'home'})
                             }
                             else{
                                 alert("Error Logging In!!\n\nPlease try again")
@@ -85,18 +80,19 @@ import router from '../router'
         },
         checkPassword() {
             if (this.form.password === "") {
-                console.log("aa")
-                this.error_password = true;
+                this.error_password = true
                 this.error_msg = "**Please enter password**"
                 this.$refs.password.focus()
                 return false;
             } else if (this.form.password !== "") {
-                if (this.form.password.length < 8) {
+                const passRegex =/^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+                if(!passRegex.test(this.form.password)){
                     this.error_password = true;
-                    this.error_msg = "**Password must be greater than 8 characters**"
+                    this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
                     this.$refs.password.focus()
                     return false;
                 }
+              
                 return true
             }
             return true
@@ -121,9 +117,10 @@ h1 {
 }
 
 div.row {
-    height: 80px;
+    height: 110px;
     margin-top: 0px;
 }
+
 
 .heading {
     display: flex;
@@ -148,15 +145,15 @@ label {
 .error {
     color: red;
     padding-left: 40px;
-    margin-top: 2px;
+    margin-top: 10px;
     margin-bottom: 0px;
+    margin-right: 40px;;
 
 }
 
 .row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     margin-top: 10px;
 }
 
@@ -199,6 +196,10 @@ input:focus {
 }
 
 @media (max-width:500px){  
+    form{
+        margin-left:20px;
+        margin-right:20px;
+    }
     .heading {
      
     align-items: center;
