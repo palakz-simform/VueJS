@@ -1,5 +1,5 @@
 <template>
-<Navbar />
+<NavBar />
 <div class="car-card">
     <div v-for="item in cars_info" :key="item.id">
         <gallery_card :name="item.name" :image="item.image" :description="item.desc" :price="item.price" @get-Price-Info="getPrice" />
@@ -9,12 +9,10 @@
 
 <script>
 import gallery_card from "./components/gallery-card.vue";
-import Navbar from "./Nav-bar";
 export default {
     name: "App",
     components: {
         gallery_card,
-        Navbar,
     },
     methods: {
         getPrice(price) {
