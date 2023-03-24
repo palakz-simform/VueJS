@@ -94,5 +94,11 @@ font-size: 18px;
 }
 }
 
+@media (max-width: 375px) {
+    .title h1 {
 
+    font-size: 20px;
+    margin-left:20px;
+}
+}
 </style>

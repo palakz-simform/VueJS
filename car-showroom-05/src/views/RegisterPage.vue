@@ -29,7 +29,7 @@
             <div class="row">
                 <label>Confirm Password:</label>
                 <input type="password" v-model="form.confirmPassword" ref="confirmPassword">
-                <div v-if="error_confirmPassword" class="error">{{ error_msg }}  </div>
+                <div v-if="error_confirmPassword" class="error">{{ error_msg }} </div>
             </div>
             <!-- Role -->
             <div class="row">
@@ -71,8 +71,9 @@
                 <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31">
                 <div v-if="error_dob" class="error">{{ error_msg }}</div>
             </div>
-
-            <button class="submit" @click.prevent="submit">Register</button>
+            <div class="row row-button">
+                <button class="submit" @click.prevent="submit">Register</button>
+            </div>
         </div>
     </div>
 
@@ -86,7 +87,7 @@ export default {
     name: 'RegisterPage',
     data() {
         return {
-            error_name:false,
+            error_name: false,
             error_email: false,
             error_password: false,
             error_confirmPassword: false,
@@ -94,10 +95,10 @@ export default {
             error_gender: false,
             error_age: false,
             error_dob: false,
-          
+
             error_msg: "",
             form: {
-                name:'',
+                name: '',
                 email: '',
                 password: '',
                 confirmPassword: '',
@@ -112,7 +113,7 @@ export default {
     methods: {
         submit() {
             // clear error
-            this.error_name=false
+            this.error_name = false
             this.error_email = false,
                 this.error_password = false,
                 this.error_confirmPassword = false,
@@ -121,31 +122,31 @@ export default {
                 this.error_age = false,
                 this.error_dob = false
 
-            if (this.checkName() &&this.checkEmail() && this.checkPassword() && this.checkConfirmPassword() && this.checkRole() && this.checkGender() && this.checkAge() && this.checkDOB()) {
-                axios.post('https://testapi.io/api/dartya/resource/users',{
-                    name:this.form.name,
-                    email:this.form.email,
-                    role:this.form.role,
-                    password:this.form.password,
-                    age:this.form.age,
-                    dob:this.form.dob,
-                    gender:this.form.gender               
-                }).then((res)=>{                   
-                    if(res.status===201){
-                        alert(' User added Successfully: \n\nName: ' + this.form.name +'\nEmail: ' + this.form.email + '\nRole :' + this.form.role + '\nGender:' + this.form.gender+ '\nAge:' + this.form.age+ '\nDate of Birth:' + this.form.dob)
-                        this.$router.push({name: 'login'})                        
-                    }
-                    else{
+            if (this.checkName() && this.checkEmail() && this.checkPassword() && this.checkConfirmPassword() && this.checkRole() && this.checkGender() && this.checkAge() && this.checkDOB()) {
+                axios.post('https://testapi.io/api/dartya/resource/users', {
+                    name: this.form.name,
+                    email: this.form.email,
+                    role: this.form.role,
+                    password: this.form.password,
+                    age: this.form.age,
+                    dob: this.form.dob,
+                    gender: this.form.gender
+                }).then((res) => {
+                    if (res.status === 201) {
+                        alert(' User added Successfully: \n\nName: ' + this.form.name + '\nEmail: ' + this.form.email + '\nRole :' + this.form.role + '\nGender:' + this.form.gender + '\nAge:' + this.form.age + '\nDate of Birth:' + this.form.dob)
+                        this.$router.push({
+                            name: 'login'
+                        })
+                    } else {
                         alert("Error!!")
                     }
-                  
+
                 })
-               
+
             }
-     
 
         },
-        checkName(){
+        checkName() {
             if (this.form.name === "") {
                 this.error_name = true
                 this.error_msg = "**Please enter name**"
@@ -179,14 +180,14 @@ export default {
                 this.$refs.password.focus()
                 return false;
             } else if (this.form.password !== "") {
-                const passRegex =/^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
-                if(!passRegex.test(this.form.password)){
+                const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+                if (!passRegex.test(this.form.password)) {
                     this.error_password = true;
                     this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
                     this.$refs.password.focus()
                     return false;
                 }
-              
+
                 return true
             }
             return true

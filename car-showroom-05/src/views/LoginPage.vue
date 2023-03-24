@@ -17,7 +17,10 @@
         <input type="password" v-model="form.password" ref="password">
         <div v-show="error_password" class="error">{{error_msg }}</div>
     </div>
+    <div class="row row-button">
         <button @click.prevent="login" class="submit">Login</button>  
+    </div>
+        
 </div>
 </div>
 

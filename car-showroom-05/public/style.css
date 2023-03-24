@@ -17,6 +17,7 @@ div.row {
 }
 
 .heading {
+    padding-top: 20px;
     text-align: center;
 }
 
@@ -130,9 +131,14 @@ input:focus {
     border-radius: 10px;
     font-size: 15px;
     margin-top: 25px;
-    margin-left: 195px;
     margin-bottom: 40px;
 
+}
+
+.row-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .submit:hover {
@@ -144,14 +150,17 @@ input:focus {
 @media (max-width: 550px) {
     form {
         max-width: 400px;
-        margin-left: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    form {
+        max-width: 400px;
         margin-right: 20px;
-        ;
+        margin-left: 20px;
 
     }
 
-    .submit {
-        margin-left: 40px;
 
-    }
+
 }
