@@ -1,6 +1,6 @@
 <template>
 <!-- Navigation Global Component -->
-<Navbar />
+<NavBar />
 
 <!-- Add Car Button -->
 <div class="add-car-button">
@@ -27,12 +27,10 @@
 <script>
 import gallery_card from "./components/gallery-card.vue";
 import carform from "./components/car-form.vue";
-import Navbar from "./components/Nav-bar";
 export default {
     name: "App",
     components: {
         gallery_card,
-        Navbar,
         carform,
     },
     methods: {
