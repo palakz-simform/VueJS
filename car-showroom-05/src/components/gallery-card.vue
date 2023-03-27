@@ -91,7 +91,9 @@ export default {
     background-color: rgb(44, 44, 44);
     color: wheat;
     overflow: hidden;
-
+}
+.heading h1:hover {
+    color: wheat;
 }
 
 .image {

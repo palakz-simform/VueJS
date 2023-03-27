@@ -1,5 +1,4 @@
 <template>
-
 <!-- Add Car Button -->
 <div class="add-car-button">
     <button class="button" @click="addCar()">Add Car</button>
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
 import axios from 'axios'
@@ -32,8 +30,8 @@ export default {
         this.getData()
 
     },
-    components: {      
-        carform,        
+    components: {
+        carform,
         gallery_card
     },
     data() {
@@ -77,10 +75,9 @@ export default {
                     details: formdata.description,
                     price: formdata.price
                 }).then((res) => {
-                    if(res.status===201){
-                        this.getData()                        
-                    }
-                    else{
+                    if (res.status === 201) {
+                        this.getData()
+                    } else {
                         alert("Error!!")
                     }
                     this.addForm = false
@@ -109,14 +106,13 @@ export default {
                 details: data.description,
                 price: data.price
             }).then((res) => {
-                if(res.status===200){                    
-                     this.getData()
-                }
-                else{
+                if (res.status === 200) {
+                    this.getData()
+                } else {
                     alert("Error!!")
                 }
                 this.editForm = false
-               
+
             }).catch(error => {
                 alert("Error : " + error)
             });
@@ -127,13 +123,12 @@ export default {
         deleteCar(data) {
             if (confirm("Do you want to delete this car data ?") == true) {
                 axios.delete('https://testapi.io/api/dartya/resource/cardata/' + data.id).then((res) => {
-                    if(res.status===204){
+                    if (res.status === 204) {
                         this.getData()
-                    alert("Car : " + data.name + " deleted successuflly!")
-                    }
-                    else{
+                        alert("Car : " + data.name + " deleted successuflly!")
+                    } else {
                         alert("Error!!")
-                    }                  
+                    }
                 }).catch(error => {
                     alert("Error : " + error)
                 })
@@ -143,7 +138,6 @@ export default {
 
 };
 </script>
-
 
 <style scoped>
 .car-card {
@@ -156,7 +150,8 @@ export default {
     display: flex;
     justify-content: end;
     padding: 20px;
-    margin-right: 30px;;
+    margin-right: 30px;
+    ;
 }
 
 button {
@@ -205,11 +200,13 @@ button:hover {
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .add-car-button {
-    display: flex;
-    justify-content: end;
-    padding: 20px;
-    margin-right: 0px;;
-}
+        display: flex;
+        justify-content: end;
+        padding: 20px;
+        margin-right: 0px;
+        ;
+    }
 }
 </style>
