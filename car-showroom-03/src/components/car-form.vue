@@ -31,7 +31,7 @@
     </div>
     <div class="row">
         <label>Price:</label>
-        <input type="number" v-model="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+        <input type="number" v-model.number="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
         <!-- Prevent the user from pressing key : +,-,e -->
         <div v-if="error_price">
             <p class="error">{{ error_msg }}</p>
