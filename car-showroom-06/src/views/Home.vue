@@ -1,4 +1,5 @@
 <template>
+    <div>
 <!-- Add Car Button -->
 <div class="add-car-button">
     <button class="button" @click="addCar()">Add Car</button>
@@ -21,6 +22,8 @@
         <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
     </div>
 </div>
+    </div>
+
 </template>
 
 <script>

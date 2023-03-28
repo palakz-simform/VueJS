@@ -1,83 +1,85 @@
 <template>
-<form>
-    <div class="login-form">
-        <div class="heading">
-            <h1>Registration Form</h1>
-        </div>
-        <!-- Car Add/Edit Form -->
+<div>
+    <form>
+        <div class="login-form">
+            <div class="heading">
+                <h1>Registration Form</h1>
+            </div>
+            <!-- Car Add/Edit Form -->
 
-        <div class="form">
-            <!-- Name -->
-            <div class="row">
-                <label>Name:</label>
-                <input type="text" v-model="form.name" ref="name">
-                <div v-show="error_name" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Email -->
-            <div class="row">
-                <label>Email:</label>
-                <input type="email" v-model="form.email" ref="email">
-                <div v-show="error_email" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Password -->
-            <div class="row">
-                <label>Password:</label>
-                <input type="password" v-model="form.password" ref="password">
-                <div v-if="error_password" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Confirm Password -->
-            <div class="row">
-                <label>Confirm Password:</label>
-                <input type="password" v-model="form.confirmPassword" ref="confirmPassword">
-                <div v-if="error_confirmPassword" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Role -->
-            <div class="row">
-                <label>Role:</label>
-                <select v-model="form.role" ref="role">
-                    <option value="Admin">Admin</option>
-                    <option value="Employee">Employee</option>
-                    <option value="Customer">Customer</option>
-                </select>
-                <div v-if="error_role" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Gender -->
-            <div class="gender-class">
-                <div class="row-gender row ">
-                    <label>Gender:</label>
-                    <div class="gender">
-                        <div class="male">
-                            <input type="radio" value="male" name="gender" v-model="form.gender" ref="gender" />
-                            <label>Male</label>
-                        </div>
-                        <div class="female">
-                            <input type="radio" value="female" name="gender" v-model="form.gender" ref="gender" />
-                            <label>Female</label>
+            <div class="form">
+                <!-- Name -->
+                <div class="row">
+                    <label>Name:</label>
+                    <input type="text" v-model="form.name" ref="name">
+                    <div v-show="error_name" class="error">{{ error_msg }} </div>
+                </div>
+                <!-- Email -->
+                <div class="row">
+                    <label>Email:</label>
+                    <input type="email" v-model="form.email" ref="email">
+                    <div v-show="error_email" class="error">{{ error_msg }} </div>
+                </div>
+                <!-- Password -->
+                <div class="row">
+                    <label>Password:</label>
+                    <input type="password" v-model="form.password" ref="password">
+                    <div v-if="error_password" class="error">{{ error_msg }} </div>
+                </div>
+                <!-- Confirm Password -->
+                <div class="row">
+                    <label>Confirm Password:</label>
+                    <input type="password" v-model="form.confirmPassword" ref="confirmPassword">
+                    <div v-if="error_confirmPassword" class="error">{{ error_msg }} </div>
+                </div>
+                <!-- Role -->
+                <div class="row">
+                    <label>Role:</label>
+                    <select v-model="form.role" ref="role">
+                        <option value="Admin">Admin</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                    <div v-if="error_role" class="error">{{ error_msg }} </div>
+                </div>
+                <!-- Gender -->
+                <div class="gender-class">
+                    <div class="row-gender row ">
+                        <label>Gender:</label>
+                        <div class="gender">
+                            <div class="male">
+                                <input type="radio" value="male" name="gender" v-model="form.gender" ref="gender" />
+                                <label>Male</label>
+                            </div>
+                            <div class="female">
+                                <input type="radio" value="female" name="gender" v-model="form.gender" ref="gender" />
+                                <label>Female</label>
+                            </div>
                         </div>
                     </div>
+                    <div v-if="error_gender" class="error">{{ error_msg }} </div>
                 </div>
-                <div v-if="error_gender" class="error">{{ error_msg }} </div>
-            </div>
-            <!-- Age -->
-            <div class="row">
-                <label>Age:</label>
-                <input type="number" v-model="form.age" ref="age" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
-                <!-- Prevent the user from pressing key : +,-,e -->
-                <div v-if="error_age" class="error">{{ error_msg }}</div>
-            </div>
-            <!-- DOB -->
-            <div class="row">
-                <label>Date of Birth:</label>
-                <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31">
-                <div v-if="error_dob" class="error">{{ error_msg }}</div>
-            </div>
-            <div class="row row-button">
-                <button class="submit" @click.prevent="submit">Register</button>
+                <!-- Age -->
+                <div class="row">
+                    <label>Age:</label>
+                    <input type="number" v-model="form.age" ref="age" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                    <!-- Prevent the user from pressing key : +,-,e -->
+                    <div v-if="error_age" class="error">{{ error_msg }}</div>
+                </div>
+                <!-- DOB -->
+                <div class="row">
+                    <label>Date of Birth:</label>
+                    <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31">
+                    <div v-if="error_dob" class="error">{{ error_msg }}</div>
+                </div>
+                <div class="row row-button">
+                    <button class="submit" @click.prevent="submit">Register</button>
+                </div>
             </div>
         </div>
-    </div>
 
-</form>
+    </form>
+</div>
 </template>
 
 <script>

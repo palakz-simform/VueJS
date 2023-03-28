@@ -1,30 +1,31 @@
 <template>
-     <button @click="show=!show">Toggle</button>
-<form>   
+<div>
+    <form>
         <div class="login-form">
-        <div class="heading">
-            <h1>Login Form</h1>
-        </div>
-        <!-- Car Add/Edit Form -->
+            <div class="heading">
+                <h1>Login Form</h1>
+            </div>
+            <!-- Car Add/Edit Form -->
 
-        <div class="form">
-            <div class="row">
-                <label>Email:</label>
-                <input type="email" v-model="form.email" ref="email">
-                <div v-show="error_email" class="error">{{error_msg }}</div>
-            </div>
-            <div class="row row-password">
-                <label>Password:</label>
-                <input type="password" v-model="form.password" ref="password">
-                <div v-show="error_password" class="error">{{error_msg }}</div>
-            </div>
-            <div class="row row-button">
-                <button @click.prevent="login" class="submit">Login</button>
+            <div class="form">
+                <div class="row">
+                    <label>Email:</label>
+                    <input type="email" v-model="form.email" ref="email">
+                    <div v-show="error_email" class="error">{{error_msg }}</div>
+                </div>
+                <div class="row row-password">
+                    <label>Password:</label>
+                    <input type="password" v-model="form.password" ref="password">
+                    <div v-show="error_password" class="error">{{error_msg }}</div>
+                </div>
+                <div class="row row-button">
+                    <button @click.prevent="login" class="submit">Login</button>
+                </div>
             </div>
         </div>
-    </div>
 
-</form>
+    </form>
+</div>
 </template>
 
 <script>
@@ -34,7 +35,6 @@ export default {
     name: 'LoginPage',
     data() {
         return {
-            show:true,
             error_email: false,
             error_password: false,
             error_msg: "",

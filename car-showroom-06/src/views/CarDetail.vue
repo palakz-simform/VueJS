@@ -1,5 +1,6 @@
 <template>
-<div class="back">
+    <div>
+        <div class="back">
     <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
 </div>
 <div class="car-detail">
@@ -20,6 +21,8 @@
         </div>
     </div>
 </div>
+    </div>
+
 </template>
 
 <script>
