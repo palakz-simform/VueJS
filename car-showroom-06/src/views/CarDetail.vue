@@ -1,28 +1,27 @@
 <template>
-    <div>
-        <div class="back">
-    <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
+<div>
+    <div class="back">
+        <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
+    </div>
+    <div class="car-detail">
+        <div class="image">
+            <img :src="car.image">
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>{{ car.name }}</h1>
+            </div>
+            <div class="description">
+                <h3>Description of Car : </h3>
+                <p>{{ car.details }}</p>
+            </div>
+            <div class="price">
+                <h3>Price of Car : </h3>
+                <p>Rs. {{ car.price }}</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="car-detail">
-    <div class="image">
-        <img :src="car.image">
-    </div>
-    <div class="info">
-        <div class="title">
-            <h1>{{ car.name }}</h1>
-        </div>
-        <div class="description">
-            <h3>Description of Car : </h3>
-            <p>{{ car.details }}</p>
-        </div>
-        <div class="price">
-            <h3>Price of Car : </h3>
-            <p>Rs. {{ car.price }}</p>
-        </div>
-    </div>
-</div>
-    </div>
-
 </template>
 
 <script>
@@ -50,9 +49,7 @@ export default {
                 name: 'home'
             })
         }
-
     }
-
 }
 </script>
 
@@ -78,6 +75,7 @@ button:hover {
 i {
     margin-right: 15px;
 }
+
 .car-detail {
     margin: auto;
     margin-top: 50px;
@@ -89,6 +87,7 @@ i {
     box-shadow: 5px 10px 18px #888888;
 
 }
+
 .info {
     margin-top: 20px;
 }

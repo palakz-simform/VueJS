@@ -1,44 +1,46 @@
 <template>
 <!-- Car Form for Edit and Add Car -->
-<div class="modal">
-<div class="heading">
-    <h1>{{ title }}</h1>
-    <!-- Button to click when the user wants to close the form -->
-    <button class="button" @click="showModalx">x</button>
-</div>
-<!-- Car Add/Edit Form -->
-<div class="form">
-    <div class="row">
-        <label>Name:</label>
-        <input type="text" v-model="form.name" ref="name">
-        <div v-show="error_name">
-            <p class="error">{{error_msg }}</p>
+<div class="form-add-edit-car">
+    <div class="modal">
+        <div class="heading">
+            <h1>{{ title }}</h1>
+            <!-- Button to click when the user wants to close the form -->
+            <button class="button" @click="showModalx">x</button>
+        </div>
+        <!-- Car Add/Edit Form -->
+        <div class="form">
+            <div class="row">
+                <label>Name:</label>
+                <input type="text" v-model="form.name" ref="name">
+                <div v-show="error_name">
+                    <p class="error">{{error_msg }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <label>Image:</label>
+                <input type="url" v-model="form.image" ref="image">
+                <div v-if="error_image">
+                    <p class="error">{{ error_msg }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <label>Description:</label>
+                <textarea v-model="form.description" ref="description"></textarea>
+                <div v-if="error_description">
+                    <p class="error">{{ error_msg }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <label>Price:</label>
+                <input type="number" v-model.number="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                <!-- Prevent the user from pressing key : +,-,e -->
+                <div v-if="error_price">
+                    <p class="error">{{ error_msg }}</p>
+                </div>
+            </div>
+            <button @click="submit" class="submit">{{ addForm===true?'Submit':'Edit' }}</button>
         </div>
     </div>
-    <div class="row">
-        <label>Image:</label>
-        <input type="url" v-model="form.image" ref="image">
-        <div v-if="error_image">
-            <p class="error">{{ error_msg }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <label>Description:</label>
-        <textarea v-model="form.description" ref="description"></textarea>
-        <div v-if="error_description">
-            <p class="error">{{ error_msg }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <label>Price:</label>
-        <input type="number" v-model.number="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
-        <!-- Prevent the user from pressing key : +,-,e -->
-        <div v-if="error_price">
-            <p class="error">{{ error_msg }}</p>
-        </div>
-    </div>
-    <button @click="submit" class="submit">{{ addForm===true?'Submit':'Edit' }}</button>
-</div>
 </div>
 </template>
 
@@ -113,7 +115,7 @@ export default {
             if (this.addForm == true) {
                 this.alertData()
                 this.$emit("display-data", this.form)
-            } 
+            }
             // Emit event 'edit-data' when the form is Add Car
             else if (this.editForm == true) {
                 this.alertData()
@@ -169,9 +171,11 @@ h1 {
     text-align: center;
     color: brown
 }
+
 h1:hover {
     color: brown
 }
+
 div.row {
     height: 80px;
     margin-top: 0px;
@@ -180,7 +184,7 @@ div.row {
 .heading {
     display: flex;
     justify-content: space-between;
-    padding: 1px 10px 5px 140px;
+    padding: 1px 10px 5px 130px;
 }
 
 .button {
@@ -219,7 +223,6 @@ textarea {
     margin-right: 40px;
     height: 28px;
     padding-left: 5px;
-    ;
 }
 
 textarea:focus,
@@ -248,44 +251,40 @@ input:focus {
     color: brown;
     border: 3px solid brown;
 }
-.modal {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    z-index: 2;
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 5px;
-    height: 600px;   
-    margin-top: -200px;
-    margin-left: -200px;
-}
 
-/* .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+.modal {
     width: 100%;
     max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
     height: 600px;
-} */
 
-@media (max-width: 400px){
-    .modal {  
-    max-width: 300px;   
-    margin-left: -150px;
 }
-.heading {
-    padding: 1px 10px 5px 90px;
+
+.form-add-edit-car {
+    position: fixed;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 10;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.submit {
-    margin-left: 100px;
-}
+
+@media (max-width: 400px) {
+    .modal {
+        max-width: 300px;
+    }
+
+    .heading {
+        padding: 1px 10px 5px 90px;
+    }
+
+    .submit {
+        margin-left: 100px;
+    }
 
 }
 </style>

@@ -1,29 +1,27 @@
 <template>
-    <div>
-<!-- Add Car Button -->
-<div class="add-car-button">
-    <button class="button" @click="addCar()">Add Car</button>
-</div>
+<div>
+    <!-- Add Car Button -->
+    <div class="add-car-button">
+        <button class="button" @click="addCar()">Add Car</button>
+    </div>
 
-<!-- Style applied when Add/Edit form is displayed -->
-<transition name="fade">
-    <div class="modal-overlay" v-if="showModal "></div>
-</transition>
+    <!-- Style applied when Add/Edit form is displayed -->
+    <transition name="fade">
+        <div class="modal-overlay" v-if="showModal "></div>
+    </transition>
 
-
-<!-- Add/Edit Car Component -->
-<transition name="car-form">
+    <!-- Add/Edit Car Component -->
+    <transition name="car-form">
         <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
-</transition>
+    </transition>
 
-<!-- gallery-card.vue component -->
-<transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
-    <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
-    </div>
-</transition-group>
-    </div>
-
+    <!-- gallery-card.vue component -->
+    <transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
+        <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
+            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+        </div>
+    </transition-group>
+</div>
 </template>
 
 <script>
@@ -142,17 +140,17 @@ export default {
             }
         },
 
-        beforeEnter(el){
+        beforeEnter(el) {
             el.style.opacity = 0;
-            el.style.transform='translateY(100px)'
+            el.style.transform = 'translateY(100px)'
         },
-        enter(el,done){
-            gsap.to(el,{
-                opacity:1,
-                y:0,
-                duration:0.5,
+        enter(el, done) {
+            gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
                 onComplete: done,
-                delay: el.dataset.index*0.1
+                delay: el.dataset.index * 0.1
             })
         }
     },
@@ -202,12 +200,16 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.fade-enter, .fade-leave-to{
+.fade-enter,
+.fade-leave-to {
     opacity: 0;
 }
-.fade-enter-active, .fade-leave-active{
+
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s ease !important;
 }
+
 .car-form-enter-active {
     animation: pop 0.5s;
 }
@@ -242,7 +244,12 @@ button:hover {
         justify-content: end;
         padding: 20px;
         margin-right: 0px;
-        ;
+    }
+}
+
+@media (max-width:400px) {
+    .modal {
+        max-width: 300px;
     }
 }
 </style>
