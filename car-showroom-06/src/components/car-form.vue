@@ -1,5 +1,6 @@
 <template>
 <!-- Car Form for Edit and Add Car -->
+<div class="modal">
 <div class="heading">
     <h1>{{ title }}</h1>
     <!-- Button to click when the user wants to close the form -->
@@ -37,6 +38,7 @@
         </div>
     </div>
     <button @click="submit" class="submit">{{ addForm===true?'Submit':'Edit' }}</button>
+</div>
 </div>
 </template>
 
@@ -167,7 +169,9 @@ h1 {
     text-align: center;
     color: brown
 }
-
+h1:hover {
+    color: brown
+}
 div.row {
     height: 80px;
     margin-top: 0px;
@@ -176,7 +180,7 @@ div.row {
 .heading {
     display: flex;
     justify-content: space-between;
-    padding: 1px 10px 5px 150px;
+    padding: 1px 10px 5px 140px;
 }
 
 .button {
@@ -244,4 +248,18 @@ input:focus {
     color: brown;
     border: 3px solid brown;
 }
+.modal {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 2;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 600px;
+    width: 400px;
+    margin-top: -200px;
+    margin-left: -200px;
+}
+
 </style>

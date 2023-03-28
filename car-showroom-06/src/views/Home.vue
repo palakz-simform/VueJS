@@ -5,12 +5,15 @@
 </div>
 
 <!-- Style applied when Add/Edit form is displayed -->
-<div class="modal-overlay" v-if="showModal "></div>
+<transition name="fade">
+    <div class="modal-overlay" v-if="showModal "></div>
+</transition>
+
 
 <!-- Add/Edit Car Component -->
-<div class="modal" v-if="showModal">
-    <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
-</div>
+<transition name="car-form">
+        <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
+</transition>
 
 <!-- gallery-card.vue component -->
 <div class="car-card">
@@ -181,17 +184,32 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 5px;
-    height: 600px;
+.fade-enter, .fade-leave-to{
+    opacity: 0;
+}
+.fade-enter-active, .fade-leave-active{
+    transition: opacity 0.5s ease !important;
+}
+.car-form-enter-active {
+    animation: pop 0.5s;
+}
+
+.car-form-leave-active {
+    animation: pop 0.5s reverse;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 800px) {

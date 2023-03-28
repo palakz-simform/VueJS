@@ -1,6 +1,7 @@
 <template>
-<form>
-    <div class="login-form">
+     <button @click="show=!show">Toggle</button>
+<form>   
+        <div class="login-form">
         <div class="heading">
             <h1>Login Form</h1>
         </div>
@@ -22,6 +23,7 @@
             </div>
         </div>
     </div>
+
 </form>
 </template>
 
@@ -32,6 +34,7 @@ export default {
     name: 'LoginPage',
     data() {
         return {
+            show:true,
             error_email: false,
             error_password: false,
             error_msg: "",
