@@ -17,11 +17,11 @@
 </transition>
 
 <!-- gallery-card.vue component -->
-<div class="car-card">
-    <div v-for="item in cars_info" :key="item.id">
+<transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
+    <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
         <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
     </div>
-</div>
+</transition-group>
     </div>
 
 </template>
@@ -30,6 +30,7 @@
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
 import axios from 'axios'
+import gsap from 'gsap'
 export default {
     name: "HomePage",
     mounted() {
@@ -139,6 +140,20 @@ export default {
                     alert("Error : " + error)
                 })
             }
+        },
+
+        beforeEnter(el){
+            el.style.opacity = 0;
+            el.style.transform='translateY(100px)'
+        },
+        enter(el,done){
+            gsap.to(el,{
+                opacity:1,
+                y:0,
+                duration:0.5,
+                onComplete: done,
+                delay: el.dataset.index*0.1
+            })
         }
     },
 

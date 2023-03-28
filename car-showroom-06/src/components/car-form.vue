@@ -254,12 +254,38 @@ input:focus {
     left: 50%;
     z-index: 2;
     width: 100%;
+    max-width: 400px;
     background-color: #fff;
     border-radius: 5px;
-    height: 600px;
-    width: 400px;
+    height: 600px;   
     margin-top: -200px;
     margin-left: -200px;
 }
 
+/* .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 600px;
+} */
+
+@media (max-width: 400px){
+    .modal {  
+    max-width: 300px;   
+    margin-left: -150px;
+}
+.heading {
+    padding: 1px 10px 5px 90px;
+}
+.submit {
+    margin-left: 100px;
+}
+
+}
 </style>

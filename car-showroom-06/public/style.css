@@ -21,7 +21,8 @@ div.row {
 }
 
 .heading {
-    padding-top: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     text-align: center;
 }
 
