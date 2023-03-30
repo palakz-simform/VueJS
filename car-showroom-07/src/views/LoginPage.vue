@@ -29,7 +29,6 @@
 </template>
 
 <script>
-
 import { mapActions, mapWritableState } from 'pinia'
 import {useUserStore} from '../stores/user'
 export default {

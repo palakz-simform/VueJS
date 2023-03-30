@@ -10,23 +10,24 @@ export const useUserStore = defineStore('user', {
             password: "",
             age: "",
             dob: "",
-            gender: ""
+            gender: "",
+            login: false
         }
 
     },
     actions: {
-        registerUser() {
+        registerUser(data) {
             axios.post('https://testapi.io/api/dartya/resource/users', {
-                name: this.name,
-                email: this.email,
-                role: this.role,
-                password: this.password,
-                age: this.age,
-                dob: this.dob,
-                gender: this.gender
+                name: data.name,
+                email: data.email,
+                role: data.role,
+                password: data.password,
+                age: data.age,
+                dob: data.dob,
+                gender: data.gender
             }).then((res) => {
                 if (res.status === 201) {
-                    alert(' User added Successfully: \n\nName: ' + this.name + '\nEmail: ' + this.email + '\nRole :' + this.role + '\nGender:' + this.gender + '\nAge:' + this.age + '\nDate of Birth:' + this.dob)
+                    alert(' User added Successfully: \n\nName: ' + data.name + '\nEmail: ' + data.email + '\nRole :' + data.role + '\nGender:' + data.gender + '\nAge:' + data.age + '\nDate of Birth:' + data.dob)
                     router.push({
                         name: 'login'
                     })
@@ -40,8 +41,17 @@ export const useUserStore = defineStore('user', {
                 const data = res.data.data
                 if (res.status == 200) {
                     const userData = data.find(udata => udata.email == this.email)
+                    console.log(userData)
                     if (userData.password == this.password) {
                         alert("Logged In Successfully!!")
+                        this.name = userData.name,
+                            this.email = userData.email,
+                            this.role = userData.role,
+                            this.password = userData.password,
+                            this.age = userData.age,
+                            this.dob = userData.dob,
+                            this.gender = userData.gender
+                        this.login = true
                         router.push({
                             name: 'home'
                         })

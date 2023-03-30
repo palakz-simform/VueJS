@@ -59,7 +59,8 @@ export default {
             el.style.opacity = 0;
             el.style.transform = 'translateY(100px)'
         },
-        enter(el, done) {      
+        enter(el, done) {
+      
             gsap.to(el, {
                 opacity: 1,
                 y: 0,
