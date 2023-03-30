@@ -5,19 +5,19 @@
     </div>
     <div class="car-detail">
         <div class="image">
-            <img :src="car.image">
+            <img :src="carDetail.image">
         </div>
         <div class="info">
             <div class="title">
-                <h1>{{ car.name }}</h1>
+                <h1>{{ carDetail.name }}</h1>
             </div>
             <div class="description">
                 <h3>Description of Car : </h3>
-                <p>{{ car.details }}</p>
+                <p>{{ carDetail.details }}</p>
             </div>
             <div class="price">
                 <h3>Price of Car : </h3>
-                <p>Rs. {{ car.price }}</p>
+                <p>Rs. {{ carDetail.price }}</p>
             </div>
         </div>
     </div>
@@ -25,30 +25,28 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions, mapState } from 'pinia'
+import { useCarStore } from '../stores/car'
 
 export default {
 
     name: 'CarDetail',
-    data() {
-        return {
-            car: {}
-        }
-    },
+  
     mounted() {
-        this.getData()
+        this.getCarDetail(this.$route.params.id)
     },
     methods: {
-        getData() {
-            axios.get(`https://testapi.io/api/dartya/resource/cardata/${this.$route.params.id}`).then((response) => {
-                this.car = response.data
-            })
-        },
+        ...mapActions(useCarStore,['getCarDetail']),
+        
+     
         home() {
             this.$router.push({
                 name: 'home'
             })
         }
+    },
+    computed:{
+        ...mapState(useCarStore,['carDetail']),        
     }
 }
 </script>

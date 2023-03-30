@@ -12,14 +12,14 @@
 
     <!-- Add/Edit Car Component -->
     <transition name="car-form">
-        <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" :carData="carData" @edit-data="editCarData"></carform>
+        <carform v-if="showModal" ></carform>
     </transition>
 
     <!-- gallery-card.vue component -->
     <div class="car-content">
-        <transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
+        <transition-group class="car-card" tag="div"  @before-enter="beforeEnter" @enter="enter" appear>
         <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
-            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price"/>
         </div>
     </transition-group>
     </div>
@@ -29,15 +29,13 @@
 <script>
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
-import axios from "axios";
 import { useCarStore } from "../stores/car";
 import { mapActions, mapWritableState } from "pinia";
-
 import gsap from 'gsap'
 export default {
     name: "HomePage",
     mounted() {
-        this.getData()
+        this.getData(this.$route.params.id)
 
     },
     components: {
@@ -45,16 +43,9 @@ export default {
         gallery_card
     },
     computed:{
-        ...mapWritableState(useCarStore,['cars_info','showModal','addForm'])
+        ...mapWritableState(useCarStore,['cars_info','showModal','addForm','editForm','title','cardata'])
     },
-    data() {
-        return {           
-            title: "",
-            editForm: false,
-            carData: {},
-         
-        };
-    },
+  
     methods: {
         ...mapActions(useCarStore,['getData']),
      
@@ -63,60 +54,7 @@ export default {
                 this.showModal = true,
                 this.title = 'Add Car',
                 this.addForm = true
-        },
-        // Close form when 'x' button is clicked on the form
-
-        // Add Car data
-
-
-        // Show car data
-        getCar(cardata) {
-            this.showModal = true
-            this.editForm = true
-            this.carData = cardata;
-            this.title = cardata.title;
-
-        },
-
-        // Edit Car Data
-        editCarData(data) {
-            this.showModal = false;
-            axios.put('https://testapi.io/api/dartya/resource/cardata/' + data.id, {
-                id: data.id,
-                name: data.name,
-                image: data.image,
-                details: data.description,
-                price: data.price
-            }).then((res) => {
-                if (res.status === 200) {
-                    this.getData()
-                } else {
-                    alert("Error!!")
-                }
-                this.editForm = false
-
-            }).catch(error => {
-                alert("Error : " + error)
-            });
-
-        },
-
-        // Delete Car Data
-        deleteCar(data) {
-            if (confirm("Do you want to delete this car data ?") == true) {
-                axios.delete('https://testapi.io/api/dartya/resource/cardata/' + data.id).then((res) => {
-                    if (res.status === 204) {
-                        this.getData()
-                        alert("Car : " + data.name + " deleted successuflly!")
-                    } else {
-                        alert("Error!!")
-                    }
-                }).catch(error => {
-                    alert("Error : " + error)
-                })
-            }
-        },
-
+        },  
         beforeEnter(el) {
             el.style.opacity = 0;
             el.style.transform = 'translateY(100px)'

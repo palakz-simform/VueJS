@@ -12,7 +12,7 @@
             <div class="row">
                 <label>Name:</label>
                 <input type="text" v-model="form.name" ref="name">
-                <div v-show="error_name">
+                <div v-if="error_name">
                     <p class="error">{{error_msg }}</p>
                 </div>
             </div>
@@ -49,19 +49,50 @@ import { mapActions, mapWritableState } from 'pinia';
 import { useCarStore } from '../stores/car';
 export default {
     name: "car-form",
-    props: ["title", "carData", "addForm", "editForm"],
-    emits: ['show-model', 'edit-data'],
-    computed:{
-        ...mapWritableState(useCarStore,['showModal'])
+    props: ["carData"],
+    emits: ['show-model'],
+    computed:{        
+        ...mapWritableState(useCarStore,['showModal','cardata','title','addForm','editForm']),
+        form() {
+        // set this data when form is Add Car Data        
+        if (this.addForm == true) {            
+            return {               
+                    name: '',
+                    image: '',
+                    description: '',
+                    price: ''          
+            }
+        }
+        // Set this data when the form is Edit Car Data
+        else if (this.editForm == true) {
+            return {               
+                    id: this.cardata.id,
+                    name: this.cardata.name,
+                    image: this.cardata.image,
+                    description: this.cardata.description,
+                    price: this.cardata.price
+              
+            }
+        }
+    }
+   
+    },
+    data(){
+        return{
+            error_name: false,
+                error_image: false,
+                error_description: false,
+                error_price: false,
+                error_msg: "",
+        }
     },
     methods: {
-        ...mapActions(useCarStore,['setdata']),
+        ...mapActions(useCarStore,['setdata','editCarData']),
         showModalx() {
             this.showModal = false;
         },
         submit() {
             // Form validation
-            this.error = []
             this.error_name = false,
                 this.error_image = false,
                 this.error_description = false,
@@ -69,6 +100,7 @@ export default {
 
             // Checking that name is not empty and is a string
             if (this.form.name === "" || typeof this.form.name != 'string') {
+      
                 this.error_name = true
                 this.error_msg = "**Please enter name**";
                 this.$refs.name.focus()
@@ -125,7 +157,8 @@ export default {
             // Emit event 'edit-data' when the form is Add Car
             else if (this.editForm == true) {
                 this.alertData()
-                this.$emit("edit-data", this.form)
+                this.editCarData(this.form)
+               
             }
         },
         // function to alert data after submitting the form
@@ -133,42 +166,7 @@ export default {
             alert((this.addForm == true ? 'Created' : 'Edited') + ' data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
         }
     },
-    data() {
-        // set this data when form is Add Car Data
-        if (this.addForm == true) {
-            return {
-                error_name: false,
-                error_image: false,
-                error_description: false,
-                error_price: false,
-                error_msg: "",
-                form: {
-                    name: '',
-                    image: '',
-                    description: '',
-                    price: ''
-                },
-            }
-        }
-        // Set this data when the form is Edit Car Data
-        else if (this.editForm == true) {
-            return {
-                error_name: false,
-                error_image: false,
-                error_description: false,
-                error_price: false,
-                error_msg: "",
-                form: {
-                    id: this.carData.id,
-                    name: this.carData.name,
-                    image: this.carData.image,
-                    description: this.carData.description,
-                    price: this.carData.price
-                },
-            }
-        }
-
-    }
+    
 };
 </script>
 
@@ -230,7 +228,10 @@ textarea {
     height: 28px;
     padding-left: 5px;
 }
-
+textarea{
+    height:20px;
+    padding-top:10px;
+}
 textarea:focus,
 input:focus {
     outline: none !important;
