@@ -142,8 +142,7 @@ export default {
                     } else {
                         alert("Error!!")
                     }
-
-                })
+                })  .catch(() => alert("Error occured! Please try again"))
 
             }
 

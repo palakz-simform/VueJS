@@ -50,20 +50,22 @@ export default {
                 this.error_password = false
             if (this.checkEmail() && this.checkPassword()) {
                 axios.get('https://testapi.io/api/dartya/resource/users').then((res) => {
-                    const data = res.data.data
-                    if (res.status == 200) {
-                        const userData = data.find(udata => udata.email == this.form.email)
-                        if (userData.password == this.form.password) {
-                            alert("Logged In Successfully!!")
-                            this.$router.push({
-                                name: 'home'
-                            })
-                        } else {
-                            alert("Error Logging In!!\n\nPlease try again")
+                        const data = res.data.data
+                        if (res.status == 200) {
+                            const userData = data.find(udata => udata.email == this.form.email)
+                            if (userData) {
+                                if (userData.password == this.form.password) {
+                                    alert("Logged In Successfully!!")
+                                    this.$router.push({
+                                        name: 'home'
+                                    })
+                                }
+                            } else {
+                                alert("Invalid Email or Password!! Please try again")
+                            }
                         }
-
-                    }
-                })
+                    })
+                    .catch(() => alert("Error occured! Please try again"))
             }
         },
         checkEmail() {
