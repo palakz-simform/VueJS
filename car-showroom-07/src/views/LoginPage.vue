@@ -10,12 +10,12 @@
             <div class="form">
                 <div class="row">
                     <label>Email:</label>
-                    <input type="email" v-model="form.email" ref="email">
+                    <input type="email" v-model="email" ref="email">
                     <div v-show="error_email" class="error">{{error_msg }}</div>
                 </div>
                 <div class="row row-password">
                     <label>Password:</label>
-                    <input type="password" v-model="form.password" ref="password">
+                    <input type="password" v-model="password" ref="password">
                     <div v-show="error_password" class="error">{{error_msg }}</div>
                 </div>
                 <div class="row row-button">
@@ -29,8 +29,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 
+import { mapActions, mapWritableState } from 'pinia'
+import {useUserStore} from '../stores/user'
 export default {
     name: 'LoginPage',
     data() {
@@ -38,43 +39,29 @@ export default {
             error_email: false,
             error_password: false,
             error_msg: "",
-            form: {
-                email: '',
-                password: '',
-            }
         }
     },
+    computed:{
+        ...mapWritableState(useUserStore,['email','password'])
+    },
     methods: {
+        ...mapActions(useUserStore,['logInUser']),
         login() {
             this.error_email = false,
                 this.error_password = false
             if (this.checkEmail() && this.checkPassword()) {
-                axios.get('https://testapi.io/api/dartya/resource/users').then((res) => {
-                    const data = res.data.data
-                    if (res.status == 200) {
-                        const userData = data.find(udata => udata.email == this.form.email)
-                        if (userData.password == this.form.password) {
-                            alert("Logged In Successfully!!")
-                            this.$router.push({
-                                name: 'home'
-                            })
-                        } else {
-                            alert("Error Logging In!!\n\nPlease try again")
-                        }
-
-                    }
-                })
+                this.logInUser()
             }
         },
         checkEmail() {
-            if (this.form.email === "") {
+            if (this.email === "") {
                 this.error_email = true
                 this.error_msg = "**Please enter email**"
                 this.$refs.email.focus()
                 return false;
-            } else if (this.form.email !== "") {
+            } else if (this.email !== "") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(this.form.email)) {
+                if (!emailRegex.test(this.email)) {
                     this.error_email = true
                     this.error_msg = "**Please enter valid email**"
                     this.$refs.email.focus()
@@ -85,14 +72,14 @@ export default {
             return true;
         },
         checkPassword() {
-            if (this.form.password === "") {
+            if (this.password === "") {
                 this.error_password = true
                 this.error_msg = "**Please enter password**"
                 this.$refs.password.focus()
                 return false;
-            } else if (this.form.password !== "") {
+            } else if (this.password !== "") {
                 const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
-                if (!passRegex.test(this.form.password)) {
+                if (!passRegex.test(this.password)) {
                     this.error_password = true;
                     this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
                     this.$refs.password.focus()
