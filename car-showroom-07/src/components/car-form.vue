@@ -70,8 +70,7 @@ export default {
                     name: this.cardata.name,
                     image: this.cardata.image,
                     description: this.cardata.description,
-                    price: this.cardata.price
-              
+                    price: this.cardata.price              
             }
         }
     }
@@ -229,8 +228,8 @@ textarea {
     padding-left: 5px;
 }
 textarea{
-    height:20px;
-    padding-top:10px;
+    height:23px;
+    padding-top:8px;
 }
 textarea:focus,
 input:focus {

@@ -12,16 +12,16 @@
 
     <!-- Add/Edit Car Component -->
     <transition name="car-form">
-        <carform v-if="showModal" ></carform>
+        <carform v-if="showModal"></carform>
     </transition>
 
     <!-- gallery-card.vue component -->
     <div class="car-content">
-        <transition-group class="car-card" tag="div"  @before-enter="beforeEnter" @enter="enter" appear>
-        <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
-            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price"/>
-        </div>
-    </transition-group>
+        <transition-group class="car-card" name="car-card" tag="div" @before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave" appear>
+            <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
+                <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" />
+            </div>
+        </transition-group>
     </div>
 </div>
 </template>
@@ -29,37 +29,37 @@
 <script>
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
-import { useCarStore } from "../stores/car";
-import { mapActions, mapWritableState } from "pinia";
+import {
+    useCarStore
+} from "../stores/car";
+import {
+    mapActions,
+    mapWritableState
+} from "pinia";
 import gsap from 'gsap'
 export default {
     name: "HomePage",
     mounted() {
         this.getData(this.$route.params.id)
-
     },
     components: {
         carform,
         gallery_card
     },
-    computed:{
-        ...mapWritableState(useCarStore,['cars_info','showModal','addForm','editForm','title','cardata'])
+    computed: {
+        ...mapWritableState(useCarStore, ['cars_info', 'showModal'])
     },
-  
+
     methods: {
-        ...mapActions(useCarStore,['getData']),
-     
+        ...mapActions(useCarStore, ['getData', 'addCar']),
+
         // Display Add Car form
-        addCar() {
-                this.showModal = true,
-                this.title = 'Add Car',
-                this.addForm = true
-        },  
+
         beforeEnter(el) {
             el.style.opacity = 0;
             el.style.transform = 'translateY(100px)'
         },
-        enter(el, done) {
+        enter(el, done) {      
             gsap.to(el, {
                 opacity: 1,
                 y: 0,
@@ -67,20 +67,34 @@ export default {
                 onComplete: done,
                 delay: el.dataset.index * 0.1
             })
+        },
+        beforeLeave(el) {
+            el.style.opacity = 1
+        },
+        leave(el, done) {
+            gsap.to(el, {
+                opacity: 0,
+                y: -300,
+                duration: 0.5,
+                onComplete: done
+            })
         }
+
     },
 
 };
 </script>
 
 <style scoped>
-.car-content{
-    display:flex;
+.car-content {
+    display: flex;
     justify-content: center;
 }
+
 .car-card {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
+    margin-bottom: 10px;
 }
 
 .add-car-button {
@@ -88,7 +102,7 @@ export default {
     justify-content: end;
     padding: 20px;
     margin-right: 30px;
-    ;
+
 }
 
 button {
@@ -128,6 +142,23 @@ button:hover {
     transition: opacity 0.5s ease !important;
 }
 
+.car-card-leave-from{
+    opacity: 1;
+}
+
+.car-card-leave-to{
+    opacity: 0;
+}
+
+.car-card-leave-active {
+    transition: all 0.5s ease;
+    position: absolute;
+}
+
+.car-card-move {
+    transition: all 0.5s ease;
+}
+
 .car-form-enter-active {
     animation: pop 0.5s;
 }
@@ -152,30 +183,31 @@ button:hover {
 
 @media (max-width: 1880px) {
     .car-card {
-   display:grid;
-   grid-template-columns: auto auto auto auto;
-   gap:20px;
-}
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 20px;
+    }
 }
 
 @media (max-width: 1540px) {
     .car-card {
-   display:grid;
-   grid-template-columns: auto auto auto;
-}
-}
-@media (max-width: 980px) {
-    .car-card {
-   display:grid;
-   grid-template-columns: auto auto ;
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
 }
 
-}
-@media (max-width: 800px) {
+@media (max-width: 980px) {
     .car-card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .car-card {
+
+        gap: 5px;
     }
 
     .add-car-button {

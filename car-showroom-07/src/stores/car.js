@@ -19,7 +19,11 @@ export const useCarStore = defineStore('counter', {
                 this.cars_info = response.data.data
             })
         },
-
+        addCar() {
+            this.showModal = true,
+                this.title = 'Add Car',
+                this.addForm = true
+        },
         // Add Car data
         setdata(formdata) {
             this.showModal = false;
