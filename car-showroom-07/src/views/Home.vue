@@ -12,22 +12,27 @@
 
     <!-- Add/Edit Car Component -->
     <transition name="car-form">
-        <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
+        <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" :carData="carData" @edit-data="editCarData"></carform>
     </transition>
 
     <!-- gallery-card.vue component -->
-    <transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
+    <div class="car-content">
+        <transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
         <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
             <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
         </div>
     </transition-group>
+    </div>
 </div>
 </template>
 
 <script>
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
-import axios from 'axios'
+import axios from "axios";
+import { useCarStore } from "../stores/car";
+import { mapActions, mapWritableState } from "pinia";
+
 import gsap from 'gsap'
 export default {
     name: "HomePage",
@@ -39,58 +44,30 @@ export default {
         carform,
         gallery_card
     },
+    computed:{
+        ...mapWritableState(useCarStore,['cars_info','showModal','addForm'])
+    },
     data() {
-        return {
-            showModal: false,
+        return {           
             title: "",
-            addForm: false,
             editForm: false,
             carData: {},
-            cars_info: [],
+         
         };
     },
     methods: {
-        // fetching data
-        getData() {
-            axios.get("https://testapi.io/api/dartya/resource/cardata").then((response) => {
-                this.cars_info = response.data.data
-            })
-        },
-
+        ...mapActions(useCarStore,['getData']),
+     
         // Display Add Car form
         addCar() {
-            this.showModal = true,
+                this.showModal = true,
                 this.title = 'Add Car',
                 this.addForm = true
         },
-
         // Close form when 'x' button is clicked on the form
-        showModalx() {
-            this.showModal = false;
-        },
 
         // Add Car data
-        setdata(formdata) {
-            this.showModal = false;
-            const id = this.cars_info.length + 1;
-            axios.post('https://testapi.io/api/dartya/resource/cardata/', {
-                    id: id,
-                    name: formdata.name,
-                    image: formdata.image,
-                    details: formdata.description,
-                    price: formdata.price
-                }).then((res) => {
-                    if (res.status === 201) {
-                        this.getData()
-                    } else {
-                        alert("Error!!")
-                    }
-                    this.addForm = false
-                })
-                .catch(error => {
-                    alert("Error : " + error)
-                });
-        },
+
 
         // Show car data
         getCar(cardata) {
@@ -159,10 +136,13 @@ export default {
 </script>
 
 <style scoped>
+.car-content{
+    display:flex;
+    justify-content: center;
+}
 .car-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .add-car-button {
@@ -232,6 +212,27 @@ button:hover {
     }
 }
 
+@media (max-width: 1880px) {
+    .car-card {
+   display:grid;
+   grid-template-columns: auto auto auto auto;
+   gap:20px;
+}
+}
+
+@media (max-width: 1540px) {
+    .car-card {
+   display:grid;
+   grid-template-columns: auto auto auto;
+}
+}
+@media (max-width: 980px) {
+    .car-card {
+   display:grid;
+   grid-template-columns: auto auto ;
+}
+
+}
 @media (max-width: 800px) {
     .car-card {
         display: flex;

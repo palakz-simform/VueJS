@@ -45,13 +45,19 @@
 </template>
 
 <script>
+import { mapActions, mapWritableState } from 'pinia';
+import { useCarStore } from '../stores/car';
 export default {
     name: "car-form",
-    props: ["showModal", "title", "carData", "addForm", "editForm"],
-    emits: ['show-model', 'display-data', 'edit-data'],
+    props: ["title", "carData", "addForm", "editForm"],
+    emits: ['show-model', 'edit-data'],
+    computed:{
+        ...mapWritableState(useCarStore,['showModal'])
+    },
     methods: {
+        ...mapActions(useCarStore,['setdata']),
         showModalx() {
-            this.$emit("show-model")
+            this.showModal = false;
         },
         submit() {
             // Form validation
@@ -114,7 +120,7 @@ export default {
             // Emit event 'display-data' when the form is Add Car
             if (this.addForm == true) {
                 this.alertData()
-                this.$emit("display-data", this.form)
+                this.setdata(this.form)
             }
             // Emit event 'edit-data' when the form is Add Car
             else if (this.editForm == true) {
