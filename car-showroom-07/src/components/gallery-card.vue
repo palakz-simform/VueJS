@@ -22,15 +22,14 @@
 
 <script>
 import { mapActions } from "pinia";
-import {RouterLink} from "vue-router"
+import { RouterLink } from "vue-router"
 import { useCarStore } from "../stores/car";
 
 export default {
     name: "gallery_card",
     props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
- 
     methods: {
-        ...mapActions(useCarStore,['showEdit','deleteCar']),
+        ...mapActions(useCarStore, ['showEdit', 'deleteCar']),
         // Function to get a particular car data 
         getCarData() {
             return {
@@ -43,21 +42,19 @@ export default {
             }
         },
         // On clicking edit button emit event 'edit-car'
-        showeditform() {            
+        showeditform() {
             const getData = this.getCarData()
-            this.showEdit(getData)                  
+            this.showEdit(getData)
         },
         // On clicking delete button emit event 'delete-car'
         deleteData() {
             const cardata = this.getCarData()
-            this.deleteCar(cardata)            
+            this.deleteCar(cardata)
         }
-
     },
 
     computed: {
         // check if the car has price, if not return false and dissable the button
-      
         hasPrice() {
             if (this.price == 0) {
                 return true;
@@ -272,6 +269,6 @@ button[disabled] {
         font-weight: bolder;
         border-radius: 8px;
     }
-   
+
 }
 </style>

@@ -13,7 +13,15 @@ export const useUserStore = defineStore('user', {
             gender: "",
             login: false
         }
-
+    },
+    getters: {
+        userInfo(state) {
+            return {
+                name: state.name,
+                email: state.email,
+                login: state.login
+            }
+        }
     },
     actions: {
         registerUser(data) {
@@ -36,29 +44,29 @@ export const useUserStore = defineStore('user', {
                 }
             }).catch((err) => alert("Error occured! Please try again" + err))
         },
-        logInUser() {
+        logInUser(user) {
             axios.get('https://testapi.io/api/dartya/resource/users').then((res) => {
                 const data = res.data.data
                 if (res.status == 200) {
-                    const userData = data.find(udata => udata.email == this.email)
-                    console.log(userData)
-                    if (userData.password == this.password) {
-                        alert("Logged In Successfully!!")
-                        this.name = userData.name,
-                            this.email = userData.email,
-                            this.role = userData.role,
-                            this.password = userData.password,
-                            this.age = userData.age,
-                            this.dob = userData.dob,
-                            this.gender = userData.gender
-                        this.login = true
-                        router.push({
-                            name: 'home'
-                        })
+                    const userData = data.find(udata => udata.email == user.email)
+                    if (userData) {
+                        if (userData.password == user.password) {
+                            alert("Logged In Successfully!!")
+                            this.name = userData.name,
+                                this.email = userData.email,
+                                this.role = userData.role,
+                                this.password = userData.password,
+                                this.age = userData.age,
+                                this.dob = userData.dob,
+                                this.gender = userData.gender
+                            this.login = true
+                            router.push({
+                                name: 'home'
+                            })
+                        }
                     } else {
                         alert("Invalid Email or Password!! Please try again")
                     }
-
                 }
             }).catch((err) => alert("Error occured! Please try again" + err))
         }

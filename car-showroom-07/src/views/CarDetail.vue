@@ -29,24 +29,20 @@ import { mapActions, mapState } from 'pinia'
 import { useCarStore } from '../stores/car'
 
 export default {
-
     name: 'CarDetail',
-  
     mounted() {
         this.getCarDetail(this.$route.params.id)
     },
     methods: {
-        ...mapActions(useCarStore,['getCarDetail']),
-        
-     
+        ...mapActions(useCarStore, ['getCarDetail']),
         home() {
             this.$router.push({
                 name: 'home'
             })
         }
     },
-    computed:{
-        ...mapState(useCarStore,['carDetailInfo']),        
+    computed: {
+        ...mapState(useCarStore, ['carDetailInfo']),
     }
 }
 </script>

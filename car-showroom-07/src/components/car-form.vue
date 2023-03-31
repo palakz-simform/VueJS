@@ -45,48 +45,47 @@
 </template>
 
 <script>
-import { mapActions, mapWritableState } from 'pinia';
-import { useCarStore } from '../stores/car';
+import {mapActions, mapWritableState} from 'pinia';
+import {useCarStore} from '../stores/car';
 export default {
     name: "car-form",
     props: ["carData"],
     emits: ['show-model'],
-    computed:{        
-        ...mapWritableState(useCarStore,['showModal','cardata','title','addForm','editForm']),
+    computed: {
+        ...mapWritableState(useCarStore, ['showModal', 'cardata', 'title', 'addForm', 'editForm']),
         form() {
-        // set this data when form is Add Car Data        
-        if (this.addForm == true) {            
-            return {               
+            // set this data when form is Add Car Data        
+            if (this.addForm == true) {
+                return {
                     name: '',
                     image: '',
                     description: '',
-                    price: ''          
+                    price: ''
+                }
             }
-        }
-        // Set this data when the form is Edit Car Data
-        else if (this.editForm == true) {
-            return {               
+            // Set this data when the form is Edit Car Data
+            else if (this.editForm == true) {
+                return {
                     id: this.cardata.id,
                     name: this.cardata.name,
                     image: this.cardata.image,
                     description: this.cardata.description,
-                    price: this.cardata.price              
+                    price: this.cardata.price
+                }
             }
         }
-    }
-   
     },
-    data(){
-        return{
+    data() {
+        return {
             error_name: false,
-                error_image: false,
-                error_description: false,
-                error_price: false,
-                error_msg: "",
+            error_image: false,
+            error_description: false,
+            error_price: false,
+            error_msg: "",
         }
     },
     methods: {
-        ...mapActions(useCarStore,['setdata','editCarData']),
+        ...mapActions(useCarStore, ['setdata', 'editCarData']),
         showModalx() {
             this.showModal = false;
         },
@@ -99,7 +98,7 @@ export default {
 
             // Checking that name is not empty and is a string
             if (this.form.name === "" || typeof this.form.name != 'string') {
-      
+
                 this.error_name = true
                 this.error_msg = "**Please enter name**";
                 this.$refs.name.focus()
@@ -111,9 +110,7 @@ export default {
                 this.error_msg = "**Please enter image URL**";
                 this.$refs.image.focus()
                 return false
-
             }
-
             // If image is not empty, checking that the input is an URL
             if (this.form.image != "") {
                 const url = this.form.image;
@@ -125,7 +122,6 @@ export default {
                     return false
                 }
             }
-
             // Checking that the description is not empty
             if (this.form.description === "") {
                 this.error_description = true;
@@ -147,7 +143,6 @@ export default {
                 this.$refs.price.focus()
                 return false
             }
-
             // Emit event 'display-data' when the form is Add Car
             if (this.addForm == true) {
                 this.alertData()
@@ -157,7 +152,6 @@ export default {
             else if (this.editForm == true) {
                 this.alertData()
                 this.editCarData(this.form)
-               
             }
         },
         // function to alert data after submitting the form
@@ -165,7 +159,7 @@ export default {
             alert((this.addForm == true ? 'Created' : 'Edited') + ' data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
         }
     },
-    
+
 };
 </script>
 
@@ -178,12 +172,10 @@ h1 {
 h1:hover {
     color: brown
 }
-
 div.row {
     height: 80px;
     margin-top: 0px;
 }
-
 .heading {
     display: flex;
     justify-content: space-between;
@@ -227,10 +219,12 @@ textarea {
     height: 28px;
     padding-left: 5px;
 }
-textarea{
-    height:23px;
-    padding-top:8px;
+
+textarea {
+    height: 23px;
+    padding-top: 8px;
 }
+
 textarea:focus,
 input:focus {
     outline: none !important;

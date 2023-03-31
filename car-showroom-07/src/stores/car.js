@@ -49,10 +49,9 @@ export const useCarStore = defineStore('counter', {
                     alert("Error!!")
                 }
                 this.addForm = false
-            })
-                .catch(error => {
-                    alert("Error : " + error)
-                });
+            }).catch(error => {
+                alert("Error : " + error)
+            });
         },
 
         showEdit(data) {

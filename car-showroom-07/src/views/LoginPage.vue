@@ -29,8 +29,9 @@
 </template>
 
 <script>
-import { mapActions, mapWritableState } from 'pinia'
-import {useUserStore} from '../stores/user'
+import { useUserStore } from '../stores/user'
+import { mapActions } from 'pinia'
+
 export default {
     name: 'LoginPage',
     data() {
@@ -38,18 +39,21 @@ export default {
             error_email: false,
             error_password: false,
             error_msg: "",
+            email: "",
+            password: ""
         }
     },
-    computed:{
-        ...mapWritableState(useUserStore,['email','password'])
-    },
     methods: {
-        ...mapActions(useUserStore,['logInUser']),
+        ...mapActions(useUserStore, ['logInUser']),
         login() {
             this.error_email = false,
                 this.error_password = false
             if (this.checkEmail() && this.checkPassword()) {
-                this.logInUser()
+                const data = {
+                    email: this.email,
+                    password: this.password
+                }
+                this.logInUser(data)
             }
         },
         checkEmail() {
@@ -84,7 +88,6 @@ export default {
                     this.$refs.password.focus()
                     return false;
                 }
-
                 return true
             }
             return true

@@ -29,13 +29,8 @@
 <script>
 import carform from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
-import {
-    useCarStore
-} from "../stores/car";
-import {
-    mapActions,
-    mapWritableState
-} from "pinia";
+import { useCarStore } from "../stores/car";
+import { mapActions, mapWritableState } from "pinia";
 import gsap from 'gsap'
 export default {
     name: "HomePage",
@@ -54,13 +49,12 @@ export default {
         ...mapActions(useCarStore, ['getData', 'addCar']),
 
         // Display Add Car form
-
         beforeEnter(el) {
             el.style.opacity = 0;
             el.style.transform = 'translateY(100px)'
         },
         enter(el, done) {
-      
+
             gsap.to(el, {
                 opacity: 1,
                 y: 0,
@@ -80,7 +74,6 @@ export default {
                 onComplete: done
             })
         }
-
     },
 
 };
@@ -143,11 +136,11 @@ button:hover {
     transition: opacity 0.5s ease !important;
 }
 
-.car-card-leave-from{
+.car-card-leave-from {
     opacity: 1;
 }
 
-.car-card-leave-to{
+.car-card-leave-to {
     opacity: 0;
 }
 

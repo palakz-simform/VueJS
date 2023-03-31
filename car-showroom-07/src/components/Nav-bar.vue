@@ -1,6 +1,5 @@
 <template>
 <div class="title">
-
     <div class="nav">
         <div>
             <RouterLink to="/" class="heading">
@@ -12,17 +11,15 @@
             <RouterLink class="link" to="/login">Login</RouterLink>
             <RouterLink class="link link-register" to="/register">Register</RouterLink>
         </div>
-
     </div>
 </div>
 </template>
 
 <script>
-import {
-    RouterLink
-} from "vue-router";
+import { RouterLink } from "vue-router";
 export default {
     name: "Nav-bar",
+
 };
 </script>
 
