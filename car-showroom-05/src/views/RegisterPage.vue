@@ -61,7 +61,7 @@
             <!-- Age -->
             <div class="row">
                 <label>Age:</label>
-                <input type="number" v-model="form.age" ref="age" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                <input type="number" v-model.number="form.age" ref="age" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
                 <!-- Prevent the user from pressing key : +,-,e -->
                 <div v-if="error_age" class="error">{{ error_msg }}</div>
             </div>

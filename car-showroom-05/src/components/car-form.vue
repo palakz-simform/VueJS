@@ -167,7 +167,9 @@ h1 {
     text-align: center;
     color: brown
 }
-
+h1:hover{
+    color: brown
+}
 div.row {
     height: 80px;
     margin-top: 0px;
