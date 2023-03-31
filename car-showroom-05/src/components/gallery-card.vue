@@ -216,10 +216,11 @@ button[disabled] {
     }
 }
 
+
 @media (max-width: 670px) {
     .card {
         margin: 5px;
-        width: 175px;
+        width: 160px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         background-color: rgb(216, 215, 214);
     }
@@ -234,12 +235,12 @@ button[disabled] {
     }
 
     .image {
-        width: 175px;
+        width: 160px;
         height: 100px;
     }
 
     img {
-        width: 175px;
+        width: 160px;
         height: 100px;
     }
 
@@ -250,22 +251,23 @@ button[disabled] {
 
     .description {
         height: 120px;
-        width: 175px;
+        width: 150px;
         text-align: center;
     }
 
     .btn {
-        width: 175px;
+        width: 160px;
         height: 50px;
     }
 
     .button {
-        width: 70px;
+        width: 50px;
         height: 35px;
         background-color: rgb(44, 44, 44);
         color: wheat;
         font-weight: bolder;
         border-radius: 8px;
     }
+   
 }
 </style>

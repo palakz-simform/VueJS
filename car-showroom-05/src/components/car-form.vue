@@ -111,7 +111,7 @@ export default {
             if (this.addForm == true) {
                 this.alertData()
                 this.$emit("display-data", this.form)
-            } 
+            }
             // Emit event 'edit-data' when the form is Add Car
             else if (this.editForm == true) {
                 this.alertData()
@@ -223,6 +223,11 @@ input:focus {
     outline: none !important;
     border-color: brown;
     box-shadow: 0 0 10px rgb(196, 105, 105);
+}
+
+textarea {
+    height: 23px;
+    padding-top: 8px;
 }
 
 .submit {

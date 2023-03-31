@@ -13,9 +13,11 @@
 </div>
 
 <!-- gallery-card.vue component -->
-<div class="car-card">
-    <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+<div class="car-content">
+    <div class="car-card">
+        <div v-for="item in cars_info" :key="item.id">
+            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+        </div>
     </div>
 </div>
 </template>
@@ -140,10 +142,15 @@ export default {
 </script>
 
 <style scoped>
-.car-card {
+.car-content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.car-card {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    margin-bottom: 10px;
 }
 
 .add-car-button {
@@ -194,11 +201,34 @@ button:hover {
     height: 600px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1880px) {
     .car-card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1540px) {
+    .car-card {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 980px) {
+    .car-card {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .car-card {
+        gap: 5px;
     }
 
     .add-car-button {
@@ -206,7 +236,12 @@ button:hover {
         justify-content: end;
         padding: 20px;
         margin-right: 0px;
-        ;
+    }
+}
+
+@media (max-width:400px) {
+    .modal {
+        max-width: 300px;
     }
 }
 </style>
