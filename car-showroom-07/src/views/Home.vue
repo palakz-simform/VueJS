@@ -63,14 +63,14 @@ export default {
             })
         },
         beforeLeave(el) {
-            el.style.opacity = 1,
-            el.style.transform = "translateX(0px)"
+            el.style.opacity = 1
         },
         leave(el, done) {
             console.log(el)
             gsap.to(el, {
                 opacity: 0,
-                y: -250,
+                x: -250,
+                scaleY:0.01,
                 duration: 0.3,
                 onComplete: done
             })
