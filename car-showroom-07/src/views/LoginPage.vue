@@ -29,8 +29,12 @@
 </template>
 
 <script>
-import { useUserStore } from '../stores/user'
-import { mapActions } from 'pinia'
+import {
+    useUserStore
+} from '../stores/user'
+import {
+    mapActions
+} from 'pinia'
 
 export default {
     name: 'LoginPage',
@@ -40,7 +44,7 @@ export default {
             error_password: false,
             error_msg: "",
             email: "",
-            password: ""
+            password: "",
         }
     },
     methods: {
@@ -58,16 +62,14 @@ export default {
         },
         checkEmail() {
             if (this.email === "") {
-                this.error_email = true
-                this.error_msg = "**Please enter email**"
-                this.$refs.email.focus()
+                this.showError("email")
+                this.error_msg = "**Please enter email**"                
                 return false;
             } else if (this.email !== "") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.email)) {
-                    this.error_email = true
+                    this.showError("email")
                     this.error_msg = "**Please enter valid email**"
-                    this.$refs.email.focus()
                     return false;
                 }
                 return true
@@ -76,22 +78,25 @@ export default {
         },
         checkPassword() {
             if (this.password === "") {
-                this.error_password = true
+                this.showError("password")
                 this.error_msg = "**Please enter password**"
-                this.$refs.password.focus()
                 return false;
             } else if (this.password !== "") {
                 const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
                 if (!passRegex.test(this.password)) {
-                    this.error_password = true;
+                    this.showError("password")
                     this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
-                    this.$refs.password.focus()
                     return false;
                 }
                 return true
             }
             return true
         },
+        showError(error) {
+            this[`error_${error}`] = true;             
+            this.$refs[error].focus();
+        }
+
     }
 }
 </script>

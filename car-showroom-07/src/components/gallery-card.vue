@@ -23,11 +23,12 @@
 <script>
 import { mapActions } from "pinia";
 import { RouterLink } from "vue-router"
-import { useCarStore } from "../stores/car";
+import { useCarStore} from "../stores/car";
 
 export default {
     name: "gallery_card",
     props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
+
     methods: {
         ...mapActions(useCarStore, ['showEdit', 'deleteCar']),
         // Function to get a particular car data 
@@ -51,10 +52,12 @@ export default {
             const cardata = this.getCarData()
             this.deleteCar(cardata)
         }
+
     },
 
     computed: {
         // check if the car has price, if not return false and dissable the button
+
         hasPrice() {
             if (this.price == 0) {
                 return true;

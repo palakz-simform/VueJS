@@ -48,7 +48,6 @@ export default {
     methods: {
         ...mapActions(useCarStore, ['getData', 'addCar']),
 
-        // Display Add Car form
         beforeEnter(el) {
             el.style.opacity = 0;
             el.style.transform = 'translateY(100px)'
@@ -64,13 +63,15 @@ export default {
             })
         },
         beforeLeave(el) {
-            el.style.opacity = 1
+            el.style.opacity = 1,
+            el.style.transform = "translateX(0px)"
         },
         leave(el, done) {
+            console.log(el)
             gsap.to(el, {
                 opacity: 0,
-                y: -300,
-                duration: 0.5,
+                y: -250,
+                duration: 0.3,
                 onComplete: done
             })
         }
@@ -134,14 +135,6 @@ button:hover {
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s ease !important;
-}
-
-.car-card-leave-from {
-    opacity: 1;
-}
-
-.car-card-leave-to {
-    opacity: 0;
 }
 
 .car-card-leave-active {

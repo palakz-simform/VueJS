@@ -145,26 +145,23 @@ export default {
         },
         checkName() {
             if (this.form.name === "") {
-                this.error_name = true
+                this.showError("name")
                 this.error_msg = "**Please enter name**"
-                this.$refs.name.focus()
                 return false;
             }
             return true
         },
         checkEmail() {
             if (this.form.email === "") {
-                this.error_email = true
+                this.showError("email")
                 this.error_msg = "**Please enter email**"
-                this.$refs.email.focus()
-                return false;
+               return false;
             } else if (this.form.email !== "") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.form.email)) {
-                    this.error_email = true
+                    this.showError("email")
                     this.error_msg = "**Please enter valid email**"
-                    this.$refs.email.focus()
-                    return false;
+                   return false;
                 }
                 return true
             }
@@ -172,16 +169,14 @@ export default {
         },
         checkPassword() {
             if (this.form.password === "") {
-                this.error_password = true
+                this.showError("password")
                 this.error_msg = "**Please enter password**"
-                this.$refs.password.focus()
                 return false;
             } else if (this.form.password !== "") {
                 const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
                 if (!passRegex.test(this.form.password)) {
-                    this.error_password = true;
+                    this.showError("password")
                     this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
-                    this.$refs.password.focus()
                     return false;
                 }
 
@@ -191,16 +186,14 @@ export default {
         },
         checkConfirmPassword() {
             if (this.form.confirmPassword === "") {
-                this.error_confirmPassword = true
+                this.showError("confirmPassword")
                 this.error_msg = "**Please enter the password again to confirm**"
-                this.$refs.confirmPassword.focus()
                 return false;
             } else if (this.form.confirmPassword !== "") {
                 if (this.form.password !== this.form.confirmPassword) {
-                    this.error_confirmPassword = true
-                    this.error_msg = "**Confirm Password does not math the Password field**"
-                    this.$refs.confirmPassword.focus()
-                    return false;
+                    this.showError("confirmPassword")
+                    this.error_msg = "**Confirm Password does not match the Password field**"
+                   return false;
                 }
                 return true;
             }
@@ -208,40 +201,35 @@ export default {
         },
         checkRole() {
             if (this.form.role === "") {
-                this.error_role = true
+                this.showError("role")
                 this.error_msg = "**Please choose your role**"
-                this.$refs.role.focus()
                 return false;
             }
             return true;
         },
         checkGender() {
             if (this.form.gender === "") {
-                this.error_gender = true
+                this.showError("gender")
                 this.error_msg = "**Please choose your gender**"
-                this.$refs.gender.focus()
-                return false;
+               return false;
             }
             return true
         },
         checkAge() {
             if (this.form.age === "") {
-                this.error_age = true
+                this.showError("age")
                 this.error_msg = "**Please enter your age**"
-                this.$refs.age.focus()
                 return false;
             } else if (this.form.age !== "") {
                 const age = this.form.age
                 if (typeof this.form.age != 'number' || age.toString().includes(".")) {
-                    this.error_age = true
+                    this.showError("age")
                     this.error_msg = "**Age should be whole number**"
-                    this.$refs.age.focus()
-                    return false
+                   return false
                 } else if (this.form.age < 18 || this.form.age > 100) {
-                    this.error_age = true
+                    this.showError("age")
                     this.error_msg = "**Age should be between 18-100**"
-                    this.$refs.age.focus()
-                    return false
+                   return false
                 }
                 return true
             }
@@ -249,12 +237,15 @@ export default {
         },
         checkDOB() {
             if (this.form.dob === "") {
-                this.error_dob = true
+                this.showError("dob")
                 this.error_msg = "**Please choose your Date of Birth**"
-                this.$refs.dob.focus()
-                return false;
+               return false;
             }
             return true;
+        },
+        showError(error) {
+            this[`error_${error}`] = true;             
+            this.$refs[error].focus();
         },
         formattedDate() {
             const today = new Date();

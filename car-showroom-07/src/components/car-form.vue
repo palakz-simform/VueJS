@@ -98,49 +98,42 @@ export default {
 
             // Checking that name is not empty and is a string
             if (this.form.name === "" || typeof this.form.name != 'string') {
-
-                this.error_name = true
+                this.showError("name")
                 this.error_msg = "**Please enter name**";
-                this.$refs.name.focus()
                 return false
             }
             // Checking that image is not empty 
             if (this.form.image === "") {
-                this.error_image = true;
+                this.showError("image")
                 this.error_msg = "**Please enter image URL**";
-                this.$refs.image.focus()
                 return false
             }
             // If image is not empty, checking that the input is an URL
-            if (this.form.image != "") {
+            else if (this.form.image != "") {
                 const url = this.form.image;
                 const regex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
                 if (!regex.test(url)) {
-                    this.error_image = true;
+                    this.showError("image")
                     this.error_msg = "**Please enter valid image URL**";
-                    this.$refs.image.focus()
                     return false
                 }
             }
             // Checking that the description is not empty
             if (this.form.description === "") {
-                this.error_description = true;
+                this.showError("description")
                 this.error_msg = "**Please enter description**";
-                this.$refs.description.focus()
                 return false
             }
             // If the description is not empty, checking that the no. of characters is between 30-120
             else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
-                this.error_description = true;
+                this.showError("description")
                 this.error_msg = "**Description must be 30-120 characters long**"
-                this.$refs.description.focus()
-                return false
+               return false
             }
             // checking that the price is not empty
             if (this.form.price === "") {
-                this.error_price = true;
+                this.showError("price")
                 this.error_msg = "**Please enter price**"
-                this.$refs.price.focus()
                 return false
             }
             // Emit event 'display-data' when the form is Add Car
@@ -157,6 +150,10 @@ export default {
         // function to alert data after submitting the form
         alertData() {
             alert((this.addForm == true ? 'Created' : 'Edited') + ' data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
+        },
+        showError(error) {
+            this[`error_${error}`] = true;             
+            this.$refs[error].focus();
         }
     },
 
