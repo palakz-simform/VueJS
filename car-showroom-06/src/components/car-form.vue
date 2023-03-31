@@ -232,6 +232,11 @@ input:focus {
     box-shadow: 0 0 10px rgb(196, 105, 105);
 }
 
+textarea {
+    height: 23px;
+    padding-top: 8px;
+}
+
 .submit {
     width: 100px;
     height: 35px;

@@ -16,11 +16,13 @@
     </transition>
 
     <!-- gallery-card.vue component -->
-    <transition-group class="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter">
-        <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
-            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
-        </div>
-    </transition-group>
+    <div class="car-content">
+        <transition-group class="car-card" name="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave">
+            <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
+                <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+            </div>
+        </transition-group>
+    </div>
 </div>
 </template>
 
@@ -98,7 +100,6 @@ export default {
             this.editForm = true
             this.carData = cardata;
             this.title = cardata.title;
-
         },
 
         // Edit Car Data
@@ -121,7 +122,6 @@ export default {
             }).catch(error => {
                 alert("Error : " + error)
             });
-
         },
 
         // Delete Car Data
@@ -152,17 +152,32 @@ export default {
                 onComplete: done,
                 delay: el.dataset.index * 0.1
             })
+        },
+        beforeLeave(el) {
+            el.style.opacity = 1
+        },
+        leave(el, done) {
+            gsap.to(el, {
+                opacity: 0,
+                x: -100,
+                duration: 0.5,
+                onComplete: done
+            })
         }
     },
-
 };
 </script>
 
 <style scoped>
-.car-card {
+.car-content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.car-card {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    margin-bottom: 10px;
 }
 
 .add-car-button {
@@ -170,7 +185,6 @@ export default {
     justify-content: end;
     padding: 20px;
     margin-right: 30px;
-    ;
 }
 
 button {
@@ -210,6 +224,23 @@ button:hover {
     transition: opacity 0.5s ease !important;
 }
 
+.car-card-leave-from {
+    opacity: 1;
+}
+
+.car-card-leave-to {
+    opacity: 0;
+}
+
+.car-card-leave-active {
+    transition: all 0.5s ease;
+    position: absolute;
+}
+
+.car-card-move {
+    transition: all 0.5s ease;
+}
+
 .car-form-enter-active {
     animation: pop 0.5s;
 }
@@ -232,11 +263,29 @@ button:hover {
     }
 }
 
+@media (max-width: 1880px) {
+    .car-card {
+        grid-template-columns: auto auto auto auto;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1540px) {
+    .car-card {
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 980px) {
+    .car-card {
+        grid-template-columns: auto auto;
+    }
+}
+
 @media (max-width: 800px) {
     .car-card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 5px;
     }
 
     .add-car-button {
