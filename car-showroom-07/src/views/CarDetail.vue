@@ -5,19 +5,19 @@
     </div>
     <div class="car-detail">
         <div class="image">
-            <img :src="carDetail.image">
+            <img :src="carDetailInfo.image">
         </div>
         <div class="info">
             <div class="title">
-                <h1>{{ carDetail.name }}</h1>
+                <h1>{{ carDetailInfo.name }}</h1>
             </div>
             <div class="description">
                 <h3>Description of Car : </h3>
-                <p>{{ carDetail.details }}</p>
+                <p>{{ carDetailInfo.details }}</p>
             </div>
             <div class="price">
                 <h3>Price of Car : </h3>
-                <p>Rs. {{ carDetail.price }}</p>
+                <p>Rs. {{ carDetailInfo.price }}</p>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@ export default {
         }
     },
     computed:{
-        ...mapState(useCarStore,['carDetail']),        
+        ...mapState(useCarStore,['carDetailInfo']),        
     }
 }
 </script>

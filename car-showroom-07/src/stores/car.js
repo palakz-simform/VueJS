@@ -12,6 +12,14 @@ export const useCarStore = defineStore('counter', {
             carDetail: {}
         }
     },
+    getters: {
+        carCardInfo(state) {
+            return state.cars_info
+        },
+        carDetailInfo(state) {
+            return state.carDetail
+        }
+    },
     actions: {
         // fetching data
         getData() {

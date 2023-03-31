@@ -18,7 +18,7 @@
     <!-- gallery-card.vue component -->
     <div class="car-content">
         <transition-group class="car-card" name="car-card" tag="div" @before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave" appear>
-            <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
+            <div v-for="(item,index) in carCardInfo" :key="item.id" :data-index="index">
                 <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" />
             </div>
         </transition-group>
@@ -47,7 +47,7 @@ export default {
         gallery_card
     },
     computed: {
-        ...mapWritableState(useCarStore, ['cars_info', 'showModal'])
+        ...mapWritableState(useCarStore, ['carCardInfo', 'showModal'])
     },
 
     methods: {
