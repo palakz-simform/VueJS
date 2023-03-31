@@ -159,8 +159,8 @@ export default {
         leave(el, done) {
             gsap.to(el, {
                 opacity: 0,
-                x: -100,
-                duration: 0.5,
+                scaleY:0.01,
+                duration: 0.3,
                 onComplete: done
             })
         }
@@ -223,15 +223,6 @@ button:hover {
 .fade-leave-active {
     transition: opacity 0.5s ease !important;
 }
-
-.car-card-leave-from {
-    opacity: 1;
-}
-
-.car-card-leave-to {
-    opacity: 0;
-}
-
 .car-card-leave-active {
     transition: all 0.5s ease;
     position: absolute;
