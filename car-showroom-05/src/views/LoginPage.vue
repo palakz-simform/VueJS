@@ -1,28 +1,28 @@
 <template>
-<form>
-    <div class="login-form">
-        <div class="heading">
-            <h1>Login Form</h1>
-        </div>
-        <!-- Car Add/Edit Form -->
+    <form>
+        <div class="login-form">
+            <div class="heading">
+                <h1>Login Form</h1>
+            </div>
+            <!-- Car Add/Edit Form -->
 
-        <div class="form">
-            <div class="row">
-                <label>Email:</label>
-                <input type="email" v-model="form.email" ref="email">
-                <div v-show="error_email" class="error">{{error_msg }}</div>
-            </div>
-            <div class="row row-password">
-                <label>Password:</label>
-                <input type="password" v-model="form.password" ref="password">
-                <div v-show="error_password" class="error">{{error_msg }}</div>
-            </div>
-            <div class="row row-button">
-                <button @click.prevent="login" class="submit">Login</button>
+            <div class="form">
+                <div class="row">
+                    <label>Email:</label>
+                    <input type="email" v-model="form.email" ref="email">
+                    <div v-show="error_email" class="error">{{ error_msg }}</div>
+                </div>
+                <div class="row row-password">
+                    <label>Password:</label>
+                    <input type="password" v-model="form.password" ref="password">
+                    <div v-show="error_password" class="error">{{ error_msg }}</div>
+                </div>
+                <div class="row row-button">
+                    <button @click.prevent="login" class="submit">Login</button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 </template>
 
 <script>
@@ -50,16 +50,22 @@ export default {
                     const data = res.data.data
                     if (res.status == 200) {
                         const userData = data.find(udata => udata.email == this.form.email)
-                        if (userData.password == this.form.password) {
+                        if (!userData) {
+                            alert("Invalid Email!! Please try again");
+
+                        }
+                        else if (userData.password == this.form.password) {
                             alert("Logged In Successfully!!")
                             this.$router.push({
                                 name: 'home'
                             })
                         } else {
-                            alert("Error Logging In!!\n\nPlease try again")
+                            alert("Invalid Password!! Please try again")
                         }
 
                     }
+                }).catch(() => {
+                    alert("Error occured!! Please try again")
                 })
             }
         },
