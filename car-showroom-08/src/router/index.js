@@ -4,11 +4,15 @@ import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import CarDetail from '../views/CarDetail.vue'
 import NotFound from '../views/NotFound.vue'
+import { useUserStore } from '../stores/user'
 
 const routes = [{
   path: '/',
   name: 'home',
-  component: Home
+  component: Home,
+  meta: {
+    requiresAuth: true
+  }
 },
 {
   path: '/login',
@@ -24,6 +28,9 @@ const routes = [{
   path: '/details/:id(\\d+)',
   name: 'carDetail',
   component: CarDetail,
+  meta: {
+    requiresAuth: true
+  },
   // Per route guard
   async beforeEnter(to, from) {
     try {
@@ -52,6 +59,20 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.requiresAuth) {
+    next();
+    return
+  }
+  const store = useUserStore();
+  if (store.login) {
+    next();
+  }
+  else {
+    next({ name: "login" })
+  }
+});
 
 import axios from 'axios'
 export default router

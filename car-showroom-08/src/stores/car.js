@@ -23,7 +23,8 @@ export const useCarStore = defineStore('car', {
     actions: {
         // fetching data
         getData() {
-            axios.get("https://testapi.io/api/dartya/resource/cardata").then((response) => {
+            axios.get("https://testapi.io/api/dartya/resource/cardata", {
+            }).then((response) => {
                 this.cars_info = response.data.data
             })
         },

@@ -14,10 +14,8 @@
             <button class="edit" @click="showeditform()">
                 <i class="fa-solid fa-pen"></i>
             </button>
-            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info" title="Get Price"
-                    :disabled="hasPrice" :id="this.id">
-                    {{ price != 0 ? "Info" : "Available Soon" }}
-                </button></RouterLink>
+            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info" :disabled="hasPrice"
+                    :id="this.id">Info</button></RouterLink>
             <button class="delete" @click="deleteData()">
                 <i class="fa-sharp fa-solid fa-trash"></i>
             </button>
@@ -65,16 +63,7 @@ export default {
         },
     },
 
-    computed: {
-        // check if the car has price, if not return false and dissable the button
-        hasPrice() {
-            if (this.price == 0) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-    },
+
 };
 </script>
 
