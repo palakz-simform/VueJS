@@ -1,27 +1,27 @@
 <template>
-<div>
-    <div class="back">
-        <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
-    </div>
-    <div class="car-detail">
-        <div class="image">
-            <img :src="carDetailInfo.image">
+    <div>
+        <div class="back">
+            <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
         </div>
-        <div class="info">
-            <div class="title">
-                <h1>{{ carDetailInfo.name }}</h1>
+        <div class="car-detail">
+            <div class="image">
+                <img :src="carDetailInfo.image">
             </div>
-            <div class="description">
-                <h3>Description of Car : </h3>
-                <p>{{ carDetailInfo.details }}</p>
-            </div>
-            <div class="price">
-                <h3>Price of Car : </h3>
-                <p>Rs. {{ carDetailInfo.price }}</p>
+            <div class="info">
+                <div class="title">
+                    <h1>{{ carDetailInfo.name }}</h1>
+                </div>
+                <div class="description">
+                    <h3>Description of Car : </h3>
+                    <p>{{ carDetailInfo.details }}</p>
+                </div>
+                <div class="price">
+                    <h3>Price of Car : </h3>
+                    <p>Rs. {{ carDetailInfo.price }}</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -31,6 +31,7 @@ import { useCarStore } from '../stores/car'
 export default {
     name: 'CarDetail',
     mounted() {
+        console.log(this.$route)
         this.getCarDetail(this.$route.params.id)
     },
     methods: {

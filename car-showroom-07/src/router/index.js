@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
-import RegisterPage from '../views/RegisterPage.vue' 
+import RegisterPage from '../views/RegisterPage.vue'
 import CarDetail from '../views/CarDetail.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -21,36 +21,36 @@ const routes = [{
   component: RegisterPage
 },
 {
-  path:'/details/:id(\\d+)',
+  path: '/details/:id(\\d+)',
   name: 'carDetail',
-  component : CarDetail,
+  component: CarDetail,
   // Per route guard
-  async beforeEnter(to,from){
-    try{
+  async beforeEnter(to, from) {
+    try {
       const response = await axios.get(`https://testapi.io/api/dartya/resource/cardata/`)
-      const cdata = response.data.data 
-      const cardata = cdata.find(data => data.id==to.params.id)
-      if(!cardata){
-        return{
-          name:'NotFound',
+      const cdata = response.data.data
+      const cardata = cdata.find(data => data.id == to.params.id)
+      if (!cardata) {
+        return {
+          name: 'NotFound',
           //allows keeping URL while redirectiong to the home page. "PathMatch" is a property in Vue.js that is used to capture dynamic segments of a URL
-          params:{pathMatch: to.path.split('/').slice(1)},          
+          params: { pathMatch: to.path.split('/').slice(1) },
         }
       }
     }
-    catch{}
+    catch { }
   }
 },
 {
-  path:'/:pathMatch(.*)*',
-  name:'NotFound',
+  path: '/:pathMatch(.*)*',
+  name: 'NotFound',
   component: NotFound
 }
 
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes:routes
+  routes: routes
 })
 
 import axios from 'axios'

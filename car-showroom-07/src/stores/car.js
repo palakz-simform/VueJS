@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-export const useCarStore = defineStore('counter', {
+export const useCarStore = defineStore('car', {
     state: () => {
         return {
             cars_info: [],

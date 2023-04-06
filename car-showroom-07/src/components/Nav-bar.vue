@@ -1,25 +1,31 @@
 <template>
-<div class="title">
-    <div class="nav">
-        <div>
-            <RouterLink to="/" class="heading">
-                <h1>Car Gallery</h1>
-            </RouterLink>
-        </div>
-        <div>
-            <RouterLink class="link" to="/">Home</RouterLink>
-            <RouterLink class="link" to="/login">Login</RouterLink>
-            <RouterLink class="link link-register" to="/register">Register</RouterLink>
+    <div class="title">
+        <div class="nav">
+            <div>
+                <RouterLink to="/" class="heading">
+                    <h1>Car Gallery</h1>
+                </RouterLink>
+            </div>
+            <div>
+                <RouterLink class="link" to="/">Home</RouterLink>
+                <RouterLink class="link" to="/login">{{
+                    login == true ? "Logout" : "Login"
+                }}</RouterLink>
+                <RouterLink class="link link-register" to="/register">Register</RouterLink>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
+import { mapWritableState } from "pinia";
 import { RouterLink } from "vue-router";
+import { useUserStore } from "../stores/user";
 export default {
     name: "Nav-bar",
-
+    computed: {
+        ...mapWritableState(useUserStore, ["login"]),
+    },
 };
 </script>
 
@@ -55,7 +61,7 @@ hr {
 }
 
 .heading h1:hover {
-    color: white
+    color: white;
 }
 
 .link {
@@ -77,14 +83,12 @@ a.router-link-exact-active {
 
 a {
     text-decoration: none;
-    ;
 }
 
 @media (max-width: 750px) {
     .title h1 {
         margin-left: 20px;
         font-size: 25px;
-
     }
 
     .link {
@@ -94,12 +98,10 @@ a {
 
     .link-register {
         margin-right: 0px;
-        ;
     }
 
     .nav {
         padding-right: 10px;
-        ;
     }
 
     a.router-link-exact-active {
@@ -109,7 +111,6 @@ a {
 
 @media (max-width: 375px) {
     .title h1 {
-
         font-size: 20px;
         margin-left: 20px;
     }

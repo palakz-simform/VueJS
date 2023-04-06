@@ -1,37 +1,48 @@
 <template>
-<!-- Card of each car -->
-<div class="card">
-    <div class="heading">
-        <h1>{{ name }}</h1>
+    <!-- Card of each car -->
+    <div class="card-car">
+        <div class="heading">
+            <h1>{{ name }}</h1>
+        </div>
+        <div class="image">
+            <img :src="image" alt="car-image" />
+        </div>
+        <div class="description">
+            <p>{{ description }}</p>
+        </div>
+        <div class="btn-car">
+            <button class="edit" @click="showeditform()">
+                <i class="fa-solid fa-pen"></i>
+            </button>
+            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info" title="Get Price"
+                    :disabled="hasPrice" :id="this.id">
+                    {{ price != 0 ? "Info" : "Available Soon" }}
+                </button></RouterLink>
+            <button class="delete" @click="deleteData()">
+                <i class="fa-sharp fa-solid fa-trash"></i>
+            </button>
+        </div>
     </div>
-    <div class="image">
-        <img :src="image" />
-    </div>
-    <div class="description">
-        <p>{{ description }}</p>
-    </div>
-    <div class="btn">
-        <button class="edit" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
-        <RouterLink :to="{name:'carDetail',params:{id:id}}"><button class="button" title="Get Price" :disabled="hasPrice" :id="this.id">
-                {{ price!=0 ? "Info" : "Available Soon" }}
-            </button></RouterLink>
-        <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
-    </div>
-</div>
 </template>
 
 <script>
 import { mapActions } from "pinia";
-import { RouterLink } from "vue-router"
-import { useCarStore} from "../stores/car";
-
+import { RouterLink } from "vue-router";
+import { useCarStore } from "../stores/car";
 export default {
     name: "gallery_card",
-    props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
-
+    props: [
+        "id",
+        "name",
+        "image",
+        "formtype",
+        "description",
+        "price",
+        "showModalEdit",
+    ],
     methods: {
-        ...mapActions(useCarStore, ['showEdit', 'deleteCar']),
-        // Function to get a particular car data 
+        ...mapActions(useCarStore, ["showEdit", "deleteCar"]),
+        // Function to get a particular car data
         getCarData() {
             return {
                 id: this.id,
@@ -39,25 +50,23 @@ export default {
                 image: this.image,
                 description: this.description,
                 price: this.price,
-                title: "Edit Car"
-            }
+                title: "Edit Car",
+            };
         },
         // On clicking edit button emit event 'edit-car'
         showeditform() {
-            const getData = this.getCarData()
-            this.showEdit(getData)
+            const getData = this.getCarData();
+            this.showEdit(getData);
         },
         // On clicking delete button emit event 'delete-car'
         deleteData() {
-            const cardata = this.getCarData()
-            this.deleteCar(cardata)
-        }
-
+            const cardata = this.getCarData();
+            this.deleteCar(cardata);
+        },
     },
 
     computed: {
         // check if the car has price, if not return false and dissable the button
-
         hasPrice() {
             if (this.price == 0) {
                 return true;
@@ -70,14 +79,14 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.card-car {
     width: 350px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgb(216, 215, 214);
 }
 
-.card:hover {
+.card-car:hover {
     transform: scale(0.95);
     transition: 0.25s;
 }
@@ -86,7 +95,6 @@ export default {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
-
 }
 
 .heading {
@@ -132,7 +140,7 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-.btn {
+.btn-car {
     width: 350px;
     height: 50px;
     display: flex;
@@ -153,7 +161,7 @@ button[disabled] {
     cursor: pointer;
 }
 
-.button {
+.button-info {
     width: 150px;
     height: 34px;
     background-color: rgb(44, 44, 44);
@@ -163,7 +171,7 @@ button[disabled] {
     cursor: pointer;
 }
 
-.button:hover,
+.button-info:hover,
 .edit:hover,
 .delete:hover {
     background-color: transparent;
@@ -173,17 +181,13 @@ button[disabled] {
 }
 
 @media (max-width: 1155px) {
-    .card {
+    .card-car {
         width: 300px;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background-color: rgb(216, 215, 214);
     }
 
     .heading {
         height: 40px;
         font-size: 10px;
-
     }
 
     .image {
@@ -206,27 +210,15 @@ button[disabled] {
         text-align: center;
     }
 
-    .btn {
+    .btn-car {
         width: 300px;
-        height: 50px;
-    }
-
-    .button {
-        width: 100px;
-        height: 34px;
-        background-color: rgb(44, 44, 44);
-        color: wheat;
-        font-weight: bolder;
-        border-radius: 10px;
     }
 }
 
 @media (max-width: 670px) {
-    .card {
+    .card-car {
         margin: 5px;
         width: 160px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background-color: rgb(216, 215, 214);
     }
 
     .heading {
@@ -249,29 +241,21 @@ button[disabled] {
     }
 
     .description p {
-        padding: 6px;
         font-size: 12px;
     }
 
     .description {
-        height: 120px;
         width: 150px;
         text-align: center;
     }
 
-    .btn {
+    .btn-car {
         width: 160px;
-        height: 50px;
     }
 
-    .button {
+    .button-info {
         width: 50px;
         height: 35px;
-        background-color: rgb(44, 44, 44);
-        color: wheat;
-        font-weight: bolder;
-        border-radius: 8px;
     }
-
 }
 </style>
