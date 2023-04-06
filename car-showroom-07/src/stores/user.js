@@ -21,7 +21,6 @@ export const useUserStore = defineStore('demo', {
                 const data = await res.data.data
                 if (res.status == 200) {
                     const userData = data.find(udata => udata.email == user.email)
-                    console.log(userData)
                     if (!userData) {
                         alert("Invalid Email!! Please try again")
                         return false
@@ -67,7 +66,10 @@ export const useUserStore = defineStore('demo', {
                 alert("Error occured! Please try again")
                 return false;
             }
-
+        },
+        logout() {
+            alert("Logged Out Successfully")
+            this.login = false
         }
 
     }

@@ -31,7 +31,6 @@ import { useCarStore } from '../stores/car'
 export default {
     name: 'CarDetail',
     mounted() {
-        console.log(this.$route)
         this.getCarDetail(this.$route.params.id)
     },
     methods: {

@@ -8,17 +8,21 @@
             </div>
             <div>
                 <RouterLink class="link" to="/">Home</RouterLink>
-                <RouterLink class="link" to="/login">{{
-                    login == true ? "Logout" : "Login"
-                }}</RouterLink>
-                <RouterLink class="link link-register" to="/register">Register</RouterLink>
+                <span v-if="login">
+                    <RouterLink class="link" to="/login" @click="logout">Logout</RouterLink>
+                </span>
+                <template v-else>
+                    <RouterLink class="link" to="/login">Login</RouterLink>
+                    <RouterLink class="link link-register" to="/register">Register</RouterLink>
+                </template>
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { mapWritableState } from "pinia";
+import { mapWritableState, mapActions } from "pinia";
 import { RouterLink } from "vue-router";
 import { useUserStore } from "../stores/user";
 export default {
@@ -26,6 +30,9 @@ export default {
     computed: {
         ...mapWritableState(useUserStore, ["login"]),
     },
+    methods: {
+        ...mapActions(useUserStore, ["logout"])
+    }
 };
 </script>
 

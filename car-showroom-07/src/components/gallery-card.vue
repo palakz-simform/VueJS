@@ -129,7 +129,7 @@ img {
 }
 
 .description {
-    height: 80px;
+    height: 100px;
     width: 350px;
     text-align: center;
     overflow: hidden;
