@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+localStorage.setItem('user_authentication', JSON.stringify({ token: "", isLoggedIn: false }))
 export const useUserStore = defineStore('demo', {
     state: () => ({
 
@@ -10,7 +11,7 @@ export const useUserStore = defineStore('demo', {
         age: "",
         dob: "",
         gender: "",
-        login: false
+        login: JSON.parse(localStorage.getItem('user_authentication')).isLoggedIn,
 
     }),
 
@@ -34,7 +35,12 @@ export const useUserStore = defineStore('demo', {
                             this.dob = userData.dob,
                             this.gender = userData.gender
                         this.login = true
-                        localStorage.setItem('token', `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`)
+                        localStorage.setItem('user_authentication',
+                            JSON.stringify({
+                                token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`,
+                                isLoggedIn: true
+                            })
+                        )
                         return true
                     }
                     else {
@@ -68,10 +74,5 @@ export const useUserStore = defineStore('demo', {
                 return false;
             }
         },
-        logout() {
-            alert("Logged Out Successfully")
-            this.login = false
-        }
-
     }
 })

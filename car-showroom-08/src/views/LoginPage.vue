@@ -48,7 +48,6 @@ export default {
             password: "",
         }
     },
-
     methods: {
         ...mapActions(useUserStore, ['logInUser']),
         getUserData() {

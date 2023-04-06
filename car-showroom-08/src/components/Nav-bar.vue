@@ -9,7 +9,7 @@
             <div>
                 <RouterLink class="link" to="/">Home</RouterLink>
                 <span v-if="login">
-                    <RouterLink class="link" to="/login" @click="logout">Logout</RouterLink>
+                    <a class="link" @click="logout">Logout</a>
                 </span>
                 <template v-else>
                     <RouterLink class="link" to="/login">Login</RouterLink>
@@ -25,13 +25,32 @@
 import { mapWritableState, mapActions } from "pinia";
 import { RouterLink } from "vue-router";
 import { useUserStore } from "../stores/user";
+import router from "../router";
 export default {
     name: "Nav-bar",
+
     computed: {
         ...mapWritableState(useUserStore, ["login"]),
     },
     methods: {
-        ...mapActions(useUserStore, ["logout"])
+        ...mapActions(useUserStore, ["logout"]),
+        logout() {
+            if (confirm("Do you really want to log out ?") == true) {
+                localStorage.setItem('user_authentication',
+                    JSON.stringify({
+                        token: "",
+                        isLoggedIn: false
+                    })
+                )
+                router.push({
+                    name: 'login'
+                })
+                setTimeout(() => {
+                    alert("Logged Out Successfully")
+                }, 500)
+
+            }
+        }
     }
 };
 </script>

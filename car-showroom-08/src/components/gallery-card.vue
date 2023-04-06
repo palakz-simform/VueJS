@@ -14,7 +14,7 @@
             <button class="edit" @click="showeditform()">
                 <i class="fa-solid fa-pen"></i>
             </button>
-            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info" :disabled="hasPrice"
+            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info"
                     :id="this.id">Info</button></RouterLink>
             <button class="delete" @click="deleteData()">
                 <i class="fa-sharp fa-solid fa-trash"></i>
