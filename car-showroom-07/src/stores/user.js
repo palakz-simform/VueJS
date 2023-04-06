@@ -44,7 +44,7 @@ export const useUserStore = defineStore('demo', {
                 }
             }
             catch (err) {
-                console.log(err)
+                alert("Error occured!! Please try again")
                 return false
             }
         },
@@ -64,7 +64,7 @@ export const useUserStore = defineStore('demo', {
                 }
             }
             catch (error) {
-                alert("Error occured! Please try again\n\n" + error)
+                alert("Error occured! Please try again")
                 return false;
             }
 
