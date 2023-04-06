@@ -1,29 +1,32 @@
 <template>
-<div>
-    <!-- Add Car Button -->
-    <div class="add-car-button">
-        <button class="button" @click="addCar()">Add Car</button>
+    <div>
+        <!-- Add Car Button -->
+        <div class="add-car-button">
+            <button class="button" @click="addCar()">Add Car</button>
+        </div>
+
+        <!-- Style applied when Add/Edit form is displayed -->
+        <transition name="fade">
+            <div class="modal-overlay" v-if="showModal"></div>
+        </transition>
+
+        <!-- Add/Edit Car Component -->
+        <transition name="car-form">
+            <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal"
+                @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
+        </transition>
+
+        <!-- gallery-card.vue component -->
+        <div class="car-content">
+            <transition-group class="car-card" name="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter"
+                @before-leave="beforeLeave" @leave="leave">
+                <div v-for="(item, index) in cars_info" :key="item.id" :data-index="index">
+                    <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details"
+                        :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+                </div>
+            </transition-group>
+        </div>
     </div>
-
-    <!-- Style applied when Add/Edit form is displayed -->
-    <transition name="fade">
-        <div class="modal-overlay" v-if="showModal "></div>
-    </transition>
-
-    <!-- Add/Edit Car Component -->
-    <transition name="car-form">
-        <carform v-if="showModal" :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
-    </transition>
-
-    <!-- gallery-card.vue component -->
-    <div class="car-content">
-        <transition-group class="car-card" name="car-card" tag="div" appear @before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave">
-            <div v-for="(item,index) in cars_info" :key="item.id" :data-index="index">
-                <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
-            </div>
-        </transition-group>
-    </div>
-</div>
 </template>
 
 <script>
@@ -76,19 +79,19 @@ export default {
             this.showModal = false;
             const id = this.cars_info.length + 1;
             axios.post('https://testapi.io/api/dartya/resource/cardata/', {
-                    id: id,
-                    name: formdata.name,
-                    image: formdata.image,
-                    details: formdata.description,
-                    price: formdata.price
-                }).then((res) => {
-                    if (res.status === 201) {
-                        this.getData()
-                    } else {
-                        alert("Error!!")
-                    }
-                    this.addForm = false
-                })
+                id: id,
+                name: formdata.name,
+                image: formdata.image,
+                details: formdata.description,
+                price: formdata.price
+            }).then((res) => {
+                if (res.status === 201) {
+                    this.getData()
+                } else {
+                    alert("Error!!")
+                }
+                this.addForm = false
+            })
                 .catch(error => {
                     alert("Error : " + error)
                 });
@@ -159,7 +162,7 @@ export default {
         leave(el, done) {
             gsap.to(el, {
                 opacity: 0,
-                scaleY:0.01,
+                scaleY: 0.01,
                 duration: 0.3,
                 onComplete: done
             })
@@ -223,6 +226,7 @@ button:hover {
 .fade-leave-active {
     transition: opacity 0.5s ease !important;
 }
+
 .car-card-leave-active {
     transition: all 0.5s ease;
     position: absolute;
@@ -291,5 +295,4 @@ button:hover {
     .modal {
         max-width: 300px;
     }
-}
-</style>
+}</style>

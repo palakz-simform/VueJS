@@ -1,23 +1,24 @@
 <template>
-<!-- Card of each car -->
-<div class="card">
-    <div class="heading">
-        <h1>{{ name }}</h1>
+    <!-- Card of each car -->
+    <div class="card">
+        <div class="heading">
+            <h1>{{ name }}</h1>
+        </div>
+        <div class="image">
+            <img :src="image" />
+        </div>
+        <div class="description">
+            <p>{{ description }}</p>
+        </div>
+        <div class="btn">
+            <button class="edit" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
+            <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button" title="Get Price"
+                    :disabled="hasPrice" :id="this.id">
+                    {{ price != 0 ? "Info" : "Available Soon" }}
+                </button></RouterLink>
+            <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
+        </div>
     </div>
-    <div class="image">
-        <img :src="image" />
-    </div>
-    <div class="description">
-        <p>{{ description }}</p>
-    </div>
-    <div class="btn">
-        <button class="edit" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
-        <RouterLink :to="{name:'carDetail',params:{id:id}}"><button class="button" title="Get Price" :disabled="hasPrice" :id="this.id">
-                {{ price!=0 ? "Info" : "Available Soon" }}
-            </button></RouterLink>
-        <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
-    </div>
-</div>
 </template>
 
 <script>
@@ -269,6 +270,6 @@ button[disabled] {
         color: wheat;
         font-weight: bolder;
         border-radius: 8px;
-    }   
+    }
 }
 </style>

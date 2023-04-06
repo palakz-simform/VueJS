@@ -1,20 +1,19 @@
 <template>
-<div class="title">
+    <div class="title">
+        <div class="nav">
+            <div>
+                <RouterLink to="/" class="heading">
+                    <h1>Car Gallery</h1>
+                </RouterLink>
+            </div>
+            <div>
+                <RouterLink class="link" to="/">Home</RouterLink>
+                <RouterLink class="link" to="/login">Login</RouterLink>
+                <RouterLink class="link link-register" to="/register">Register</RouterLink>
+            </div>
 
-    <div class="nav">
-        <div>
-            <RouterLink to="/" class="heading">
-                <h1>Car Gallery</h1>
-            </RouterLink>
         </div>
-        <div>
-            <RouterLink class="link" to="/">Home</RouterLink>
-            <RouterLink class="link" to="/login">Login</RouterLink>
-            <RouterLink class="link link-register" to="/register">Register</RouterLink>
-        </div>
-
     </div>
-</div>
 </template>
 
 <script>

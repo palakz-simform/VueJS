@@ -1,47 +1,48 @@
 <template>
-<!-- Car Form for Edit and Add Car -->
-<div class="form-add-edit-car">
-    <div class="modal">
-        <div class="heading">
-            <h1>{{ title }}</h1>
-            <!-- Button to click when the user wants to close the form -->
-            <button class="button" @click="showModalx">x</button>
-        </div>
-        <!-- Car Add/Edit Form -->
-        <div class="form">
-            <div class="row">
-                <label>Name:</label>
-                <input type="text" v-model="form.name" ref="name">
-                <div v-show="error_name">
-                    <p class="error">{{error_msg }}</p>
-                </div>
+    <!-- Car Form for Edit and Add Car -->
+    <div class="form-add-edit-car">
+        <div class="modal">
+            <div class="heading">
+                <h1>{{ title }}</h1>
+                <!-- Button to click when the user wants to close the form -->
+                <button class="button" @click="showModalx">x</button>
             </div>
-            <div class="row">
-                <label>Image:</label>
-                <input type="url" v-model="form.image" ref="image">
-                <div v-if="error_image">
-                    <p class="error">{{ error_msg }}</p>
+            <!-- Car Add/Edit Form -->
+            <div class="form">
+                <div class="row">
+                    <label>Name:</label>
+                    <input type="text" v-model="form.name" ref="name">
+                    <div v-show="error_name">
+                        <p class="error">{{ error_msg }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <label>Description:</label>
-                <textarea v-model="form.description" ref="description"></textarea>
-                <div v-if="error_description">
-                    <p class="error">{{ error_msg }}</p>
+                <div class="row">
+                    <label>Image:</label>
+                    <input type="url" v-model="form.image" ref="image">
+                    <div v-if="error_image">
+                        <p class="error">{{ error_msg }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <label>Price:</label>
-                <input type="number" v-model.number="form.price" ref="price" onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
-                <!-- Prevent the user from pressing key : +,-,e -->
-                <div v-if="error_price">
-                    <p class="error">{{ error_msg }}</p>
+                <div class="row">
+                    <label>Description:</label>
+                    <textarea v-model="form.description" ref="description"></textarea>
+                    <div v-if="error_description">
+                        <p class="error">{{ error_msg }}</p>
+                    </div>
                 </div>
+                <div class="row">
+                    <label>Price:</label>
+                    <input type="number" v-model.number="form.price" ref="price"
+                        onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                    <!-- Prevent the user from pressing key : +,-,e -->
+                    <div v-if="error_price">
+                        <p class="error">{{ error_msg }}</p>
+                    </div>
+                </div>
+                <button @click="submit" class="submit">{{ addForm === true ? 'Submit' : 'Edit' }}</button>
             </div>
-            <button @click="submit" class="submit">{{ addForm===true?'Submit':'Edit' }}</button>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -96,6 +97,7 @@ export default {
                 this.$refs.description.focus()
                 return false
             }
+
             // If the description is not empty, checking that the no. of characters is between 30-120
             else if (this.form.description.length < 30 || this.form.description.length > 120 || typeof this.form.description != 'string') {
                 this.error_description = true;
@@ -103,6 +105,7 @@ export default {
                 this.$refs.description.focus()
                 return false
             }
+
             // checking that the price is not empty
             if (this.form.price === "") {
                 this.error_price = true;
@@ -116,12 +119,14 @@ export default {
                 this.alertData()
                 this.$emit("display-data", this.form)
             }
+
             // Emit event 'edit-data' when the form is Add Car
             else if (this.editForm == true) {
                 this.alertData()
                 this.$emit("edit-data", this.form)
             }
         },
+
         // function to alert data after submitting the form
         alertData() {
             alert((this.addForm == true ? 'Created' : 'Edited') + ' data: \n\nName: ' + this.form.name + '\n\nImage:' + this.form.image + '\n\nDescription :' + this.form.description + '\n\nPrice Rs.:' + this.form.price)
