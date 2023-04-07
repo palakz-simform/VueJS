@@ -56,18 +56,12 @@ export default {
                 password: this.password
             }
         },
-        async login() {
+        login() {
             this.error_email = false,
                 this.error_password = false
             if (this.checkEmail() && this.checkPassword()) {
                 const data = this.getUserData()
-                const result = await this.logInUser(data)
-                if (result == true) {
-                    alert("Logged In Successfully!!")
-                    router.push({
-                        name: 'home'
-                    })
-                }
+                this.logInUser(data)
             }
         },
         checkEmail() {

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-localStorage.setItem('user_authentication', JSON.stringify({ token: "", isLoggedIn: false }))
+import router from '../router/index'
+
 export const useUserStore = defineStore('demo', {
     state: () => ({
 
@@ -11,7 +12,7 @@ export const useUserStore = defineStore('demo', {
         age: "",
         dob: "",
         gender: "",
-        login: JSON.parse(localStorage.getItem('user_authentication')).isLoggedIn,
+        login: localStorage.getItem('loggedIn')
 
     }),
 
@@ -35,23 +36,21 @@ export const useUserStore = defineStore('demo', {
                             this.dob = userData.dob,
                             this.gender = userData.gender
                         this.login = true
-                        localStorage.setItem('user_authentication',
-                            JSON.stringify({
-                                token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`,
-                                isLoggedIn: true
-                            })
-                        )
-                        return true
+                        localStorage.setItem('token', `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`)
+                        localStorage.setItem('loggedIn', true)
+                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+                        alert("Logged In Successfully!!")
+                        router.push({
+                            name: 'home'
+                        })
                     }
                     else {
                         alert("Invalid Password!! Please try again")
-                        return false
                     }
                 }
             }
             catch (err) {
                 alert("Error occured!! Please try again")
-                return false
             }
         },
         async registerUser(data) {
@@ -66,13 +65,29 @@ export const useUserStore = defineStore('demo', {
                     gender: data.gender
                 })
                 if (res.status === 201) {
-                    return true
+                    alert(' User added Successfully: \n\nName: ' + data.name + '\nEmail: ' + data.email + '\nRole :' + data.role + '\nGender:' + data.gender + '\nAge:' + data.age + '\nDate of Birth:' + data.dob)
+                    router.push({
+                        name: 'login'
+                    })
                 }
             }
             catch (error) {
                 alert("Error occured! Please try again")
-                return false;
             }
         },
+        logout() {
+            if (confirm("Do you really want to log out ?") == true) {
+                localStorage.setItem('token', "")
+                localStorage.setItem("loggedIn", false)
+                router.push({
+                    name: 'login'
+                })
+                this.login = false
+                setTimeout(() => {
+                    alert("Logged Out Successfully")
+                }, 500)
+
+            }
+        }
     }
 })

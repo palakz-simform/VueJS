@@ -141,15 +141,7 @@ export default {
                     gender: this.form.gender
                 }
                 const result = await this.registerUser(data)
-                if (result == true) {
-                    alert(' User added Successfully: \n\nName: ' + data.name + '\nEmail: ' + data.email + '\nRole :' + data.role + '\nGender:' + data.gender + '\nAge:' + data.age + '\nDate of Birth:' + data.dob)
-                    router.push({
-                        name: 'login'
-                    })
-                }
-
             }
-
         },
         checkName() {
             if (this.form.name === "") {

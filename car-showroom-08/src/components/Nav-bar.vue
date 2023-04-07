@@ -15,7 +15,6 @@
                     <RouterLink class="link" to="/login">Login</RouterLink>
                     <RouterLink class="link link-register" to="/register">Register</RouterLink>
                 </template>
-
             </div>
         </div>
     </div>
@@ -25,7 +24,6 @@
 import { mapWritableState, mapActions } from "pinia";
 import { RouterLink } from "vue-router";
 import { useUserStore } from "../stores/user";
-import router from "../router";
 export default {
     name: "Nav-bar",
 
@@ -34,28 +32,12 @@ export default {
     },
     methods: {
         ...mapActions(useUserStore, ["logout"]),
-        logout() {
-            if (confirm("Do you really want to log out ?") == true) {
-                localStorage.setItem('user_authentication',
-                    JSON.stringify({
-                        token: "",
-                        isLoggedIn: false
-                    })
-                )
-                router.push({
-                    name: 'login'
-                })
-                setTimeout(() => {
-                    alert("Logged Out Successfully")
-                }, 500)
 
-            }
-        }
     }
 };
 </script>
 
-<style>
+<style >
 body {
     margin: 0px;
 }
@@ -86,10 +68,6 @@ hr {
     align-items: center;
 }
 
-.heading h1:hover {
-    color: white;
-}
-
 .link {
     margin-right: 70px;
     color: wheat;
@@ -105,6 +83,7 @@ a.router-link-exact-active {
 
 .link:hover {
     color: rgb(253, 247, 247);
+    cursor: pointer;
 }
 
 a {
