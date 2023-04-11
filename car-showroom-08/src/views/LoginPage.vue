@@ -9,14 +9,14 @@
 
                 <div class="form">
                     <div class="row">
-                        <label>Email:</label>
-                        <input type="email" v-model="email" ref="email">
-                        <div v-show="error_email" class="error">{{ error_msg }}</div>
+                        <label for="email">Email:</label>
+                        <input type="email" v-model="email" id="email" ref="email" @input="checkEmail">
+                        <div v-show="error_msg_email" class="error">{{ error_msg_email }}</div>
                     </div>
                     <div class="row row-password">
-                        <label>Password:</label>
-                        <input type="password" v-model="password" ref="password">
-                        <div v-show="error_password" class="error">{{ error_msg }}</div>
+                        <label for="password">Password:</label>
+                        <input type="password" v-model="password" id="password" ref="password" @input="checkPassword">
+                        <div v-show="error_msg_password" class="error">{{ error_msg_password }}</div>
                     </div>
                     <div class="row row-button">
                         <button @click.prevent="login()" class="submit">Login</button>
@@ -32,7 +32,6 @@
 import {
     mapActions
 } from 'pinia'
-import router from '../router/index'
 import {
     useUserStore
 } from '../stores/user'
@@ -41,15 +40,21 @@ export default {
     name: 'LoginPage',
     data() {
         return {
-            error_email: false,
-            error_password: false,
-            error_msg: "",
+            // error_email: false,
+            // error_password: false,
+            // error_msg: "",
+            error_msg_email: "",
+            error_msg_password: "",
             email: "",
             password: "",
         }
     },
     methods: {
         ...mapActions(useUserStore, ['logInUser']),
+        clearError() {
+            this.error_msg_email = "",
+                this.error_msg_password = ""
+        },
         getUserData() {
             return {
                 email: this.email,
@@ -65,39 +70,42 @@ export default {
             }
         },
         checkEmail() {
+            this.clearError()
             if (this.email === "") {
-                this.showError("email")
-                this.error_msg = "**Please enter email**"
+                const msg = "**Please enter email**"
+                this.showError("email", msg)
                 return false;
             } else if (this.email !== "") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.email)) {
-                    this.showError("email")
-                    this.error_msg = "**Please enter valid email**"
+                    const msg = "**Please enter valid email**"
+                    this.showError("email", msg)
                     return false;
                 }
-                return true
+                return true;
             }
             return true;
         },
         checkPassword() {
+            this.clearError()
             if (this.password === "") {
-                this.showError("password")
-                this.error_msg = "**Please enter password**"
+                const msg = "**Please enter password**"
+                this.showError("password", msg)
                 return false;
             } else if (this.password !== "") {
                 const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
                 if (!passRegex.test(this.password)) {
-                    this.showError("password")
-                    this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
+                    const msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
+                    this.showError("password", msg)
                     return false;
                 }
                 return true
             }
             return true
         },
-        showError(error) {
-            this[`error_${error}`] = true;
+        showError(error, msg) {
+            // this[`error_${error}`] = true;
+            this[`error_msg_${error}`] = msg;
             this.$refs[error].focus();
         }
 

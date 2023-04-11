@@ -11,36 +11,37 @@
                     <!-- Name -->
                     <div class="row">
                         <label>Name:</label>
-                        <input type="text" v-model="form.name" ref="name">
-                        <div v-show="error_name" class="error">{{ error_msg }} </div>
+                        <input type="text" v-model="form.name" ref="name" @input="checkName">
+                        <div v-show="error_msg_name" class="error">{{ error_msg_name }} </div>
                     </div>
                     <!-- Email -->
                     <div class="row">
                         <label>Email:</label>
-                        <input type="email" v-model="form.email" ref="email">
-                        <div v-show="error_email" class="error">{{ error_msg }} </div>
+                        <input type="email" v-model="form.email" ref="email" @input="checkEmail">
+                        <div v-show="error_msg_email" class="error">{{ error_msg_email }} </div>
                     </div>
                     <!-- Password -->
                     <div class="row">
                         <label>Password:</label>
-                        <input type="password" v-model="form.password" ref="password">
-                        <div v-if="error_password" class="error">{{ error_msg }} </div>
+                        <input type="password" v-model="form.password" ref="password" @input="checkPassword">
+                        <div v-if="error_msg_password" class="error">{{ error_msg_password }} </div>
                     </div>
                     <!-- Confirm Password -->
                     <div class="row">
                         <label>Confirm Password:</label>
-                        <input type="password" v-model="form.confirmPassword" ref="confirmPassword">
-                        <div v-if="error_confirmPassword" class="error">{{ error_msg }} </div>
+                        <input type="password" v-model="form.confirmPassword" ref="confirmPassword"
+                            @input="checkConfirmPassword">
+                        <div v-if="error_msg_confirmPassword" class="error">{{ error_msg_confirmPassword }} </div>
                     </div>
                     <!-- Role -->
                     <div class="row">
                         <label>Role:</label>
-                        <select v-model="form.role" ref="role">
+                        <select v-model="form.role" ref="role" @input="checkRole">
                             <option value="Admin">Admin</option>
                             <option value="Employee">Employee</option>
                             <option value="Customer">Customer</option>
                         </select>
-                        <div v-if="error_role" class="error">{{ error_msg }} </div>
+                        <div v-if="error_msg_role" class="error">{{ error_msg_role }} </div>
                     </div>
                     <!-- Gender -->
                     <div class="gender-class">
@@ -48,30 +49,34 @@
                             <label>Gender:</label>
                             <div class="gender">
                                 <div class="male">
-                                    <input type="radio" value="male" name="gender" v-model="form.gender" ref="gender" />
+                                    <input type="radio" value="male" name="gender" v-model="form.gender" ref="gender"
+                                        @input="checkGender" />
                                     <label>Male</label>
                                 </div>
                                 <div class="female">
-                                    <input type="radio" value="female" name="gender" v-model="form.gender" ref="gender" />
+                                    <input type="radio" value="female" name="gender" v-model="form.gender" ref="gender"
+                                        @input="checkGender" />
                                     <label>Female</label>
                                 </div>
                             </div>
                         </div>
-                        <div v-if="error_gender" class="error">{{ error_msg }} </div>
+                        <div v-if="error_msg_gender" class="error">{{ error_msg_gender }} </div>
                     </div>
                     <!-- Age -->
                     <div class="row">
                         <label>Age:</label>
                         <input type="number" v-model.number="form.age" ref="age"
-                            onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                            onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);"
+                            @input="checkAge">
                         <!-- Prevent the user from pressing key : +,-,e -->
-                        <div v-if="error_age" class="error">{{ error_msg }}</div>
+                        <div v-if="error_msg_age" class="error">{{ error_msg_age }}</div>
                     </div>
                     <!-- DOB -->
                     <div class="row">
                         <label>Date of Birth:</label>
-                        <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31">
-                        <div v-if="error_dob" class="error">{{ error_msg }}</div>
+                        <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31"
+                            @input="checkDOB">
+                        <div v-if="error_msg_dob" class="error">{{ error_msg_dob }}</div>
                     </div>
                     <div class="row row-button">
                         <button class="submit" @click.prevent="submit">Register</button>
@@ -95,15 +100,14 @@ export default {
 
     data() {
         return {
-            error_name: false,
-            error_email: false,
-            error_password: false,
-            error_confirmPassword: false,
-            error_role: false,
-            error_gender: false,
-            error_age: false,
-            error_dob: false,
-            error_msg: "",
+            error_msg_name: "",
+            error_msg_email: "",
+            error_msg_password: "",
+            error_msg_confirmPassword: "",
+            error_msg_role: "",
+            error_msg_gender: "",
+            error_msg_age: "",
+            error_msg_dob: "",
             form: {
                 name: '',
                 email: '',
@@ -121,14 +125,7 @@ export default {
 
         async submit() {
             // clear error
-            this.error_name = false
-            this.error_email = false,
-                this.error_password = false,
-                this.error_confirmPassword = false,
-                this.error_role = false,
-                this.error_gender = false,
-                this.error_age = false,
-                this.error_dob = false
+            this.clearError()
 
             if (this.checkName() && this.checkEmail() && this.checkPassword() && this.checkConfirmPassword() && this.checkRole() && this.checkGender() && this.checkAge() && this.checkDOB()) {
                 const data = {
@@ -143,24 +140,36 @@ export default {
                 const result = await this.registerUser(data)
             }
         },
+        clearError() {
+            this.error_msg_name = "",
+                this.error_msg_email = "",
+                this.error_msg_password = "",
+                this.error_msg_confirmPassword = "",
+                this.error_msg_role = "",
+                this.error_msg_gender = "",
+                this.error_msg_age = "",
+                this.error_msg_dob = ""
+        },
         checkName() {
+            this.clearError()
             if (this.form.name === "") {
-                this.showError("name")
-                this.error_msg = "**Please enter name**"
+                const msg = "**Please enter name**"
+                this.showError("name", msg)
                 return false;
             }
             return true
         },
         checkEmail() {
+            this.clearError()
             if (this.form.email === "") {
-                this.showError("email")
-                this.error_msg = "**Please enter email**"
+                const msg = "**Please enter email**"
+                this.showError("email", msg)
                 return false;
             } else if (this.form.email !== "") {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.form.email)) {
-                    this.showError("email")
-                    this.error_msg = "**Please enter valid email**"
+                    const msg = "**Please enter valid email**"
+                    this.showError("email", msg)
                     return false;
                 }
                 return true
@@ -168,15 +177,16 @@ export default {
             return true;
         },
         checkPassword() {
+            this.clearError()
             if (this.form.password === "") {
-                this.showError("password")
-                this.error_msg = "**Please enter password**"
+                const msg = "**Please enter password**"
+                this.showError("password", msg)
                 return false;
             } else if (this.form.password !== "") {
                 const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
                 if (!passRegex.test(this.form.password)) {
-                    this.showError("password")
-                    this.error_msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
+                    const msg = "**Password must be 8-12 characters, 1 number, 1 special character**"
+                    this.showError("password", msg)
                     return false;
                 }
 
@@ -185,14 +195,15 @@ export default {
             return true
         },
         checkConfirmPassword() {
+            this.clearError()
             if (this.form.confirmPassword === "") {
-                this.showError("confirmPassword")
-                this.error_msg = "**Please enter the password again to confirm**"
+                const msg = "**Please enter the password again to confirm**"
+                this.showError("confirmPassword", msg)
                 return false;
             } else if (this.form.confirmPassword !== "") {
                 if (this.form.password !== this.form.confirmPassword) {
-                    this.showError("confirmPassword")
-                    this.error_msg = "**Confirm Password does not match the Password field**"
+                    const msg = "**Confirm Password does not match the Password field**"
+                    this.showError("confirmPassword", msg)
                     return false;
                 }
                 return true;
@@ -200,35 +211,38 @@ export default {
             return true;
         },
         checkRole() {
+            this.clearError()
             if (this.form.role === "") {
-                this.showError("role")
-                this.error_msg = "**Please choose your role**"
+                const msg = "**Please choose your role**"
+                this.showError("role", msg)
                 return false;
             }
             return true;
         },
         checkGender() {
+            this.clearError()
             if (this.form.gender === "") {
-                this.showError("gender")
-                this.error_msg = "**Please choose your gender**"
+                const msg = "**Please choose your gender**"
+                this.showError("gender", msg)
                 return false;
             }
             return true
         },
         checkAge() {
+            this.clearError()
             if (this.form.age === "") {
-                this.showError("age")
-                this.error_msg = "**Please enter your age**"
+                const msg = "**Please enter your age**"
+                this.showError("age", msg)
                 return false;
             } else if (this.form.age !== "") {
                 const age = this.form.age
                 if (typeof this.form.age != 'number' || age.toString().includes(".")) {
-                    this.showError("age")
-                    this.error_msg = "**Age should be whole number**"
+                    const msg = "**Age should be whole number**"
+                    this.showError("age", msg)
                     return false
                 } else if (this.form.age < 18 || this.form.age > 100) {
-                    this.showError("age")
-                    this.error_msg = "**Age should be between 18-100**"
+                    const msg = "**Age should be between 18-100**"
+                    this.showError("age", msg)
                     return false
                 }
                 return true
@@ -236,15 +250,18 @@ export default {
             return true
         },
         checkDOB() {
+            this.clearError()
             if (this.form.dob === "") {
-                this.showError("dob")
-                this.error_msg = "**Please choose your Date of Birth**"
+                const msg = "**Please choose your Date of Birth**"
+                this.showError("dob", msg)
                 return false;
             }
             return true;
         },
-        showError(error) {
+        showError(error, msg) {
+            this.clearError()
             this[`error_${error}`] = true;
+            this[`error_msg_${error}`] = msg;
             this.$refs[error].focus();
         },
         formattedDate() {

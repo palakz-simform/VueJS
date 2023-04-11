@@ -4,7 +4,6 @@ import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import CarDetail from '../views/CarDetail.vue'
 import NotFound from '../views/NotFound.vue'
-import { useUserStore } from '../stores/user'
 
 const routes = [{
   path: '/',
@@ -71,8 +70,9 @@ router.beforeEach((to, from, next) => {
     next();
     return
   }
-  const store = useUserStore();
-  if (store.login) {
+  const loggedIn = localStorage.getItem("loggedIn");
+
+  if (loggedIn == 'true') {
     next();
   }
   else {

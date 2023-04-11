@@ -8,7 +8,7 @@
             </div>
             <div>
                 <RouterLink class="link" to="/">Home</RouterLink>
-                <span v-if="login">
+                <span v-if="login == true || login == 'true'">
                     <a class="link" @click="logout">Logout</a>
                 </span>
                 <template v-else>
