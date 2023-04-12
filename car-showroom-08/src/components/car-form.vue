@@ -11,21 +11,21 @@
             <div class="form">
                 <div class="row">
                     <label>Name:</label>
-                    <input type="text" v-model="form.name" ref="name">
+                    <input type="text" v-model="form.name" ref="name" @input="checkName">
                     <div v-if="error_name">
                         <p class="error">{{ error_msg }}</p>
                     </div>
                 </div>
                 <div class="row">
                     <label>Image:</label>
-                    <input type="url" v-model="form.image" ref="image">
+                    <input type="url" v-model="form.image" ref="image" @input="checkImage">
                     <div v-if="error_image">
                         <p class="error">{{ error_msg }}</p>
                     </div>
                 </div>
                 <div class="row">
                     <label>Description:</label>
-                    <textarea v-model="form.description" ref="description"></textarea>
+                    <textarea v-model="form.description" ref="description" @input="checkDescription"></textarea>
                     <div v-if="error_description">
                         <p class="error">{{ error_msg }}</p>
                     </div>
@@ -33,7 +33,8 @@
                 <div class="row">
                     <label>Price:</label>
                     <input type="number" v-model.number="form.price" ref="price"
-                        onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);">
+                        onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);"
+                        @input="checkPrice">
                     <!-- Prevent the user from pressing key : +,-,e -->
                     <div v-if="error_price">
                         <p class="error">{{ error_msg }}</p>
@@ -90,19 +91,40 @@ export default {
         showModalx() {
             this.showModal = false;
         },
-        submit() {
-            // Form validation
+        clearError() {
             this.error_name = false,
                 this.error_image = false,
                 this.error_description = false,
                 this.error_price = false
-
+        },
+        submit() {
+            // Form validation    
+            if (this.checkName() && this.checkImage() && this.checkDescription() && this.checkPrice()) {
+                this.clearError()
+                //  Execute if Add Car
+                if (this.addForm == true) {
+                    this.alertData()
+                    this.setdata(this.form)
+                }
+                // Execute id Edit Car
+                else if (this.editForm == true) {
+                    this.alertData()
+                    this.editCarData(this.form)
+                }
+            }
+        },
+        checkName() {
+            this.clearError()
             // Checking that name is not empty and is a string
             if (this.form.name === "" || typeof this.form.name != 'string') {
                 this.showError("name")
                 this.error_msg = "**Please enter name**";
                 return false
             }
+            return true
+        },
+        checkImage() {
+            this.clearError()
             // Checking that image is not empty 
             if (this.form.image === "") {
                 this.showError("image")
@@ -118,7 +140,12 @@ export default {
                     this.error_msg = "**Please enter valid image URL**";
                     return false
                 }
+                return true
             }
+            return true
+        },
+        checkDescription() {
+            this.clearError()
             // Checking that the description is not empty
             if (this.form.description === "") {
                 this.showError("description")
@@ -131,22 +158,17 @@ export default {
                 this.error_msg = "**Description must be 30-120 characters long**"
                 return false
             }
+            return true
+        },
+        checkPrice() {
+            this.clearError()
             // checking that the price is not empty
             if (this.form.price === "") {
                 this.showError("price")
                 this.error_msg = "**Please enter price**"
                 return false
             }
-            // Emit event 'display-data' when the form is Add Car
-            if (this.addForm == true) {
-                this.alertData()
-                this.setdata(this.form)
-            }
-            // Emit event 'edit-data' when the form is Add Car
-            else if (this.editForm == true) {
-                this.alertData()
-                this.editCarData(this.form)
-            }
+            return true
         },
         // function to alert data after submitting the form
         alertData() {
@@ -286,4 +308,5 @@ input:focus {
         margin-left: 100px;
     }
 
-}</style>
+}
+</style>

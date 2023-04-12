@@ -8,7 +8,7 @@
             </div>
             <div>
                 <RouterLink class="link" to="/">Home</RouterLink>
-                <span v-if="login == true || login == 'true'">
+                <span v-if="login == 'true'">
                     <a class="link" @click="logout">Logout</a>
                 </span>
                 <template v-else>
@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         ...mapActions(useUserStore, ["logout"]),
-
     }
 };
 </script>

@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import LoginPage from '../views/LoginPage.vue'
-import RegisterPage from '../views/RegisterPage.vue'
-import CarDetail from '../views/CarDetail.vue'
-import NotFound from '../views/NotFound.vue'
 
 const routes = [{
   path: '/',
   name: 'home',
-  component: Home,
+  component: () => import("../views/Home.vue"),
   meta: {
     requiresAuth: true
   }
@@ -16,17 +11,17 @@ const routes = [{
 {
   path: '/login',
   name: 'login',
-  component: LoginPage
+  component: () => import("../views/LoginPage.vue")
 },
 {
   path: '/register',
   name: 'register',
-  component: RegisterPage
+  component: () => import("../views/RegisterPage.vue")
 },
 {
   path: '/details/:id(\\d+)',
   name: 'carDetail',
-  component: CarDetail,
+  component: () => import("../views/CarDetail.vue"),
   meta: {
     requiresAuth: true
   },
@@ -56,7 +51,7 @@ const routes = [{
 {
   path: '/:pathMatch(.*)*',
   name: 'NotFound',
-  component: NotFound
+  component: () => import("../views/NotFound.vue")
 }
 
 ]

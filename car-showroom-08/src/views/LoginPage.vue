@@ -40,9 +40,6 @@ export default {
     name: 'LoginPage',
     data() {
         return {
-            // error_email: false,
-            // error_password: false,
-            // error_msg: "",
             error_msg_email: "",
             error_msg_password: "",
             email: "",
@@ -62,8 +59,7 @@ export default {
             }
         },
         login() {
-            this.error_email = false,
-                this.error_password = false
+            this.clearError()
             if (this.checkEmail() && this.checkPassword()) {
                 const data = this.getUserData()
                 this.logInUser(data)

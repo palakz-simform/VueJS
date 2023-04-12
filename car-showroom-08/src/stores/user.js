@@ -35,10 +35,9 @@ export const useUserStore = defineStore('user', {
                             this.age = userData.age,
                             this.dob = userData.dob,
                             this.gender = userData.gender
-                        this.login = true
+                        this.login = "true"
                         localStorage.setItem('token', `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`)
                         localStorage.setItem('loggedIn', true)
-                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
                         alert("Logged In Successfully!!")
                         router.push({
                             name: 'home'
@@ -82,7 +81,7 @@ export const useUserStore = defineStore('user', {
                 router.push({
                     name: 'login'
                 })
-                this.login = false
+                this.login = "false"
                 setTimeout(() => {
                     alert("Logged Out Successfully")
                 }, 500)
