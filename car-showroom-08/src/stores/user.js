@@ -2,12 +2,9 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '../router/index'
 
-const cookies = document.cookie.split(';');
-const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));
-const loggedInCookie = cookies.find(cookie => cookie.trim().startsWith('loggedIn='));
-
 export const useUserStore = defineStore('user', {
     state: () => ({
+
         name: "",
         email: "",
         role: "",
@@ -15,9 +12,8 @@ export const useUserStore = defineStore('user', {
         age: "",
         dob: "",
         gender: "",
-        cookie: document.cookie,
-        token: tokenCookie ? tokenCookie.trim().substring('token='.length) : null,
-        loggedIn: loggedInCookie.trim().substring('loggedIn='.length)
+        login: localStorage.getItem('loggedIn')
+
     }),
 
     actions: {
@@ -39,20 +35,19 @@ export const useUserStore = defineStore('user', {
                             this.age = userData.age,
                             this.dob = userData.dob,
                             this.gender = userData.gender
-
+                        this.login = "true"
                         try {
                             const res = await axios.post('https://reqres.in/api/login', {
                                 email: "eve.holt@reqres.in",
                                 password: "cityslicka"
                             })
-                            document.cookie = `token=${res.data.token}`
-                            document.cookie = 'loggedIn = true'
-                            this.loggedIn = "true"
+                            console.log(res)
+                            localStorage.setItem('token', res.data.token)
+                            localStorage.setItem('loggedIn', true)
                         }
                         catch (err) {
-                            document.cookie = `tokeneyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
-                            document.cookie = 'loggedIn = true'
-                            this.loggedIn = "true"
+                            localStorage.setItem('token', `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`)
+                            localStorage.setItem('loggedIn', true)
                         }
 
                         alert("Logged In Successfully!!")
@@ -93,14 +88,12 @@ export const useUserStore = defineStore('user', {
         },
         logout() {
             if (confirm("Do you really want to log out ?") == true) {
-                // localStorage.setItem('token', "")
-                // localStorage.setItem("loggedIn", false)
+                localStorage.setItem('token', "")
+                localStorage.setItem("loggedIn", false)
                 router.push({
                     name: 'login'
                 })
-                document.cookie = 'token=; expires=Thu, 18 Dec 2013 12:00:00 UTC ;'
-                document.cookie = 'loggedIn= false'
-                this.loggedIn = ""
+                this.login = "false"
                 setTimeout(() => {
                     alert("Logged Out Successfully")
                 }, 500)

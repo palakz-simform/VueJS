@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { useUserStore } from './user'
-const store = useUserStore()
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.token
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 export const useCarStore = defineStore('car', {
     state: () => {
         return {

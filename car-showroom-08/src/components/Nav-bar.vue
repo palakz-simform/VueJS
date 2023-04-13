@@ -8,7 +8,7 @@
             </div>
             <div>
                 <RouterLink class="link" to="/">Home</RouterLink>
-                <span v-if="loggedIn == 'true'">
+                <span v-if="login == 'true'">
                     <a class="link" @click="logout">Logout</a>
                 </span>
                 <template v-else>
@@ -28,7 +28,7 @@ export default {
     name: "Nav-bar",
 
     computed: {
-        ...mapWritableState(useUserStore, ["loggedIn"]),
+        ...mapWritableState(useUserStore, ["login"]),
     },
     methods: {
         ...mapActions(useUserStore, ["logout"]),
