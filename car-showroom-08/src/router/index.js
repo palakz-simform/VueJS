@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { useUserStore } from '../stores/user'
 const routes = [{
   path: '/',
   name: 'home',
@@ -65,8 +65,8 @@ router.beforeEach((to, from, next) => {
     next();
     return
   }
-  const loggedIn = localStorage.getItem("loggedIn");
-
+  const store = useUserStore()
+  const loggedIn = store.loggedIn;
   if (loggedIn == 'true') {
     next();
   }
