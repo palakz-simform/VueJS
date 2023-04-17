@@ -62,8 +62,6 @@ export default {
             this.deleteCar(cardata);
         },
     },
-
-
 };
 </script>
 

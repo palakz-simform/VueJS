@@ -6,7 +6,6 @@
                     <h1>Registration Form</h1>
                 </div>
                 <!-- Car Add/Edit Form -->
-
                 <div class="form">
                     <!-- Name -->
                     <div class="row">
