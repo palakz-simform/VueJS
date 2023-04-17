@@ -6,12 +6,17 @@
       <component :is="Component"></component>
     </transition>
   </RouterView>
+  <carFooter />
 </template>
   
 <script>
 import { RouterView } from "vue-router";
+import carFooter from "./components/footer.vue"
 export default {
   name: "App",
+  components: {
+    carFooter
+  },
 }
 </script>
 

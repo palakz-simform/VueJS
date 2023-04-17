@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import axios from 'axios'
 
 const routes = [{
   path: '/',
@@ -35,8 +34,7 @@ const routes = [{
       if (!cardata) {
         return {
           name: 'NotFound',
-          //allows keeping URL while redirectiong to the home page. 
-          // "PathMatch" is a property in Vue.js that is used to capture dynamic segments of a URL
+          //allows keeping URL while redirectiong to the home page. "PathMatch" is a property in Vue.js that is used to capture dynamic segments of a URL
           params: { pathMatch: to.path.split('/').slice(1) },
         }
       }
@@ -44,8 +42,7 @@ const routes = [{
     catch {
       return {
         name: 'NotFound',
-        //allows keeping URL while redirectiong to the home page. 
-        // "PathMatch" is a property in Vue.js that is used to capture dynamic segments of a URL
+        //allows keeping URL while redirectiong to the home page. "PathMatch" is a property in Vue.js that is used to capture dynamic segments of a URL
         params: { pathMatch: to.path.split('/').slice(1) },
       }
     }
@@ -78,4 +75,5 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+import axios from 'axios'
 export default router

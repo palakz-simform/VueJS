@@ -62,15 +62,21 @@ export default {
             this.deleteCar(cardata);
         },
     },
+
+
 };
 </script>
 
 <style scoped>
 .card-car {
-    width: 350px;
+    width: 340px;
     margin: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: rgb(216, 215, 214);
+    border-left: 2px solid rgb(35, 177, 172);
+    border-top: 2px solid rgb(35, 177, 172);
+     box-shadow: 6px 8px 15px 0 rgba(47, 243, 237, 0.7);
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    
 }
 
 .card-car:hover {
@@ -87,25 +93,25 @@ export default {
 .heading {
     height: 50px;
     text-align: center;
-    background-color: rgb(44, 44, 44);
-    color: wheat;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     overflow: hidden;
+    border-radius: 15px;
 }
 
-.heading h1:hover {
-    color: wheat;
-}
 
 .image {
-    width: 350px;
+    width: 340px;
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 }
 
 img {
-    width: 350px;
+    width: 340px;
     height: 200px;
 }
 
@@ -117,7 +123,7 @@ img {
 
 .description {
     height: 100px;
-    width: 350px;
+    width: 340px;
     text-align: center;
     overflow: hidden;
 }
@@ -128,8 +134,8 @@ button[disabled] {
 }
 
 .btn-car {
-    width: 350px;
-    height: 50px;
+    width: 340px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -142,7 +148,8 @@ button[disabled] {
     margin-left: 10px;
     margin-right: 10px;
     background-color: rgb(44, 44, 44);
-    color: wheat;
+    border: 0px;
+    color: white;
     font-weight: bolder;
     border-radius: 10px;
     cursor: pointer;
@@ -152,7 +159,8 @@ button[disabled] {
     width: 150px;
     height: 34px;
     background-color: rgb(44, 44, 44);
-    color: wheat;
+    border: 0px;
+    color: white;
     font-weight: bolder;
     border-radius: 10px;
     cursor: pointer;
@@ -170,6 +178,7 @@ button[disabled] {
 @media (max-width: 1155px) {
     .card-car {
         width: 300px;
+         box-shadow: 6px 8px 10px 0 rgba(47, 243, 237, 0.7);
     }
 
     .heading {
@@ -205,12 +214,51 @@ button[disabled] {
 @media (max-width: 670px) {
     .card-car {
         margin: 5px;
-        width: 160px;
+        margin-bottom: 15px;
+        width: 200px;
     }
 
     .heading {
         height: 25px;
         font-size: 8px;
+    }
+
+    .heading h1 {
+        padding-top: 4px;
+    }
+
+    .image {
+        width: 200px;
+        height: 120px;
+    }
+
+    img {
+        width: 200px;
+        height: 120px;
+    }
+
+    .description p {
+        font-size: 12px;
+    }
+
+    .description {
+        width: 190px;
+        text-align: center;
+    }
+
+    .btn-car {
+        width: 200px;
+    }
+
+    .button-info {
+        width: 50px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 500px) {
+    .card-car {
+       width: 160px;
     }
 
     .heading h1 {
@@ -227,22 +275,13 @@ button[disabled] {
         height: 100px;
     }
 
-    .description p {
-        font-size: 12px;
-    }
-
     .description {
-        width: 150px;
-        text-align: center;
+        width: 160px;
     }
 
     .btn-car {
         width: 160px;
     }
 
-    .button-info {
-        width: 50px;
-        height: 35px;
-    }
 }
 </style>

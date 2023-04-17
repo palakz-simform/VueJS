@@ -1,11 +1,12 @@
 <template>
     <div>
-        <form>
+        <form autocomplete="off">
             <div class="login-form">
                 <div class="heading">
                     <h1>Login Form</h1>
                 </div>
                 <!-- Car Add/Edit Form -->
+
                 <div class="form">
                     <div class="row">
                         <label for="email">Email:</label>
@@ -22,6 +23,7 @@
                     </div>
                 </div>
             </div>
+
         </form>
     </div>
 </template>

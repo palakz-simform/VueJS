@@ -184,13 +184,23 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    text-align: center;
-    color: brown
+div.modal {
+    background-color: black;
+    border: 1px solid rgb(35, 177, 172);
+    border-radius: 15px;
+    box-shadow: 8px 10px 5px 0 rgb(35, 177, 172, 0.7);
 }
 
-h1:hover {
-    color: brown
+h1 {
+    text-align: center;
+    color: rgb(35, 177, 172)
+}
+
+/* h1:hover {
+    color: rgb(35, 177, 172);
+} */
+button {
+    color: white
 }
 
 div.row {
@@ -216,10 +226,11 @@ div.row {
 label {
     padding-left: 40px;
     font-size: 18px;
+    color: white
 }
 
 .error {
-    color: red;
+    color: rgb(220, 73, 73);
     padding-left: 40px;
     margin-top: 2px;
     margin-bottom: 0px;
@@ -240,6 +251,12 @@ textarea {
     margin-right: 40px;
     height: 28px;
     padding-left: 5px;
+    background-color: black;
+    border: 0px;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 15px;
+
 }
 
 textarea {
@@ -250,15 +267,18 @@ textarea {
 textarea:focus,
 input:focus {
     outline: none !important;
-    border-color: brown;
-    box-shadow: 0 0 10px rgb(196, 105, 105);
+    border-color: rgb(220, 73, 73);
+    border: 0px;
+    border-bottom: 1px;
+    box-shadow: 0px 2px 0px rgb(220, 73, 73);
+    ;
 }
 
 .submit {
     width: 100px;
     height: 35px;
-    background-color: brown;
-    color: white;
+    background-color: rgb(35, 177, 172);
+    color: rgb(0, 0, 0);
     font-weight: bold;
     border: none;
     border-radius: 10px;
@@ -270,8 +290,8 @@ input:focus {
 
 .submit:hover {
     background-color: transparent;
-    color: brown;
-    border: 3px solid brown;
+    color: rgb(35, 177, 172);
+    border: 3px solid rgb(35, 177, 172);
 }
 
 .modal {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home">
         <!-- Add Car Button -->
         <div class="add-car-button">
             <button class="button" @click="addCar()">Add Car</button>
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import carform from "@/components/car-form.vue";
-import gallery_card from "@/components/gallery-card.vue";
+import carform from "../components/car-form.vue";
+import gallery_card from "../components/gallery-card.vue";
 import {
     useCarStore
 } from "../stores/car";
@@ -86,6 +86,10 @@ export default {
 </script>
 
 <style scoped>
+.home {
+    margin-bottom: 190px;
+}
+
 .car-content {
     display: flex;
     justify-content: center;
@@ -109,8 +113,8 @@ export default {
 button {
     width: 100px;
     height: 35px;
-    background-color: brown;
-    color: white;
+    background-color: rgb(35, 177, 172);
+    color: rgb(0, 0, 0);
     font-weight: bold;
     border: none;
     border-radius: 10px;
@@ -119,8 +123,8 @@ button {
 
 button:hover {
     background-color: transparent;
-    color: brown;
-    border: 3px solid brown;
+    color: rgb(35, 177, 172);
+    border: 3px solid rgb(35, 177, 172);
 }
 
 .modal-overlay {
@@ -199,7 +203,7 @@ button:hover {
 @media (max-width: 800px) {
 
     .car-card {
-        gap: 5px;
+        gap: 20px;
     }
 
     .add-car-button {
@@ -210,12 +214,12 @@ button:hover {
     }
 }
 
-@media (max-width: 670px) {
+@media (max-width: 690px) {
 
     .car-card {
         display: grid;
-        grid-template-columns: auto auto auto;
-        gap: 5px;
+        grid-template-columns: auto auto;
+        gap: 10px;
     }
 
     .add-car-button {
@@ -224,6 +228,14 @@ button:hover {
         padding: 20px;
         margin-right: 0px;
     }
+}
+@media (max-width:675px) {
+  .car-card {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 30px;
+    }
+
 }
 
 @media (max-width:550px) {
@@ -234,8 +246,12 @@ button:hover {
     .car-card {
         display: grid;
         grid-template-columns: auto auto;
-        gap: 5px;
+        gap: 15px;
     }
-
+}
+@media (max-width:400px) {
+     .car-card {       
+        gap: 10px;
+    }
 }
 </style>

@@ -51,8 +51,9 @@ export default {
 button {
     margin-top: 30px;
     margin-left: 30px;
-    color: wheat;
-    background-color: rgb(44, 44, 44);
+    color: rgb(255, 255, 255);
+    background-color: rgb(35, 177, 172);
+    border-radius: 10px;
     border: none;
     height: 40px;
     width: 100px;
@@ -61,9 +62,9 @@ button {
 
 button:hover {
     background-color: transparent;
-    color: rgb(44, 44, 44);
+    color: rgb(35, 177, 172);
     font-weight: bolder;
-    border: 3px solid rgb(44, 44, 44);
+    border: 3px solid rgb(35, 177, 172);
 }
 
 i {
@@ -73,13 +74,15 @@ i {
 .car-detail {
     margin: auto;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 120px;
     height: 500px;
     box-shadow: 0px 1px 10px;
     max-width: 1200px;
     display: flex;
-    box-shadow: 5px 10px 18px #888888;
-
+    box-shadow: 6px 8px 20px 0 rgba(47, 243, 237, 0.7);
+    border-radius: 15px;
+    border-left: 1px solid rgb(35, 177, 172);
+    border-top: 1px solid rgb(35, 177, 172);
 }
 
 .info {
@@ -102,24 +105,22 @@ img {
 }
 
 .title h1 {
-    color: black;
+    color: rgb(255, 255, 255);
     margin-right: 30px;
-    ;
 }
 
 .description {
     padding-left: 80px;
-
     height: 150px;
 }
 
 .description h3 {
-    color: maroon;
+    color: rgb(35, 177, 172);
     font-size: 25px;
 }
 
 .description p {
-
+    color: white;
     font-size: 18px;
 }
 
@@ -128,12 +129,13 @@ img {
 }
 
 .price h3 {
-    color: maroon;
+    color: rgb(35, 177, 172);
     font-size: 25px;
 }
 
 .price p {
     font-size: 18px;
+    color: white;
 }
 
 @media (max-width:1500px) {
@@ -143,8 +145,8 @@ img {
         height: 500px;
         box-shadow: 0px 1px 10px;
         max-width: 800px;
-        display: flex;
-        box-shadow: 5px 10px 18px #888888;
+        display: flex;;
+        box-shadow: 5px 8px 10px 0 rgba(47, 243, 237, 0.7);
 
     }
 
@@ -177,8 +179,8 @@ img {
     @media(max-width: 810px) {
 
         .car-detail {
-            margin-left: 10px;
-            margin-right: 10px;
+            margin-left: 20px;
+            margin-right: 30px;
             flex-direction: column;
             height: 700px;
             display: flex;

@@ -2,7 +2,8 @@
     <div class="title">
         <div class="nav">
             <div>
-                <RouterLink to="/" class="heading">
+                <RouterLink to="/" class="nav-heading">
+                <img src="../assets/car-logo.png"/>
                     <h1>Car Gallery</h1>
                 </RouterLink>
             </div>
@@ -44,32 +45,36 @@ body {
 .title {
     text-align: center;
 }
-
-hr {
-    width: 8%;
-    border: 5px solid brown;
-    border-radius: 5px;
+.nav-heading{
+    display:flex;
 }
-
+.nav img{
+    height:60px;
+    margin-left:30px;
+    margin-top: 3px;
+}
 .title h1 {
-    color: wheat;
-    font-size: 35px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
     text-shadow: 0 0 3px gray;
-    margin-left: 40px;
+    margin-left: 10px;
+    margin-top: 22px;
 }
 
 .nav {
-    height: 60px;
-    background-color: rgb(44, 44, 44);
+    height: 70px;
+    background-color: rgb(0, 0, 0);
     padding-right: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
+    box-shadow: 0px 1px 30px 1px rgba(255, 255, 255, 0.75);
 }
 
 .link {
     margin-right: 70px;
-    color: wheat;
+    color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
     width: 60px;
@@ -78,10 +83,11 @@ hr {
 
 a.router-link-exact-active {
     font-size: 22px;
+    color: rgb(35, 177, 172);
 }
 
 .link:hover {
-    color: rgb(253, 247, 247);
+    color: rgb(35, 177, 172);
     cursor: pointer;
 }
 
@@ -112,11 +118,13 @@ a {
         font-size: 18px;
     }
 }
-
-@media (max-width: 375px) {
-    .title h1 {
-        font-size: 20px;
-        margin-left: 20px;
+@media (max-width: 600px) {
+    .nav img{
+        margin-left:15px;
     }
+    .title h1 {
+        display: none;
 }
+}
+
 </style>
