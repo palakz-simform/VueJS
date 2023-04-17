@@ -17,6 +17,17 @@ export default {
   components: {
     carFooter
   },
+  created() {
+    if (import.meta.env.VITE_MODE == "production") {
+      console.log("You entered Production environment")
+    }
+    else if (import.meta.env.VITE_MODE == "staging") {
+      console.log("You entered Staging environment")
+    }
+    else {
+      console.log("Development environment")
+    }
+  }
 }
 </script>
 
