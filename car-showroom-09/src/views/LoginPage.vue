@@ -23,18 +23,13 @@
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 </template>
 
 <script>
-import {
-    mapActions
-} from 'pinia'
-import {
-    useUserStore
-} from '../stores/user'
+import { mapActions } from 'pinia'
+import { useUserStore } from '../stores/user'
 
 export default {
     name: 'LoginPage',
@@ -48,9 +43,8 @@ export default {
     },
     methods: {
         ...mapActions(useUserStore, ['logInUser']),
-        clearError() {
-            this.error_msg_email = "",
-                this.error_msg_password = ""
+        clearError(error) {
+            this[`error_msg_${error}`] = "";
         },
         getUserData() {
             return {
@@ -59,14 +53,14 @@ export default {
             }
         },
         login() {
-            this.clearError()
+            this.checkEmail(),
+                this.checkPassword()
             if (this.checkEmail() && this.checkPassword()) {
                 const data = this.getUserData()
                 this.logInUser(data)
             }
         },
         checkEmail() {
-            this.clearError()
             if (this.email === "") {
                 const msg = "**Please enter email**"
                 this.showError("email", msg)
@@ -78,12 +72,13 @@ export default {
                     this.showError("email", msg)
                     return false;
                 }
+                this.clearError("email")
                 return true;
             }
+            this.clearError("email")
             return true;
         },
         checkPassword() {
-            this.clearError()
             if (this.password === "") {
                 const msg = "**Please enter password**"
                 this.showError("password", msg)
@@ -95,12 +90,13 @@ export default {
                     this.showError("password", msg)
                     return false;
                 }
+                this.clearError("password")
                 return true
             }
+            this.clearError("password")
             return true
         },
         showError(error, msg) {
-            // this[`error_${error}`] = true;
             this[`error_msg_${error}`] = msg;
             this.$refs[error].focus();
         }

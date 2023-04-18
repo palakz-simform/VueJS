@@ -4,7 +4,6 @@ import router from '../router/index'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-
         name: "",
         email: "",
         role: "",
@@ -13,7 +12,6 @@ export const useUserStore = defineStore('user', {
         dob: "",
         gender: "",
         login: localStorage.getItem('loggedIn')
-
     }),
 
     actions: {
@@ -41,7 +39,6 @@ export const useUserStore = defineStore('user', {
                                 email: "eve.holt@reqres.in",
                                 password: "cityslicka"
                             })
-                            console.log(res)
                             localStorage.setItem('token', res.data.token)
                             localStorage.setItem('loggedIn', true)
                         }

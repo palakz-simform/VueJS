@@ -36,7 +36,7 @@
                     <!-- Role -->
                     <div class="row">
                         <label>Role:</label>
-                        <select v-model="form.role" ref="role" @input="checkRole">
+                        <select v-model="form.role" ref="role" @change="checkRole">
                             <option value="Admin">Admin</option>
                             <option value="Employee">Employee</option>
                             <option value="Customer">Customer</option>
@@ -44,19 +44,20 @@
                         <div v-if="error_msg_role" class="error">{{ error_msg_role }} </div>
                     </div>
                     <!-- Gender -->
+
                     <div class="gender-class">
                         <div class="row-gender row ">
                             <label>Gender:</label>
                             <div class="gender">
                                 <div class="male">
-                                    <input type="radio" value="male" name="gender" v-model="form.gender" ref="gender"
-                                        @input="checkGender" />
-                                    <label>Male</label>
+                                    <input type="radio" value="male" id="male" name="gender" v-model="form.gender"
+                                        ref="gender" @change="checkGender" />
+                                    <label for="male">Male</label>
                                 </div>
                                 <div class="female">
-                                    <input type="radio" value="female" name="gender" v-model="form.gender" ref="gender"
-                                        @input="checkGender" />
-                                    <label>Female</label>
+                                    <input type="radio" value="female" id="female" name="gender" v-model="form.gender"
+                                        ref="gender" @change="checkGender" />
+                                    <label for="female">Female</label>
                                 </div>
                             </div>
                         </div>
@@ -88,13 +89,8 @@
 </template>
 
 <script>
-import {
-    mapActions
-} from 'pinia'
-import {
-    useUserStore
-} from '../stores/user'
-import router from '../router'
+import { mapActions } from 'pinia'
+import { useUserStore } from '../stores/user'
 export default {
     name: 'RegisterPage',
 
@@ -123,10 +119,8 @@ export default {
     methods: {
         ...mapActions(useUserStore, ['registerUser']),
 
-        async submit() {
-            // clear error
-            this.clearError()
-
+        submit() {
+            this.checkName(), this.checkEmail(), this.checkPassword(), this.checkConfirmPassword(), this.checkRole(), this.checkGender(), this.checkAge(), this.checkDOB()
             if (this.checkName() && this.checkEmail() && this.checkPassword() && this.checkConfirmPassword() && this.checkRole() && this.checkGender() && this.checkAge() && this.checkDOB()) {
                 const data = {
                     name: this.form.name,
@@ -137,30 +131,22 @@ export default {
                     dob: this.form.dob,
                     gender: this.form.gender
                 }
-                const result = await this.registerUser(data)
+                this.registerUser(data)
             }
         },
-        clearError() {
-            this.error_msg_name = "",
-                this.error_msg_email = "",
-                this.error_msg_password = "",
-                this.error_msg_confirmPassword = "",
-                this.error_msg_role = "",
-                this.error_msg_gender = "",
-                this.error_msg_age = "",
-                this.error_msg_dob = ""
+        clearError(error) {
+            this[`error_msg_${error}`] = "";
         },
         checkName() {
-            this.clearError()
             if (this.form.name === "") {
                 const msg = "**Please enter name**"
                 this.showError("name", msg)
                 return false;
             }
+            this.clearError("name")
             return true
         },
         checkEmail() {
-            this.clearError()
             if (this.form.email === "") {
                 const msg = "**Please enter email**"
                 this.showError("email", msg)
@@ -172,12 +158,13 @@ export default {
                     this.showError("email", msg)
                     return false;
                 }
+                this.clearError("email")
                 return true
             }
+            this.clearError("email")
             return true;
         },
         checkPassword() {
-            this.clearError()
             if (this.form.password === "") {
                 const msg = "**Please enter password**"
                 this.showError("password", msg)
@@ -189,13 +176,13 @@ export default {
                     this.showError("password", msg)
                     return false;
                 }
-
+                this.clearError("password")
                 return true
             }
+            this.clearError("password")
             return true
         },
         checkConfirmPassword() {
-            this.clearError()
             if (this.form.confirmPassword === "") {
                 const msg = "**Please enter the password again to confirm**"
                 this.showError("confirmPassword", msg)
@@ -206,30 +193,31 @@ export default {
                     this.showError("confirmPassword", msg)
                     return false;
                 }
+                this.clearError("confirmPassword")
                 return true;
             }
+            this.clearError("confirmPassword")
             return true;
         },
         checkRole() {
-            this.clearError()
             if (this.form.role === "") {
                 const msg = "**Please choose your role**"
                 this.showError("role", msg)
                 return false;
             }
+            this.clearError("role")
             return true;
         },
         checkGender() {
-            this.clearError()
             if (this.form.gender === "") {
                 const msg = "**Please choose your gender**"
                 this.showError("gender", msg)
                 return false;
             }
+            this.clearError("gender")
             return true
         },
         checkAge() {
-            this.clearError()
             if (this.form.age === "") {
                 const msg = "**Please enter your age**"
                 this.showError("age", msg)
@@ -245,21 +233,22 @@ export default {
                     this.showError("age", msg)
                     return false
                 }
+                this.clearError("age")
                 return true
             }
+            this.clearError("age")
             return true
         },
         checkDOB() {
-            this.clearError()
             if (this.form.dob === "") {
                 const msg = "**Please choose your Date of Birth**"
                 this.showError("dob", msg)
                 return false;
             }
+            this.clearError("dob")
             return true;
         },
         showError(error, msg) {
-            this.clearError()
             this[`error_${error}`] = true;
             this[`error_msg_${error}`] = msg;
             this.$refs[error].focus();

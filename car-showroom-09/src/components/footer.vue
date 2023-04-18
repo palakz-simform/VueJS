@@ -3,7 +3,7 @@
         <div class="social-row">
             <h2>Social Media</h2>
             <div class="social">
-                <p><a href="#"><i class="fa-brands fa-instagram fa-2xl"></i></a></p>
+                <p><a href="instagram.com"><i class="fa-brands fa-instagram fa-2xl"></i></a></p>
                 <p><a href="#"><i class="fa-brands fa-square-facebook fa-2xl"></i></a></p>
                 <p><a href="#"><i class="fa-brands fa-youtube fa-2xl"></i></a></p>
                 <p><a href="#"><i class="fa-brands fa-square-twitter fa-2xl"></i></a></p>
@@ -55,7 +55,7 @@ export default {
 </script>
 <style scoped>
 .footer {
-    margin-top:300px;
+    margin-top: 300px;
     margin-bottom: 0px;
     width: 100%;
     background-color: rgb(0, 0, 0);
@@ -131,7 +131,7 @@ i:hover {
         padding-right: 20px;
         padding-left: 20px;
     }
-    
+
 }
 
 @media (max-width: 600px) {
@@ -140,17 +140,21 @@ i:hover {
         grid-template-columns: auto auto;
         font-size: 12px;
     }
-    .row-copyright p{
-        margin-right:px;
+
+    .row-copyright p {
+        margin-right: px;
     }
-   .social-row h2{
-    font-size: 18px;
-   }
-   .common-row h2{
+
+    .social-row h2 {
         font-size: 18px;
     }
-   .common-row p{
-        font-size:12px;
+
+    .common-row h2 {
+        font-size: 18px;
+    }
+
+    .common-row p {
+        font-size: 12px;
     }
 }
 </style>

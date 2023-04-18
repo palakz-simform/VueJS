@@ -15,18 +15,20 @@ export default {
 <style scoped>
 .not-found {
     text-align: center;
+    margin-top: 150px;
 }
 
 h1 {
-    color: maroon;
+    color: rgb(35, 177, 172);
 }
 
 p {
     font-size: 20px;
+    color: white;
 }
 
 span {
-    color: blue;
+    color: rgb(35, 177, 172);
     text-decoration: underline;
     cursor: pointer;
 }

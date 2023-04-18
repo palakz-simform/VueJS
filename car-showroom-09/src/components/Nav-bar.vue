@@ -3,7 +3,7 @@
         <div class="nav">
             <div>
                 <RouterLink to="/" class="nav-heading">
-                <img src="../assets/car-logo.png"/>
+                    <img src="../assets/car-logo.png" alt="logo" />
                     <h1>Car Gallery</h1>
                 </RouterLink>
             </div>
@@ -45,14 +45,18 @@ body {
 .title {
     text-align: center;
 }
-.nav-heading{
-    display:flex;
+
+.nav-heading {
+    display: flex;
 }
-.nav img{
-    height:60px;
-    margin-left:30px;
+
+.nav img {
+    height: 60px;
+    width: auto;
+    margin-left: 30px;
     margin-top: 3px;
 }
+
 .title h1 {
     color: rgb(255, 255, 255);
     font-size: 25px;
@@ -118,13 +122,14 @@ a {
         font-size: 18px;
     }
 }
+
 @media (max-width: 600px) {
-    .nav img{
-        margin-left:15px;
+    .nav img {
+        margin-left: 15px;
     }
+
     .title h1 {
         display: none;
+    }
 }
-}
-
 </style>
