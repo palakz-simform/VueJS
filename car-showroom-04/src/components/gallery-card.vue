@@ -1,23 +1,23 @@
 <template>
-<!-- Card of each car -->
-<div class="card">
-    <div class="heading">
-        <h1>{{ name }}</h1>
+    <!-- Card of each car -->
+    <div class="card-car">
+        <div class="car-heading">
+            <h1>{{ name }}</h1>
+        </div>
+        <div class="car-image">
+            <img :src="image" />
+        </div>
+        <div class="car-description">
+            <p>{{ description }}</p>
+        </div>
+        <div class="car-btn">
+            <button class="car-edit-btn" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
+            <button class="button-info" @click="getPrice" title="Get Price" :disabled="hasPrice">
+                {{ price != 0 ? "Info" : "Available Soon" }}
+            </button>
+            <button class="car-delete-btn" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
+        </div>
     </div>
-    <div class="image">
-        <img :src="image" />
-    </div>
-    <div class="description">
-        <p>{{ description }}</p>
-    </div>
-    <div class="btn">
-        <button class="edit" @click="showeditform()"><i class="fa-solid fa-pen"></i></button>
-        <button class="button" @click="getPrice" title="Get Price" :disabled="hasPrice">
-            {{ price!=0 ? "Info" : "Available Soon" }}
-        </button>
-        <button class="delete" @click="deleteData()"><i class="fa-sharp fa-solid fa-trash"></i></button>
-    </div>
-</div>
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default {
     },
 
     computed: {
-         // check if the car has price, if not return false and dissable the button
+        // check if the car has price, if not return false and dissable the button
         hasPrice() {
             if (this.price == 0) {
                 return true;
@@ -70,26 +70,28 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.card-car {
     width: 350px;
     margin: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgb(216, 215, 214);
 }
 
-.card:hover {
+.card-car:hover {
     transform: scale(0.95);
     transition: 0.25s;
 }
 
-.heading h1 {
+.car-heading h1 {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
 
 }
 
-.heading {
+.car-heading {
     height: 50px;
     text-align: center;
     background-color: rgb(44, 44, 44);
@@ -98,7 +100,7 @@ export default {
 
 }
 
-.image {
+.car-image {
     width: 350px;
     height: 200px;
     display: flex;
@@ -111,13 +113,13 @@ img {
     height: 200px;
 }
 
-.description p {
+.car-description p {
     font-weight: bold;
     line-height: 20px;
     padding: 4px;
 }
 
-.description {
+.car-description {
     height: 80px;
     width: 350px;
     text-align: center;
@@ -129,7 +131,7 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-.btn {
+.car-btn {
     width: 350px;
     height: 50px;
     display: flex;
@@ -137,8 +139,8 @@ button[disabled] {
     justify-content: space-between;
 }
 
-.edit,
-.delete {
+.car-edit-btn,
+.car-delete-btn {
     width: 55px;
     height: 34px;
     margin-left: 10px;
@@ -150,7 +152,7 @@ button[disabled] {
     cursor: pointer;
 }
 
-.button {
+.button-info {
     width: 150px;
     height: 34px;
     background-color: rgb(44, 44, 44);
@@ -160,9 +162,9 @@ button[disabled] {
     cursor: pointer;
 }
 
-.button:hover,
-.edit:hover,
-.delete:hover {
+.button-info:hover,
+.car-edit-btn:hover,
+.car-delete-btn:hover {
     background-color: transparent;
     color: rgb(44, 44, 44);
     font-weight: bolder;
@@ -170,20 +172,18 @@ button[disabled] {
 }
 
 @media (max-width: 1155px) {
-    .card {
+    .card-car {
         width: 300px;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background-color: rgb(216, 215, 214);
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
-    .heading {
+    .car-heading {
         height: 40px;
         font-size: 10px;
-
     }
 
-    .image {
+    .car-image {
         width: 300px;
         height: 175px;
     }
@@ -193,49 +193,42 @@ button[disabled] {
         height: 175px;
     }
 
-    .description p {
+    .car-description p {
         padding: 6px;
     }
 
-    .description {
+    .car-description {
         height: 120px;
         width: 300px;
-        text-align: center;
     }
 
-    .btn {
+    .car-btn {
         width: 300px;
-        height: 50px;
     }
 
-    .button {
+    .button-info {
         width: 100px;
-        height: 34px;
-        background-color: rgb(44, 44, 44);
-        color: wheat;
-        font-weight: bolder;
-        border-radius: 10px;
     }
 }
 
-@media (max-width: 670px) {
-    .card {
+@media (max-width: 690px) {
+    .card-car {
         margin: 5px;
         width: 175px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background-color: rgb(216, 215, 214);
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
-    .heading {
+    .car-heading {
         height: 25px;
         font-size: 8px;
     }
 
-    .heading h1 {
+    .car-heading h1 {
         padding-top: 4px;
     }
 
-    .image {
+    .car-image {
         width: 175px;
         height: 100px;
     }
@@ -245,29 +238,48 @@ button[disabled] {
         height: 100px;
     }
 
-    .description p {
-        padding: 6px;
+    .car-description p {
         font-size: 12px;
     }
 
-    .description {
-        height: 120px;
+    .car-description {
         width: 175px;
         text-align: center;
     }
 
-    .btn {
+    .car-btn {
         width: 175px;
         height: 50px;
     }
 
-    .button {
+    .button-info {
         width: 70px;
         height: 35px;
-        background-color: rgb(44, 44, 44);
-        color: wheat;
-        font-weight: bolder;
-        border-radius: 8px;
+    }
+}
+
+@media (max-width: 410px) {
+    .card-car {
+        margin: 5px;
+        width: 160px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .car-image {
+        width: 160px;
+    }
+
+    img {
+        width: 160px;
+    }
+
+    .car-description {
+        width: 160px;
+    }
+
+    .car-btn {
+        width: 160px;
     }
 }
 </style>

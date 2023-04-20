@@ -1,8 +1,8 @@
 <template>
-<div class="title">
-    <h1>Car Gallery</h1>
-    <hr />
-</div>
+    <div class="title">
+        <h1>Car Gallery</h1>
+        <hr />
+    </div>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
 }
 
 hr {
-    width: 8%;
+    width: 128px;
     border: 5px solid brown;
     border-radius: 5px;
 }

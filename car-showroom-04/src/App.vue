@@ -1,26 +1,28 @@
 <template>
-<!-- Navigation Global Component -->
-<Navbar />
+    <!-- Navigation Global Component -->
+    <Navbar />
 
-<!-- Add Car Button -->
-<div class="add-car-button">
-    <button class="button" @click="addCar()">Add Car</button>
-</div>
-
-<!-- Style applied when Add/Edit form is displayed -->
-<div class="modal-overlay" v-if="showModal "></div>
-
-<!-- Add/Edit Car Component -->
-<div class="modal" v-if="showModal">
-    <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
-</div>
-
-<!-- gallery-card.vue component -->
-<div class="car-card">
-    <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @get-Price-Info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
+    <!-- Add Car Button -->
+    <div class="add-car-button">
+        <button class="button" @click="addCar()">Add Car</button>
     </div>
-</div>
+
+    <!-- Style applied when Add/Edit form is displayed -->
+    <div class="modal-overlay" v-if="showModal"></div>
+
+    <!-- Add/Edit Car Component -->
+    <div class="modal" v-if="showModal">
+        <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx"
+            @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
+    </div>
+
+    <!-- gallery-card.vue component -->
+    <div class="car-card">
+        <div v-for="item in cars_info" :key="item.id">
+            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details"
+                :price="item.price" @get-Price-Info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -77,19 +79,19 @@ export default {
             this.showModal = false;
             const id = this.cars_info.length + 1;
             axios.post('https://testapi.io/api/dartya/resource/cardata/', {
-                    id: id,
-                    name: formdata.name,
-                    image: formdata.image,
-                    details: formdata.description,
-                    price: formdata.price
-                }).then((res) => {
-                    if (res.status === 201) {
-                        this.getData()
-                    } else {
-                        alert("Error!!")
-                    }
-                    this.addForm = false
-                })
+                id: id,
+                name: formdata.name,
+                image: formdata.image,
+                details: formdata.description,
+                price: formdata.price
+            }).then((res) => {
+                if (res.status === 201) {
+                    this.getData()
+                } else {
+                    alert("Error!!")
+                }
+                this.addForm = false
+            })
                 .catch(error => {
                     alert("Error : " + error)
                 });
@@ -126,7 +128,6 @@ export default {
         },
 
         // Delete Car Data
-        // Delete Car Data
         deleteCar(data) {
             if (confirm("Do you want to delete this car data ?") == true) {
                 axios.delete('https://testapi.io/api/dartya/resource/cardata/' + data.id).then((res) => {
@@ -150,7 +151,7 @@ export default {
 .car-card {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .add-car-button {
@@ -197,13 +198,5 @@ button:hover {
     background-color: #fff;
     border-radius: 5px;
     height: 600px;
-}
-
-@media (max-width: 800px) {
-    .car-card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 }
 </style>
