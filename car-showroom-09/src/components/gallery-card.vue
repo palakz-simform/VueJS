@@ -4,19 +4,19 @@
         <div class="heading">
             <h1>{{ name }}</h1>
         </div>
-        <div class="image">
+        <div class="car-image">
             <img :src="image" alt="car-image" />
         </div>
-        <div class="description">
+        <div class="car-description">
             <p>{{ description }}</p>
         </div>
         <div class="btn-car">
-            <button class="edit" @click="showeditform()">
+            <button class="car-edit-btn" @click="showeditform()">
                 <i class="fa-solid fa-pen"></i>
             </button>
             <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info"
                     :id="this.id">Info</button></RouterLink>
-            <button class="delete" @click="deleteData()">
+            <button class="car-delete-btn" @click="deleteData()">
                 <i class="fa-sharp fa-solid fa-trash"></i>
             </button>
         </div>
@@ -73,10 +73,10 @@ export default {
     margin: 10px;
     border-left: 2px solid rgb(35, 177, 172);
     border-top: 2px solid rgb(35, 177, 172);
-     box-shadow: 6px 8px 15px 0 rgba(47, 243, 237, 0.7);
+    box-shadow: 6px 8px 15px 0 rgba(47, 243, 237, 0.7);
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
-    
+
 }
 
 .card-car:hover {
@@ -100,7 +100,7 @@ export default {
 }
 
 
-.image {
+.car-image {
     width: 340px;
     height: 200px;
     display: flex;
@@ -115,22 +115,17 @@ img {
     height: 200px;
 }
 
-.description p {
+.car-description p {
     font-weight: bold;
     line-height: 20px;
     padding: 4px;
 }
 
-.description {
+.car-description {
     height: 100px;
     width: 340px;
     text-align: center;
     overflow: hidden;
-}
-
-button:disabled,
-button[disabled] {
-    cursor: not-allowed;
 }
 
 .btn-car {
@@ -141,8 +136,8 @@ button[disabled] {
     justify-content: space-between;
 }
 
-.edit,
-.delete {
+.car-edit-btn,
+.car-delete-btn {
     width: 55px;
     height: 34px;
     margin-left: 10px;
@@ -167,18 +162,18 @@ button[disabled] {
 }
 
 .button-info:hover,
-.edit:hover,
-.delete:hover {
+.car-edit-btn:hover,
+.car-delete-btn:hover {
     background-color: transparent;
     color: rgb(44, 44, 44);
     font-weight: bolder;
     border: 3px solid rgb(44, 44, 44);
 }
 
-@media (max-width: 1155px) {
+@media (max-width: 1240px) {
     .card-car {
-        width: 300px;
-         box-shadow: 6px 8px 10px 0 rgba(47, 243, 237, 0.7);
+        width: 280px;
+        box-shadow: 6px 8px 10px 0 rgba(47, 243, 237, 0.7);
     }
 
     .heading {
@@ -186,28 +181,50 @@ button[disabled] {
         font-size: 10px;
     }
 
-    .image {
-        width: 300px;
+    .car-image {
+        width: 280px;
         height: 175px;
     }
 
     img {
-        width: 300px;
+        width: 280px;
         height: 175px;
     }
 
-    .description p {
+    .car-description p {
         padding: 6px;
     }
 
-    .description {
+    .car-description {
         height: 120px;
-        width: 300px;
+        width: 280px;
         text-align: center;
     }
 
     .btn-car {
-        width: 300px;
+        width: 280px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .card-car {
+        width: 250px;
+    }
+
+    .car-image {
+        width: 250px;
+    }
+
+    img {
+        width: 250px;
+    }
+
+    .car-description {
+        width: 250px;
+    }
+
+    .btn-car {
+        width: 250px;
     }
 }
 
@@ -227,7 +244,7 @@ button[disabled] {
         padding-top: 4px;
     }
 
-    .image {
+    .car-image {
         width: 200px;
         height: 120px;
     }
@@ -237,11 +254,11 @@ button[disabled] {
         height: 120px;
     }
 
-    .description p {
+    .car-description p {
         font-size: 12px;
     }
 
-    .description {
+    .car-description {
         width: 190px;
         text-align: center;
     }
@@ -258,14 +275,10 @@ button[disabled] {
 
 @media (max-width: 500px) {
     .card-car {
-       width: 160px;
+        width: 160px;
     }
 
-    .heading h1 {
-        padding-top: 4px;
-    }
-
-    .image {
+    .car-image {
         width: 160px;
         height: 100px;
     }
@@ -275,13 +288,12 @@ button[disabled] {
         height: 100px;
     }
 
-    .description {
+    .car-description {
         width: 160px;
     }
 
     .btn-car {
         width: 160px;
     }
-
 }
 </style>

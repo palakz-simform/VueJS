@@ -141,19 +141,12 @@ img {
 @media (max-width:1500px) {
 
     .car-detail {
-
-        height: 500px;
-        box-shadow: 0px 1px 10px;
         max-width: 800px;
-        display: flex;;
         box-shadow: 5px 8px 10px 0 rgba(47, 243, 237, 0.7);
-
     }
 
     .image {
         max-width: 400px;
-        align-self: center;
-
     }
 
     img {
@@ -161,38 +154,28 @@ img {
     }
 
     .title {
-
         max-width: 400px;
-        height: 100px;
     }
 
     .description {
         padding-right: 10px;
-        height: 150px
     }
 
     .price {
-
         height: 100px;
     }
 
-    @media(max-width: 810px) {
+    @media(max-width: 850px) {
 
         .car-detail {
             margin-left: 20px;
             margin-right: 30px;
             flex-direction: column;
             height: 700px;
-            display: flex;
-
         }
 
         .image {
-            max-width: 400px;
-            align-self: center;
             padding-top: 20px;
-            ;
-
         }
 
         img {
@@ -202,7 +185,6 @@ img {
         }
 
         .title {
-
             max-width: 100%;
             height: 70px;
         }
@@ -217,6 +199,5 @@ img {
             height: 50px;
         }
     }
-
 }
 </style>

@@ -42,7 +42,7 @@ import gsap from 'gsap'
 export default {
     name: "HomePage",
     mounted() {
-        this.getData(this.$route.params.id)
+        this.getData()
     },
     components: {
         carform,
@@ -97,9 +97,8 @@ export default {
 
 .car-card {
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    gap: 15px;
-    margin-bottom: 10px;
+    grid-template-columns: auto auto auto auto;
+    gap: 45px;
 }
 
 .add-car-button {
@@ -182,75 +181,44 @@ button:hover {
     .car-card {
         display: grid;
         grid-template-columns: auto auto auto auto;
-        gap: 15px;
+        gap: 35px;
     }
 }
 
-@media (max-width: 1540px) {
+@media (max-width: 1640px) {
     .car-card {
-        display: grid;
         grid-template-columns: auto auto auto;
+        gap: 40px;
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
     .car-card {
-        display: grid;
         grid-template-columns: auto auto;
-    }
-}
-
-@media (max-width: 800px) {
-
-    .car-card {
-        gap: 20px;
+        gap: 60px;
     }
 
     .add-car-button {
-        display: flex;
-        justify-content: end;
-        padding: 20px;
         margin-right: 0px;
     }
 }
 
-@media (max-width: 690px) {
-
-    .car-card {
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 10px;
-    }
-
-    .add-car-button {
-        display: flex;
-        justify-content: end;
-        padding: 20px;
-        margin-right: 0px;
-    }
-}
 @media (max-width:675px) {
-  .car-card {
-        display: grid;
+    .car-card {
         grid-template-columns: auto auto;
-        gap: 30px;
+        gap: 40px;
     }
 
 }
 
 @media (max-width:550px) {
-    .modal {
-        max-width: 300px;
-    }
-
     .car-card {
-        display: grid;
-        grid-template-columns: auto auto;
         gap: 15px;
     }
 }
+
 @media (max-width:400px) {
-     .car-card {       
+    .car-card {
         gap: 10px;
     }
 }

@@ -24,14 +24,14 @@
                     <div class="row">
                         <label>Password:</label>
                         <input type="password" v-model="form.password" ref="password" @input="checkPassword">
-                        <div v-if="error_msg_password" class="error">{{ error_msg_password }} </div>
+                        <div v-show="error_msg_password" class="error">{{ error_msg_password }} </div>
                     </div>
                     <!-- Confirm Password -->
                     <div class="row">
                         <label>Confirm Password:</label>
                         <input type="password" v-model="form.confirmPassword" ref="confirmPassword"
                             @input="checkConfirmPassword">
-                        <div v-if="error_msg_confirmPassword" class="error">{{ error_msg_confirmPassword }} </div>
+                        <div v-show="error_msg_confirmPassword" class="error">{{ error_msg_confirmPassword }} </div>
                     </div>
                     <!-- Role -->
                     <div class="row">
@@ -41,7 +41,7 @@
                             <option value="Employee">Employee</option>
                             <option value="Customer">Customer</option>
                         </select>
-                        <div v-if="error_msg_role" class="error">{{ error_msg_role }} </div>
+                        <div v-show="error_msg_role" class="error">{{ error_msg_role }} </div>
                     </div>
                     <!-- Gender -->
 
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="error_msg_gender" class="error">{{ error_msg_gender }} </div>
+                        <div v-show="error_msg_gender" class="error">{{ error_msg_gender }} </div>
                     </div>
                     <!-- Age -->
                     <div class="row">
@@ -70,14 +70,14 @@
                             onkeydown="return (event.keyCode !== 107 && event.keyCode !== 109 && event.keyCode !== 69);"
                             @input="checkAge">
                         <!-- Prevent the user from pressing key : +,-,e -->
-                        <div v-if="error_msg_age" class="error">{{ error_msg_age }}</div>
+                        <div v-show="error_msg_age" class="error">{{ error_msg_age }}</div>
                     </div>
                     <!-- DOB -->
                     <div class="row">
                         <label>Date of Birth:</label>
-                        <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-12-31"
-                            @input="checkDOB">
-                        <div v-if="error_msg_dob" class="error">{{ error_msg_dob }}</div>
+                        <input type="date" v-model="form.dob" ref="dob" :max="formattedDate()" min="1923-01-01"
+                            @change="checkDOB" onkeydown="return false;">
+                        <div v-show="error_msg_dob" class="error">{{ error_msg_dob }}</div>
                     </div>
                     <div class="row row-button">
                         <button class="submit" @click.prevent="submit">Register</button>
@@ -240,7 +240,8 @@ export default {
             return true
         },
         checkDOB() {
-            if (this.form.dob === "") {
+            if ((this.form.dob).length == 0) {
+                console.log("here")
                 const msg = "**Please choose your Date of Birth**"
                 this.showError("dob", msg)
                 return false;

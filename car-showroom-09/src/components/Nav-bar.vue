@@ -102,7 +102,6 @@ a {
 @media (max-width: 750px) {
     .title h1 {
         margin-left: 20px;
-        font-size: 25px;
     }
 
     .link {

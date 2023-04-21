@@ -316,6 +316,5 @@ input:focus {
     .submit {
         margin-left: 100px;
     }
-
 }
 </style>
