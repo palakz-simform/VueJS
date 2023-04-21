@@ -23,7 +23,7 @@
 <script>
 export default {
     name: "gallery_card",
-    props: ["id", "name", "image", "formtype", "description", "price", "showModalEdit"],
+    props: ["id", "name", "image", "description", "price"],
     emit: ["get-Price-Info", 'edit-car', 'delete-car'],
     methods: {
 
