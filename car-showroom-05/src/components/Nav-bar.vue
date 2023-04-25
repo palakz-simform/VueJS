@@ -1,19 +1,21 @@
 <template>
-<div class="title">
+    <div class="title">
 
-    <div class="nav">
-        <div>
-            <RouterLink to="/" class="heading"><h1>Car Gallery</h1></RouterLink>   
+        <div class="nav">
+            <div>
+                <RouterLink :to="{ name: 'home' }" class="heading">
+                    <h1>Car Gallery</h1>
+                </RouterLink>
+            </div>
+            <div>
+                <RouterLink class="link" :to="{ name: 'home' }">Home</RouterLink>
+                <RouterLink class="link" :to="{ name: 'login' }">Login</RouterLink>
+                <RouterLink class="link link-register" :to="{ name: 'register' }">Register</RouterLink>
+            </div>
+
+
         </div>
-        <div>
-            <RouterLink class="link" to="/" >Home</RouterLink>
-        <RouterLink class="link" to="/login">Login</RouterLink>
-        <RouterLink class="link link-register" to="/register">Register</RouterLink>
-        </div>
-     
-      
     </div>
-</div>
 </template>
 
 <script>
@@ -24,9 +26,10 @@ export default {
 </script>
 
 <style>
-body{
-    margin:0px;
+body {
+    margin: 0px;
 }
+
 .title {
     text-align: center;
 }
@@ -41,64 +44,76 @@ hr {
     color: wheat;
     font-size: 35px;
     text-shadow: 0 0 3px gray;
-    margin-left:40px;
+    margin-left: 40px;
 }
-.nav{
-    height:60px;
-    background-color: rgb(44, 44, 44);   
-    padding-right:50px;
+
+.nav {
+    height: 60px;
+    background-color: rgb(44, 44, 44);
+    padding-right: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.heading h1:hover{
-    color:white
+
+.heading h1:hover {
+    color: white
 }
-.link{
-    margin-right:70px;
-    color:wheat;
+
+.link {
+    margin-right: 70px;
+    color: wheat;
     font-size: 18px;
     font-weight: bold;
-    width:60px;
+    width: 60px;
     text-decoration: none;
 }
 
 a.router-link-exact-active {
-font-size: 22px;
+    font-size: 22px;
 }
-.link:hover{
+
+.link:hover {
     color: rgb(253, 247, 247);
 }
-a{
-    text-decoration: none;;
+
+a {
+    text-decoration: none;
+    ;
 }
 
 @media (max-width: 650px) {
     .title h1 {
-        margin-left:20px;
-    font-size: 25px;
-   
-}
-    .link{
-    margin-right:20px;
-    font-size:15px;   
-}
-.link-register{
-    margin-right: 0px;;
-}
-.nav{
-    padding-right: 10px;;
-}
-a.router-link-exact-active {
-font-size: 18px;
-}
+        margin-left: 20px;
+        font-size: 25px;
+
+    }
+
+    .link {
+        margin-right: 20px;
+        font-size: 15px;
+    }
+
+    .link-register {
+        margin-right: 0px;
+        ;
+    }
+
+    .nav {
+        padding-right: 10px;
+        ;
+    }
+
+    a.router-link-exact-active {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 375px) {
     .title h1 {
 
-    font-size: 20px;
-    margin-left:20px;
-}
+        font-size: 20px;
+        margin-left: 20px;
+    }
 }
 </style>
