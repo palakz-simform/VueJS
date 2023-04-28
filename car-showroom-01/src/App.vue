@@ -118,18 +118,20 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .title {
   text-align: center;
 }
+
 hr {
-  width: 8%;
+  width: 100px;
   border: 5px solid brown;
   border-radius: 5px;
 }
+
 .title h1 {
   color: black;
   font-size: 40px;
   text-shadow: 0 0 3px gray;
 }
-
 </style>
