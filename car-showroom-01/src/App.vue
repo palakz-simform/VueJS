@@ -132,11 +132,4 @@ hr {
   text-shadow: 0 0 3px gray;
 }
 
-@media (max-width: 800px) {
-  .car-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
 </style>
