@@ -44,7 +44,6 @@
                         <div v-show="error_msg_role" class="error">{{ error_msg_role }} </div>
                     </div>
                     <!-- Gender -->
-
                     <div class="gender-class">
                         <div class="row-gender row ">
                             <label>Gender:</label>
@@ -257,6 +256,7 @@ export default {
         formattedDate() {
             const today = new Date();
             const year = today.getFullYear();
+            console.log(today.getMonth())
             const month = (today.getMonth() + 1).toString().padStart(2, '0'); // add 1 to adjust for 0-based indexing
             const day = today.getDate().toString().padStart(2, '0');
             const formattedDate = `${year}-${month}-${day}`;

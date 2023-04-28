@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="back">
-            <button @click.prevent="home()"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
+            <button @click.prevent="home"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
         </div>
         <div class="car-detail">
             <div class="image">
@@ -46,6 +46,7 @@ export default {
     }
 }
 </script>
+
 
 <style scoped>
 button {
@@ -111,6 +112,7 @@ img {
 
 .description {
     padding-left: 80px;
+    padding-right: 10px;
     height: 150px;
 }
 
@@ -171,7 +173,7 @@ img {
             margin-left: 20px;
             margin-right: 30px;
             flex-direction: column;
-            height: 700px;
+            height: 800px;
         }
 
         .image {
@@ -179,9 +181,7 @@ img {
         }
 
         img {
-            margin-left: 13px;
-            margin-right: 10px;
-            width: 90%
+            margin: 0;
         }
 
         .title {
@@ -201,3 +201,4 @@ img {
     }
 }
 </style>
+
