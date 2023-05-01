@@ -240,7 +240,6 @@ export default {
         },
         checkDOB() {
             if ((this.form.dob).length == 0) {
-                console.log("here")
                 const msg = "**Please choose your Date of Birth**"
                 this.showError("dob", msg)
                 return false;
@@ -256,7 +255,6 @@ export default {
         formattedDate() {
             const today = new Date();
             const year = today.getFullYear();
-            console.log(today.getMonth())
             const month = (today.getMonth() + 1).toString().padStart(2, '0'); // add 1 to adjust for 0-based indexing
             const day = today.getDate().toString().padStart(2, '0');
             const formattedDate = `${year}-${month}-${day}`;

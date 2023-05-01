@@ -37,9 +37,7 @@ export const useCarStore = defineStore('car', {
         // Add Car data
         setdata(formdata) {
             this.showModal = false;
-            const id = this.cars_info.length + 1;
             axios.post('https://testapi.io/api/dartya/resource/cardata/', {
-                id: id,
                 name: formdata.name,
                 image: formdata.image,
                 details: formdata.description,
@@ -68,7 +66,6 @@ export const useCarStore = defineStore('car', {
         editCarData(data) {
             this.showModal = false;
             axios.put('https://testapi.io/api/dartya/resource/cardata/' + data.id, {
-                id: data.id,
                 name: data.name,
                 image: data.image,
                 details: data.description,
