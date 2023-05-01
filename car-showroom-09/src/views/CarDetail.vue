@@ -160,7 +160,8 @@ img {
     }
 
     .description {
-        padding-right: 10px;
+        height: 200px;
+        padding-right: 40px;
     }
 
     .price {
@@ -191,7 +192,6 @@ img {
 
         .description {
             padding-left: 40px;
-            height: 150px
         }
 
         .price {

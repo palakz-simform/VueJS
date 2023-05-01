@@ -1,7 +1,7 @@
 <template>
     <!-- Card of each car -->
     <div class="card-car">
-        <div class="heading">
+        <div class="car-heading">
             <h1>{{ name }}</h1>
         </div>
         <div class="car-image">
@@ -84,13 +84,13 @@ export default {
     transition: 0.25s;
 }
 
-.heading h1 {
+.car-heading h1 {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-.heading {
+.car-heading {
     height: 50px;
     text-align: center;
     background-color: rgb(255, 255, 255);
@@ -180,7 +180,7 @@ img {
         box-shadow: 6px 8px 10px 0 rgba(47, 243, 237, 0.7);
     }
 
-    .heading {
+    .car-heading {
         height: 40px;
         font-size: 10px;
     }
@@ -243,12 +243,12 @@ img {
         width: 200px;
     }
 
-    .heading {
+    .car-heading {
         height: 25px;
         font-size: 8px;
     }
 
-    .heading h1 {
+    .car-heading h1 {
         padding-top: 4px;
     }
 

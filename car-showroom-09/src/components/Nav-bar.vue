@@ -23,7 +23,6 @@
 
 <script>
 import { mapWritableState, mapActions } from "pinia";
-import { RouterLink } from "vue-router";
 import { useUserStore } from "../stores/user";
 export default {
     name: "Nav-bar",
