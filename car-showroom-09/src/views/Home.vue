@@ -106,7 +106,6 @@ export default {
     justify-content: end;
     padding: 20px;
     margin-right: 30px;
-
 }
 
 button {
@@ -117,7 +116,7 @@ button {
     font-weight: bold;
     border: none;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 button:hover {

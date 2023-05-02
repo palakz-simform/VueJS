@@ -89,7 +89,6 @@ export default {
             // Form validation  
             this.checkName(), this.checkImage(), this.checkDescription(), this.checkPrice()
             if (this.checkName() && this.checkImage() && this.checkDescription() && this.checkPrice()) {
-                this.clearError()
                 //  Execute if Add Car
                 if (this.addForm == true) {
                     this.alertData()
