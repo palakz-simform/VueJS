@@ -50,7 +50,7 @@
 </template>
 <script>
 export default {
-    name: "carFooter"
+    name: "CarFooter"
 }
 </script>
 <style scoped>

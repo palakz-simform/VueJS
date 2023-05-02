@@ -1,21 +1,23 @@
 <template>
-  <!-- Navigation Global Component -->
-  <NavBar />
-  <RouterView v-slot="{ Component }">
-    <transition name="route" mode="out-in">
-      <component :is="Component"></component>
-    </transition>
-  </RouterView>
-  <carFooter />
+  <div class="car-body">
+    <!-- Navigation Global Component -->
+    <NavBar />
+    <RouterView v-slot="{ Component }">
+      <transition name="route" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </RouterView>
+    <CarFooter />
+  </div>
 </template>
   
 <script>
 import { RouterView } from "vue-router";
-import carFooter from "./components/footer.vue"
+import CarFooter from "./components/CarFooter.vue"
 export default {
   name: "App",
   components: {
-    carFooter
+    CarFooter
   },
   created() {
     if (import.meta.env.VITE_MODE == "production") {
@@ -33,6 +35,10 @@ export default {
 
 
 <style scoped>
+.car-body {
+  background-color: black;
+}
+
 .route-enter-from {
   opacity: 0;
   transform: translateY(100px)

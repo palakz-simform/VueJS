@@ -28,7 +28,7 @@ import { mapActions } from "pinia";
 import { RouterLink } from "vue-router";
 import { useCarStore } from "../stores/car";
 export default {
-    name: "gallery_card",
+    name: "GalleryCard",
     props: [
         "id",
         "name",

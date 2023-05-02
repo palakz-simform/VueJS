@@ -25,7 +25,7 @@
 import { mapWritableState, mapActions } from "pinia";
 import { useUserStore } from "../stores/user";
 export default {
-    name: "Nav-bar",
+    name: "NavBar",
 
     computed: {
         ...mapWritableState(useUserStore, ["login"]),

@@ -42,7 +42,7 @@
 import { mapActions, mapWritableState } from 'pinia';
 import { useCarStore } from '../stores/car';
 export default {
-    name: "car-form",
+    name: "CarForm",
     props: ["carData"],
     emits: ['show-model'],
     computed: {

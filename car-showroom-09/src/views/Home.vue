@@ -12,15 +12,15 @@
 
         <!-- Add/Edit Car Component -->
         <transition name="car-form">
-            <carform v-if="showModal"></carform>
+            <CarForm v-if="showModal"></CarForm>
         </transition>
 
-        <!-- gallery-card.vue component -->
+        <!-- GalleryCard.vue component -->
         <div class="car-content">
             <transition-group class="car-card" name="car-card" tag="div" @before-enter="beforeEnter" @enter="enter"
                 @before-leave="beforeLeave" @leave="leave" appear>
                 <div v-for="(item, index) in carCardInfo" :key="item.id" :data-index="index">
-                    <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details"
+                    <GalleryCard :id="item.id" :name="item.name" :image="item.image" :description="item.details"
                         :price="item.price" />
                 </div>
             </transition-group>
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import carform from "../components/car-form.vue";
-import gallery_card from "../components/gallery-card.vue";
+import CarForm from "../components/CarForm.vue";
+import GalleryCard from "../components/GalleryCard.vue";
 import {
     useCarStore
 } from "../stores/car";
@@ -45,8 +45,8 @@ export default {
         this.getData()
     },
     components: {
-        carform,
-        gallery_card
+        CarForm,
+        GalleryCard
     },
     computed: {
         ...mapWritableState(useCarStore, ['carCardInfo', 'showModal'])
