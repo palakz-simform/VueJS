@@ -1,10 +1,13 @@
 <template>
-<NavBar />
-<div class="car-card">
-    <div v-for="item in cars_info" :key="item.id">
-        <gallery_card :name="item.name" :image="item.image" :description="item.desc" :price="item.price" @get-Price-Info="getPrice" />
+    <div>
+        <NavBar />
+        <div class="car-card">
+            <div v-for="item in cars_info" :key="item.id">
+                <gallery_card :name="item.name" :image="item.image" :description="item.desc" :price="item.price"
+                    @get-Price-Info="getPrice" />
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -21,7 +24,8 @@ export default {
     },
     data() {
         return {
-            cars_info: [{
+            cars_info: [
+                {
                     id: 1,
                     name: "Maruti Suzuki Wagon R",
                     image: require("./assets/images/1Maruti.jpg"),
@@ -57,8 +61,6 @@ export default {
 
 @media (max-width: 800px) {
     .car-card {
-        display: flex;
-        flex-wrap: wrap;
         justify-content: center;
     }
 }

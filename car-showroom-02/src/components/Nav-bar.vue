@@ -17,7 +17,7 @@ export default {
 }
 
 hr {
-  width: 8%;
+  width: 100px;
   border: 5px solid brown;
   border-radius: 5px;
 }
