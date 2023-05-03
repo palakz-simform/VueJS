@@ -11,12 +11,12 @@
             <p>{{ description }}</p>
         </div>
         <div class="btn-car">
-            <button class="car-edit-btn" @click="showeditform()">
+            <button class="car-edit-btn" @click="showEdit(getCarData())">
                 <i class="fa-solid fa-pen"></i>
             </button>
             <RouterLink :to="{ name: 'carDetail', params: { id: id } }"><button class="button-info">Info</button>
             </RouterLink>
-            <button class="car-delete-btn" @click="deleteData()">
+            <button class="car-delete-btn" @click="deleteCar(getCarData())">
                 <i class="fa-sharp fa-solid fa-trash"></i>
             </button>
         </div>
@@ -51,19 +51,7 @@ export default {
                 title: "Edit Car",
             };
         },
-        // On clicking edit button emit event 'edit-car'
-        showeditform() {
-            const getData = this.getCarData();
-            this.showEdit(getData);
-        },
-        // On clicking delete button emit event 'delete-car'
-        deleteData() {
-            const cardata = this.getCarData();
-            this.deleteCar(cardata);
-        },
     },
-
-
 };
 </script>
 

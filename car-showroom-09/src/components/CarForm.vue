@@ -44,7 +44,6 @@ import { useCarStore } from '../stores/car';
 export default {
     name: "CarForm",
     props: ["carData"],
-    emits: ['show-model'],
     computed: {
         ...mapWritableState(useCarStore, ['showModal', 'cardata', 'title', 'addForm', 'editForm']),
         form() {
