@@ -8,7 +8,7 @@
                 </RouterLink>
             </div>
             <div>
-                <RouterLink class="link" :to="{ name: 'home' }">Home</RouterLink>
+                <RouterLink v-if="login == 'true'" class="link" :to="{ name: 'home' }">Home</RouterLink>
                 <span v-if="login == 'true'">
                     <a class="link" @click="logout">Logout</a>
                 </span>
