@@ -20,7 +20,7 @@
     <div class="car-card">
         <div v-for="item in cars_info" :key="item.id">
             <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details"
-                :price="item.price" @get-Price-Info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
+                :price="item.price" @get-price-info="getPrice" @edit-car="getCar" @delete-car="deleteCar" />
         </div>
     </div>
 </template>
@@ -28,12 +28,12 @@
 <script>
 import gallery_card from "./components/gallery-card.vue";
 import carform from "./components/car-form.vue";
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
     name: "App",
     mounted() {
         this.getData()
-
     },
     components: {
         gallery_card,
@@ -59,9 +59,9 @@ export default {
 
         // Display Add Car form
         addCar() {
-            this.showModal = true,
-                this.title = 'Add Car',
-                this.addForm = true
+            this.showModal = true;
+            this.title = 'Add Car';
+            this.addForm = true;
         },
 
         // get price of the car
@@ -91,15 +91,14 @@ export default {
                     alert("Error!!")
                 }
                 this.addForm = false
-            })
-                .catch(error => {
-                    alert("Error : " + error)
-                });
+            }).catch(error => {
+                alert("Error : " + error)
+            });
         },
         // Show car data
         getCar(cardata) {
-            this.showModal = true
-            this.editForm = true
+            this.showModal = true;
+            this.editForm = true;
             this.carData = cardata;
             this.title = cardata.title;
         },
@@ -119,7 +118,7 @@ export default {
                 } else {
                     alert("Error!!")
                 }
-                this.editForm = false
+                this.editForm = false;
 
             }).catch(error => {
                 alert("Error : " + error)

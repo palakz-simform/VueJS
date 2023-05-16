@@ -24,12 +24,12 @@
 export default {
     name: "gallery_card",
     props: ["id", "name", "image", "description", "price"],
-    emit: ["get-Price-Info", 'edit-car', 'delete-car'],
+    emit: ["get-price-info", 'edit-car', 'delete-car'],
     methods: {
 
         // Emitting event to pass the price to the parent component
         getPrice() {
-            this.$emit("get-Price-Info", this.price);
+            this.$emit("get-price-info", this.price);
         },
 
         // Function to get a particular car data 
