@@ -44,7 +44,7 @@
 <script>
 export default {
     name: "car-form",
-    props: ["showModal", "title", "carData", "addForm", "editForm"],
+    props: ["title", "carData", "addForm", "editForm"],
     emits: ['show-model', 'display-data', 'edit-data'],
     methods: {
         showModalx() {
@@ -178,6 +178,10 @@ div.row {
     display: flex;
     justify-content: space-between;
     padding: 1px 10px 5px 150px;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .button {

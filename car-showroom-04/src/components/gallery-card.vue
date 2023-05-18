@@ -126,7 +126,6 @@ img {
     overflow: hidden;
 }
 
-button:disabled,
 button[disabled] {
     cursor: not-allowed;
 }

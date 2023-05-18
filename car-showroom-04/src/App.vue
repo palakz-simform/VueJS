@@ -12,8 +12,9 @@
 
     <!-- Add/Edit Car Component -->
     <div class="modal" v-if="showModal">
-        <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx"
-            @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
+        <car_form :title="title" :addForm="addForm" :editForm="editForm" @show-model="showModalx" @display-data="setdata"
+            :carData="carData" @edit-data="editCarData">
+        </car_form>
     </div>
 
     <!-- gallery-card.vue component -->
@@ -27,7 +28,7 @@
 
 <script>
 import gallery_card from "./components/gallery-card.vue";
-import carform from "./components/car-form.vue";
+import car_form from "./components/car-form.vue";
 import axios from 'axios';
 
 export default {
@@ -37,7 +38,7 @@ export default {
     },
     components: {
         gallery_card,
-        carform,
+        car_form,
     },
     data() {
         return {
@@ -59,9 +60,9 @@ export default {
 
         // Display Add Car form
         addCar() {
-            this.showModal = true;
-            this.title = 'Add Car';
-            this.addForm = true;
+            this.showModal = true
+            this.title = 'Add Car'
+            this.addForm = true
         },
 
         // get price of the car
@@ -71,7 +72,7 @@ export default {
 
         // Close form when 'x' button is clicked on the form
         showModalx() {
-            this.showModal = false;
+            this.showModal = false
         },
 
         // Add Car data
