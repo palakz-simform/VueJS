@@ -1,13 +1,13 @@
 <template>
   <!-- Navigation Global Component -->
   <NavBar />
-  <RouterView/>
-  </template>
+  <RouterView />
+</template>
   
-  <script>
-  import { RouterView } from "vue-router";
-  
-  export default{
-      name:"App"  
-  }
-  </script>
+<script>
+import { RouterView } from "vue-router";
+
+export default {
+  name: "App"
+}
+</script>

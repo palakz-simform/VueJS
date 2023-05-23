@@ -1,29 +1,31 @@
 <template>
-<!-- Add Car Button -->
-<div class="add-car-button">
-    <button class="button" @click="addCar()">Add Car</button>
-</div>
+    <!-- Add Car Button -->
+    <div class="add-car-button">
+        <button class="button" @click="addCar()">Add Car</button>
+    </div>
 
-<!-- Style applied when Add/Edit form is displayed -->
-<div class="modal-overlay" v-if="showModal "></div>
+    <!-- Style applied when Add/Edit form is displayed -->
+    <div class="modal-overlay" v-if="showModal"></div>
 
-<!-- Add/Edit Car Component -->
-<div class="modal" v-if="showModal">
-    <carform :title="title" :addForm="addForm" :editForm="editForm" :showModal="showModal" @show-model="showModalx" @display-data="setdata" :carData="carData" @edit-data="editCarData"></carform>
-</div>
+    <!-- Add/Edit Car Component -->
+    <div class="modal" v-if="showModal">
+        <car_form :title="title" :addForm="addForm" :editForm="editForm" @show-model="showModalx" @display-data="setdata"
+            :carData="carData" @edit-data="editCarData"></car_form>
+    </div>
 
-<!-- gallery-card.vue component -->
-<div class="car-content">
-    <div class="car-card">
-        <div v-for="item in cars_info" :key="item.id">
-            <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details" :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+    <!-- gallery-card.vue component -->
+    <div class="car-content">
+        <div class="car-card">
+            <div v-for="item in cars_info" :key="item.id">
+                <gallery_card :id="item.id" :name="item.name" :image="item.image" :description="item.details"
+                    :price="item.price" @edit-car="getCar" @delete-car="deleteCar" />
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import carform from "@/components/car-form.vue";
+import car_form from "@/components/car-form.vue";
 import gallery_card from "@/components/gallery-card.vue";
 import axios from 'axios'
 export default {
@@ -33,7 +35,7 @@ export default {
 
     },
     components: {
-        carform,
+        car_form,
         gallery_card
     },
     data() {
@@ -56,14 +58,14 @@ export default {
 
         // Display Add Car form
         addCar() {
-            this.showModal = true,
-                this.title = 'Add Car',
-                this.addForm = true
+            this.showModal = true
+            this.title = 'Add Car'
+            this.addForm = true
         },
 
         // Close form when 'x' button is clicked on the form
         showModalx() {
-            this.showModal = false;
+            this.showModal = false
         },
 
         // Add Car data
@@ -71,19 +73,19 @@ export default {
             this.showModal = false;
             const id = this.cars_info.length + 1;
             axios.post('https://testapi.io/api/dartya/resource/cardata/', {
-                    id: id,
-                    name: formdata.name,
-                    image: formdata.image,
-                    details: formdata.description,
-                    price: formdata.price
-                }).then((res) => {
-                    if (res.status === 201) {
-                        this.getData()
-                    } else {
-                        alert("Error!!")
-                    }
-                    this.addForm = false
-                })
+                id: id,
+                name: formdata.name,
+                image: formdata.image,
+                details: formdata.description,
+                price: formdata.price
+            }).then((res) => {
+                if (res.status === 201) {
+                    this.getData()
+                } else {
+                    alert("Error!!")
+                }
+                this.addForm = false
+            })
                 .catch(error => {
                     alert("Error : " + error)
                 });
@@ -93,8 +95,8 @@ export default {
         getCar(cardata) {
             this.showModal = true
             this.editForm = true
-            this.carData = cardata;
-            this.title = cardata.title;
+            this.carData = cardata
+            this.title = cardata.title
 
         },
 

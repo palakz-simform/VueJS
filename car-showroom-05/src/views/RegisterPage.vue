@@ -5,7 +5,6 @@
                 <h1>Registration Form</h1>
             </div>
             <!-- Car Add/Edit Form -->
-
             <div class="form">
                 <!-- Name -->
                 <div class="row">
@@ -96,7 +95,6 @@ export default {
             error_gender: false,
             error_age: false,
             error_dob: false,
-
             error_msg: "",
             form: {
                 name: '',
@@ -108,7 +106,6 @@ export default {
                 age: '',
                 dob: ''
             },
-
         }
     },
     methods: {
@@ -145,9 +142,7 @@ export default {
                 }).catch(() => {
                     alert("Error logging in!! Please try again")
                 })
-
             }
-
         },
         checkName() {
             if (this.form.name === "") {
@@ -270,9 +265,7 @@ export default {
             const formattedDate = `${year}-${month}-${day}`;
             return formattedDate
         }
-
     }
-
 }
 </script>
 
