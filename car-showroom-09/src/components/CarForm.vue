@@ -202,6 +202,7 @@ div.row {
     background-color: transparent;
     border: none;
     font-size: 18px;
+    cursor: pointer;
 }
 
 label {
